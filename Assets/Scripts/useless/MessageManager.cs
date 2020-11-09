@@ -26,6 +26,8 @@ namespace Assets.Scripts
                 _transform.position = new Vector3(_transform.position.x, _transform.position.y - .2f, -1);
             if (col.name == "GameOver")
                 _transform.position = new Vector3(_transform.position.x, _transform.position.y + .2f, -1);
+            if (col.gameObject.layer == 9)
+                _transform.position = new Vector3(_transform.position.x - 100f, _transform.position.y - 200, -1);
         }
 
         public void OnCollisionEnter2D(Collision2D col)
