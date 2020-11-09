@@ -6,5 +6,6 @@ namespace Assets.Scripts
     {
         public static float PlayerSpeed { get; set; } = 5f;
         public static Color PlayerColor { get; set; } = Color.white;
+        public static int PlayerScore { get; set; } = 0;
     }
 }
