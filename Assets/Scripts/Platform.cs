@@ -8,10 +8,12 @@ namespace Assets.Scripts
     {
         [SerializeField] private Vector3 _position;
         [SerializeField] private float Speed;
+        [SerializeField] private Color color;
         void Start()
         {
             _position.z = -1f;
             Speed = Settings.PlayerSpeed;
+            color = Settings.PlayerColor;
         }
 
         void Update()
@@ -22,6 +24,11 @@ namespace Assets.Scripts
         public float GetPlayerSpeed()
         {
             return Speed;
+        }
+
+        public Color GetPlayerColor()
+        {
+            return color;
         }
 
         public Vector3 GetPosition()
