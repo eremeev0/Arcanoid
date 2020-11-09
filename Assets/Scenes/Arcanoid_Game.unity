@@ -595,7 +595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3332917795311161306, guid: 2a6de7e57ed09e043ba548a1e9ef3e73, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -303.69
+      value: -304.73
       objectReference: {fileID: 0}
     - target: {fileID: 3332917795311161306, guid: 2a6de7e57ed09e043ba548a1e9ef3e73, type: 3}
       propertyPath: m_LocalPosition.z
@@ -633,7 +633,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6174932361230916015, guid: 2a6de7e57ed09e043ba548a1e9ef3e73, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2a6de7e57ed09e043ba548a1e9ef3e73, type: 3}
 --- !u!61 &4725395665249865709 stripped
 BoxCollider2D:
@@ -669,11 +670,11 @@ PrefabInstance:
       objectReference: {fileID: 7699150656008002593}
     - target: {fileID: 4930281158989807470, guid: edd2032cd64fbf541ac87185a94a97bd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -402.75293
+      value: -402.88
       objectReference: {fileID: 0}
     - target: {fileID: 4930281158989807470, guid: edd2032cd64fbf541ac87185a94a97bd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -302.81
+      value: -303.56
       objectReference: {fileID: 0}
     - target: {fileID: 4930281158989807470, guid: edd2032cd64fbf541ac87185a94a97bd, type: 3}
       propertyPath: m_LocalPosition.z
