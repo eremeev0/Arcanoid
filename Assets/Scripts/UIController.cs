@@ -23,7 +23,7 @@ namespace Assets.Scripts
         private Dropdown colorsList;
         private Dropdown resolutions;
 
-        //private ResolutionManager resManager;
+        private EventProvider _eventProvider = new EventProvider();
         void Start()
         {
             //resManager = gameObject.AddComponent<ResolutionManager>();
@@ -63,114 +63,57 @@ namespace Assets.Scripts
         {
             // after scene reload try select game scene
             if (SceneManager.sceneCountInBuildSettings == 2)
-            {
+            { 
                 SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(1));
             }
         }
-
-
-
+        
         public void _Start()
         {
-            print("start");
-            GameObject.Find("/UI/Menu/Panel").SetActive(false);
-            GameObject.Find("/UI/Score/Panel").SetActive(true);
-            Restart();
+            _eventProvider.SendEvent(GameEvents.GAME_STARTED);
         }
 
         public void Close()
         {
-            print("close");
-            #if UNITY_EDITOR
-                EditorApplication.isPlaying = false;
-            #else
-                Application.Quit();
-            #endif
+            _eventProvider.SendEvent(GameEvents.GAME_CLOSED);
         }
 
         public void Restart()
         {
-            //Settings.PlayerScore = 0;
-            // reload current scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Additive);
-            // unload old scene
-            SceneManager.UnloadSceneAsync(1);
-            // resume game
-            Time.timeScale = 1;
-            // hide failed window
-            GameObject.Find("/UI/Failed/Panel").SetActive(false);
-            print("restart");
+            Settings.PlayerScore = 0;
+            _eventProvider.SendEvent(GameEvents.GAME_RESTARTED);
         }
 
         public void Menu()
         {
-            GameObject.Find("/UI/Menu/Panel").SetActive(true);
-            GameObject.Find("/UI/Failed/Panel").SetActive(false);
-            GameObject.Find("/UI/Score/Panel").SetActive(false);
-            print("show menu");
+            _eventProvider.SendEvent(GameEvents.GAME_BACK_TO_MENU_2);
         }
 
         public void Options()
         {
-            GameObject.Find("/UI/Settings/Panel").SetActive(true);
-            GameObject.Find("/UI/Menu/Panel").SetActive(false);
-            print("open options");
+            _eventProvider.SendEvent(GameEvents.GAME_OPEN_OPTIONS);
         }
 
         public void BackToMenu()
         {
-            GameObject.Find("/UI/Settings/Panel").SetActive(false);
-            GameObject.Find("/UI/Menu/Panel").SetActive(true);
-            DataManager manager = gameObject.AddComponent<DataManager>();
-            // save user settings
-            manager.Save(speedSlider.value.ToString(), colorsList.value.ToString(), resolutions.value.ToString(), Settings.PlayerScore.ToString());
+            _eventProvider.SendEvent(GameEvents.GAME_BACK_TO_MENU, speedSlider.value.ToString(),
+                colorsList.value.ToString(), resolutions.value.ToString(), Settings.PlayerScore.ToString());
         }
 
         public void SpeedUpdated(float value)
         {
-            GameObject.Find("/UI/Settings/Panel/Slider/value").GetComponent<Text>().text = value.ToString();
-            Settings.PlayerSpeed = value;
+            _eventProvider.SendEvent(GameEvents.SPEED_UPDATED, value.ToString());
         }
 
         public void ColorUpdated(int value)
         {
-            switch (value)
-            {
-                case 0:
-                    Settings.PlayerColor = Color.white;
-                    break;
-                case 1:
-                    Settings.PlayerColor = Color.black;
-                    break;
-                case 2:
-                    Settings.PlayerColor = Color.blue;
-                    break;
-                case 3:
-                    Settings.PlayerColor = Color.cyan;
-                    break;
-                case 4:
-                    Settings.PlayerColor = Color.gray;
-                    break;
-                case 5:
-                    Settings.PlayerColor = Color.green;
-                    break;
-                case 6:
-                    Settings.PlayerColor = Color.grey;
-                    break;
-                case 7:
-                    Settings.PlayerColor = Color.magenta;
-                    break;
-                case 8:
-                    Settings.PlayerColor = Color.red;
-                    break;
-                case 9:
-                    Settings.PlayerColor = Color.yellow;
-                    break;
-                default:
-                    break;
-            }
+            _eventProvider.SendEvent(GameEvents.PLAYER_COLOR_UPDATED, value.ToString());
         }
 
+        public void SetNewResolution(int index)
+        {
+            _eventProvider.SendEvent(GameEvents.WIN_RESOLUTION_UPDATED, index.ToString());
+        }
         public Dropdown InitDropdown(Dropdown obj)
         {
             obj.ClearOptions();
@@ -204,44 +147,5 @@ namespace Assets.Scripts
             res.options.Add(new Dropdown.OptionData { text = "1920 x 1200" });
             return res;
         }
-
-        public void SetNewResolution(int index)
-        {
-            switch (index)
-            {
-                case 0:
-                    Screen.SetResolution(640, 360, true);
-                    break;
-                case 1:
-                    Screen.SetResolution(800, 600, true);
-                    break;
-                case 2:
-                    Screen.SetResolution(1024, 768, true);
-                    break;
-                case 3:
-                    Screen.SetResolution(1280, 800, true);
-                    break;
-                case 4:
-                    Screen.SetResolution(1360, 768, true);
-                    break;
-                case 5:
-                    Screen.SetResolution(1440, 900, true);
-                    break;
-                case 6:
-                    Screen.SetResolution(1600, 900, true);
-                    break;
-                case 7:
-                    Screen.SetResolution(1920, 1080, true);
-                    break;
-                case 8:
-                    Screen.SetResolution(1920, 1200, true);
-                    break;
-                default:
-                    break;
-            }
-           
-
-        }
-
     }
 }
