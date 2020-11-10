@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using Rigidbody2D = UnityEngine.Rigidbody2D;
 
 namespace Assets.Scripts
 {
@@ -16,9 +17,11 @@ namespace Assets.Scripts
         public float offsetX;
         public float offsetY;
 
+        private Vector2 velocity;
         // Start is called before the first frame update
         void Start()
         {
+            velocity = new Vector2(1.75f, 1.1f);
             // init score label text
             GameObject.Find("/UI/Failed/Panel/Result").GetComponent<Text>().text = "Score ";
             // get ball collider
@@ -37,60 +40,47 @@ namespace Assets.Scripts
     
         public float speedLimit = 14f;
 
-        public float speedMultiplier = .01f;
+        public float speedMultiplier = .5f;
 
         // Update is called once per frame
         void Update()
         {
-            var transformPosition = transform.position;
-            transformPosition.x += Time.deltaTime * offsetX * speed;
-            transformPosition.y += Time.deltaTime * offsetY * speed;
-            transform.position = transformPosition;
-            foreach (var collider2D1 in Collider2Ds)
-            {
-                if (_collider.bounds.Intersects(collider2D1.bounds))
-                {
-                    print(speed);
-                    switch (collider2D1.name)
-                    {
-                        case "playerPillar":
-                            offsetY = 1f;
-                            if (speed < speedLimit)
-                                speed+= speedMultiplier;
-                            break;
-                        case "topPillar":
-                            offsetY = -1f;
-                            if (speed < speedLimit)
-                                speed += speedMultiplier;
-                            break;
-                        case "leftPillar":
-                            offsetX = 1f;
-                            if (speed < speedLimit)
-                                speed += speedMultiplier;
-                            break;
-                        case "rightPillar":
-                            offsetX = -1f;
-                            if (speed < speedLimit)
-                                speed += speedMultiplier;
-                            break;
-                        case "bottomSide":
-                            offsetY = -1f;
-                            if (speed < speedLimit)
-                                speed += speedMultiplier;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
+            GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + velocity * Time.fixedDeltaTime * speed);
         }
 
         void OnCollisionEnter2D(Collision2D col)
         {
-            // if ball touch player invert direction of move
-            if (col.gameObject.name == "playerPillar")
+            switch (col.gameObject.name)
             {
-                offsetY = 3f;
+                case "playerPillar":
+                    if (velocity.y < 0)
+                        velocity.y = -velocity.y;
+                    if (speed < speedLimit)
+                        speed += speedMultiplier;
+                    break;
+                case "topPillar":
+                    velocity.y = -velocity.y;
+                    if (speed < speedLimit)
+                        speed += speedMultiplier;
+                    break;
+                case "leftPillar":
+                    velocity.x = -velocity.x;
+                    if (speed < speedLimit)
+                        speed += speedMultiplier;
+                    break;
+                case "rightPillar":
+                    velocity.x = -velocity.x;
+                    if (speed < speedLimit)
+                        speed += speedMultiplier;
+                    break;
+                case "bottomSide":
+                    if (velocity.y > 0)
+                        velocity.y = -velocity.y;
+                    if (speed < speedLimit)
+                        speed += speedMultiplier;
+                    break;
+                default:
+                    break;
             }
             // if ball touch platforms
             if (col.gameObject.layer == 11)
@@ -98,7 +88,7 @@ namespace Assets.Scripts
                 // destroy current touched platform
                 Destroy(col.gameObject);
                 // invert direction move
-                offsetY = -offsetY;
+                velocity.y = -velocity.y;
                 // speed up
                 speed += speedMultiplier;
                 // increment score
