@@ -7,6 +7,7 @@ namespace Assets.Scripts
         private GameObject go;
         void Start()
         {
+            
            // DataManager manager = gameObject.AddComponent<DataManager>();
            // manager.Load();
         }
@@ -17,7 +18,8 @@ namespace Assets.Scripts
             go = GameObject.Find("/ActiveObjects/Platforms/Platform");
             // if all platforms destroyed go to next level
             if (go == null)
-            { 
+            {
+                Time.timeScale = 0;
                 // level 2 init here
             }
         }
