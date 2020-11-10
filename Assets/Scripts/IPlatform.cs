@@ -11,5 +11,6 @@ namespace Assets.Scripts
         float GetPlayerSpeed();
         Color GetPlayerColor();
         void SetPosition(Vector component, float value);
+        void SetPosition(Vector3 pos);
     }
 }

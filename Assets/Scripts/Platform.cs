@@ -65,5 +65,10 @@ namespace Assets.Scripts
 
             transform.position = _position;
         }
+
+        public void SetPosition(Vector3 pos)
+        {
+            _position = pos;
+        }
     }
 }

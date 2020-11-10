@@ -21,7 +21,7 @@ namespace Assets.Scripts
         // Start is called before the first frame update
         void Start()
         {
-            velocity = new Vector2(1.75f, 1.1f);
+            velocity = new Vector2(1f, 1f);
             // init score label text
             GameObject.Find("/UI/Failed/Panel/Result").GetComponent<Text>().text = "Score ";
             // get ball collider
@@ -45,6 +45,7 @@ namespace Assets.Scripts
         // Update is called once per frame
         void Update()
         {
+            GetComponent<Rigidbody2D>().inertia = 0;
             GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + velocity * Time.fixedDeltaTime * speed);
         }
 
@@ -88,7 +89,7 @@ namespace Assets.Scripts
                 // destroy current touched platform
                 Destroy(col.gameObject);
                 // invert direction move
-                velocity.y = -velocity.y;
+                velocity.y = -velocity.y - .3f;
                 // speed up
                 speed += speedMultiplier;
                 // increment score
