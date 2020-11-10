@@ -2,6 +2,9 @@
 
 namespace Assets.Scripts
 {
+    /// <summary>
+    /// Player logic interface class
+    /// </summary>
     public interface IPlatform
     {
         Vector3 GetPosition();

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
+    /// <summary>
+    /// Player logic implementation class
+    /// </summary>
     public class Platform: MonoBehaviour, IPlatform
     {
         [SerializeField] private Vector3 _position;
@@ -35,7 +38,11 @@ namespace Assets.Scripts
         {
             return _position;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="component">coordinate</param>
+        /// <param name="value">new coordinate value</param>
         public void SetPosition(Vector component, float value)
         {
             if (!Enum.IsDefined(typeof(Vector), component))

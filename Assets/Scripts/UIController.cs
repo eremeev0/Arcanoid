@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
+    /// <summary>
+    /// class responsible for the logic of the game's user interface
+    /// </summary>
     public class UIController: MonoBehaviour
     {
 
@@ -20,10 +23,12 @@ namespace Assets.Scripts
         private Dropdown colorsList;
         private Dropdown resolutions;
 
-        private ResolutionManager resManager;
+        //private ResolutionManager resManager;
         void Start()
         {
-            resManager = gameObject.AddComponent<ResolutionManager>();
+            //resManager = gameObject.AddComponent<ResolutionManager>();
+            
+            // UI first init 
             GameObject.Find("/UI/Failed/Panel").SetActive(false);
             GameObject.Find("/UI/Score/Panel").SetActive(false);
             GameObject.Find("/UI/Settings/Panel").SetActive(false);
@@ -50,11 +55,13 @@ namespace Assets.Scripts
             colorsList.onValueChanged.AddListener(ColorUpdated);
             resolutions = InitResolutions(resolutions);
             resolutions.onValueChanged.AddListener(SetNewResolution);
+            // stop game
             Time.timeScale = 0;
         }
 
         void Update()
         {
+            // after scene reload try select game scene
             if (SceneManager.sceneCountInBuildSettings == 2)
             {
                 SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(1));
@@ -83,10 +90,14 @@ namespace Assets.Scripts
 
         public void Restart()
         {
-            Settings.PlayerScore = 0;
+            //Settings.PlayerScore = 0;
+            // reload current scene
             SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Additive);
+            // unload old scene
             SceneManager.UnloadSceneAsync(1);
+            // resume game
             Time.timeScale = 1;
+            // hide failed window
             GameObject.Find("/UI/Failed/Panel").SetActive(false);
             print("restart");
         }
@@ -110,8 +121,9 @@ namespace Assets.Scripts
         {
             GameObject.Find("/UI/Settings/Panel").SetActive(false);
             GameObject.Find("/UI/Menu/Panel").SetActive(true);
-            DataManager mngr = new DataManager();
-            mngr.Save(speedSlider.value.ToString(), colorsList.value.ToString(), resolutions.value.ToString(), Settings.PlayerScore.ToString());
+            DataManager manager = gameObject.AddComponent<DataManager>();
+            // save user settings
+            manager.Save(speedSlider.value.ToString(), colorsList.value.ToString(), resolutions.value.ToString(), Settings.PlayerScore.ToString());
         }
 
         public void SpeedUpdated(float value)

@@ -2,9 +2,12 @@
 
 namespace Assets.Scripts
 {
+    /// <summary>
+    /// this class contains player movement logic
+    /// </summary>
     public class PlayerController : MonoBehaviour
     {
-        // properties with the possibility of change from Unity editor
+        
         public float Speed = 0f;
 
         private IPlatform platform;
@@ -27,17 +30,14 @@ namespace Assets.Scripts
         // Update is called once per frame
         void Update()
         {
-            //transform.position = platform.GetPosition();
             Speed = platform.GetPlayerSpeed(); 
             gameObject.GetComponent<SpriteRenderer>().color = platform.GetPlayerColor();
             var transformRotation = transform.rotation;
             transformRotation.z = 0f;
             transform.rotation = transformRotation;
-            // transform.position += Move()
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 platform.SetPosition(Vector.Y, transform.position.y + Time.deltaTime * Speed);
-                //   platform.SetPosition(platform.GetPos() += Time.deltaTime * Speed;);
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {

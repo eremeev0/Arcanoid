@@ -2,6 +2,9 @@
 
 namespace Assets.Scripts
 {
+    /// <summary>
+    /// this class contain all game properties
+    /// </summary>
     public class Settings
     {
         public static float PlayerSpeed { get; set; } = 5f;
