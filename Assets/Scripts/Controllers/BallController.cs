@@ -43,32 +43,27 @@ namespace Assets.Scripts.Controllers
 
         void OnCollisionEnter2D(Collision2D col)
         {
+            _ballService.SpeedUp();
             switch (col.gameObject.name)
             {
                 case "playerPillar":
                     _velocity.y = -_velocity.y;
-                    _ballService.SpeedUp();
                     break;
                 case "topPillar":
                     _velocity.y = -_velocity.y;
-                    _ballService.SpeedUp();
                     break;
                 case "leftPillar":
                     _velocity.x = -_velocity.x;
-                    _ballService.SpeedUp();
                     break;
                 case "rightPillar":
                     _velocity.x = -_velocity.x;
-                    _ballService.SpeedUp();
                     break;
                 case "bottomSide":
                     _velocity.y = -_velocity.y;
-                    _ballService.SpeedUp();
                     break;
                 case "Platform":
                     Destroy(col.gameObject);
                     _velocity.y = -_velocity.y;
-                    _ballService.SpeedUp();
                     _ballService.IncrementScore();
                     _destroyedPlatform.IncrementDestroyed();
                     break;
