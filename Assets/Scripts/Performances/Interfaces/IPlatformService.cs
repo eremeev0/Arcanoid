@@ -5,7 +5,7 @@ namespace Assets.Scripts.Performances.Interfaces
     /// <summary>
     /// Player logic interface class
     /// </summary>
-    public interface IPlatform
+    public interface IPlatformService
     {
         Vector3 GetPosition();
         float GetSpeed();

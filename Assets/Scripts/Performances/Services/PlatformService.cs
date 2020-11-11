@@ -9,7 +9,7 @@ namespace Assets.Scripts.Performances.Services
     /// <summary>
     /// Player logic implementation class
     /// </summary>
-    public class Platform: MonoBehaviour, IPlatform
+    public class PlatformService: MonoBehaviour, IPlatformService
     {
         [SerializeField] private Vector3 _position;
         [SerializeField] private float _speed = Settings.PlayerSpeed;

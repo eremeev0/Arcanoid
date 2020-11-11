@@ -6,7 +6,7 @@ namespace Assets.Scripts.Controllers
 {
     public class ScoreController: MonoBehaviour
     {
-        [SerializeField] private int score = Settings.PlayerScore;
+        private int score = Settings.PlayerScore;
         
         // displayed score
         private Text _count;
@@ -16,6 +16,7 @@ namespace Assets.Scripts.Controllers
             _count = GameObject.Find("/UI/Score/Panel/Panel/count").GetComponent<Text>();
             _count.text = score.ToString();
         }
+        
         /// <summary>
         /// plus the received score value to the current
         /// </summary>
@@ -24,8 +25,6 @@ namespace Assets.Scripts.Controllers
         {
             score += val;
             Settings.PlayerScore = score;
-            // check that Settings get value from class
-            // display current score
             _count.text = score.ToString();
         }
 

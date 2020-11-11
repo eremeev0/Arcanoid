@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts.ConfigurationManagment;
+using Assets.Scripts.Performances;
 using Assets.Scripts.Performances.Interfaces;
 using Assets.Scripts.Performances.Services;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace Assets.Scripts.Controllers
         public float Speed = 0f;
 
         // player data storage interface
-        private IPlatform _platform;
+        private IPlatformService _platform;
 
         //bug(for select) ********* operators init. end
 
@@ -24,7 +25,7 @@ namespace Assets.Scripts.Controllers
         //bug(for select) Start is called before the first frame update
         void Start()
         {
-            _platform = gameObject.AddComponent<Platform>();
+            _platform = gameObject.AddComponent<PlatformService>();
             _platform.SetPosition(transform.position);
         }
 
@@ -49,7 +50,10 @@ namespace Assets.Scripts.Controllers
             
             // Ball can't push player
             if (col.gameObject.name == "gameBall")
+            {
+                gameObject.GetComponent<Rigidbody2D>().rotation = 0f;
                 gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+            }
         }
 
         //bug(for select) Update is called once per frame
@@ -57,7 +61,9 @@ namespace Assets.Scripts.Controllers
         {
             if (!Settings.IsGameStopped)
             {
-                transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+                var transformRotation = transform.rotation;
+                transformRotation.z = 0;
+                transform.rotation = transformRotation;
                 if (_platform.IsColorUpdate())
                     gameObject.GetComponent<SpriteRenderer>().color = _platform.GetColor();
 

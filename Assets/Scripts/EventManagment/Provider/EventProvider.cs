@@ -29,8 +29,6 @@ namespace Assets.Scripts.EventManagment.Provider
                 case GameEvents.GAME_RESTARTED:
                     ReloadGame();
                     break;
-                case GameEvents.LEVEL_FAILED:
-                    break;
                 case GameEvents.GAME_BACK_TO_MENU:
                     OpenMenu();
                     break;
@@ -73,6 +71,9 @@ namespace Assets.Scripts.EventManagment.Provider
                     break;
                 case GameEvents.SCORE_UPDATED:
                     UpdateScore(Convert.ToInt32(value[0]));
+                    break;
+                case GameEvents.LEVEL_FAILED:
+                    OpenFailedWindow(value[0]);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(@event), @event, null);
@@ -218,6 +219,7 @@ namespace Assets.Scripts.EventManagment.Provider
             ResumeGame();
             // hide failed window
             GameObject.Find("/UI/Failed/Panel").SetActive(false);
+            GameObject.Find("/UI/Failed/Panel/Result").GetComponent<Text>().text = "Score ";
         }
 
         private void OpenMenu()
@@ -226,6 +228,13 @@ namespace Assets.Scripts.EventManagment.Provider
             GameObject.Find("/UI/Failed/Panel").SetActive(false);
             GameObject.Find("/UI/Score/Panel").SetActive(false);
             GameObject.Find("/UI/Settings/Panel").SetActive(false);
+        }
+
+        private void OpenFailedWindow(string value)
+        {
+            Settings.PlayerScore = Convert.ToInt32(value);
+            GameObject.Find("/UI/Failed/Panel/Result").GetComponent<Text>().text += value;
+            GameObject.Find("/UI/Failed/Panel").SetActive(true);
         }
 
         private void OpenOptions()
