@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.ConfigurationManagment;
+using Assets.Scripts.EventManagment.Events;
+using UnityEngine;
 using UnityEngine.UI;
+using EventProvider = Assets.Scripts.EventManagment.Provider.EventProvider;
 using Random = UnityEngine.Random;
 using Rigidbody2D = UnityEngine.Rigidbody2D;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Controllers
 {
     public class BallController : MonoBehaviour
     {
@@ -13,7 +16,7 @@ namespace Assets.Scripts
 
         private GameObject _gameObject;
         private MessageManager msgManager;
-        private Score score;
+        private ScoreController score;
         public float offsetX;
         public float offsetY;
 
@@ -33,7 +36,7 @@ namespace Assets.Scripts
             _gameObject = GameObject.Find("/UI/Failed/Panel");
             _gameObject.SetActive(false);
             // get score class for counting
-            score = gameObject.AddComponent<Score>();
+            score = gameObject.AddComponent<ScoreController>();
         }
 
         public float speed = 2f;
@@ -45,8 +48,11 @@ namespace Assets.Scripts
         // Update is called once per frame
         void Update()
         {
-            GetComponent<Rigidbody2D>().inertia = 0;
-            GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + velocity * Time.fixedDeltaTime * speed);
+            if (!Settings.IsGameStopped)
+            {
+                GetComponent<Rigidbody2D>().inertia = 0;
+                GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + velocity * Time.fixedDeltaTime * speed);
+            }
         }
 
         void OnCollisionEnter2D(Collision2D col)
@@ -107,7 +113,7 @@ namespace Assets.Scripts
                 gameObject.SetActive(false);
                 _gameObject.SetActive(true);
                 // stop game
-                Time.timeScale = 0;
+                new EventProvider().SendEvent(GameEvents.GAME_PAUSED);
                 // get last score for save record
                 Settings.PlayerScore = score.GetScore();
                 // displayed reached score

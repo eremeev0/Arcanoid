@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Performances.Interfaces
 {
     /// <summary>
     /// Player logic interface class
@@ -8,8 +8,11 @@ namespace Assets.Scripts
     public interface IPlatform
     {
         Vector3 GetPosition();
-        float GetPlayerSpeed();
-        Color GetPlayerColor();
+        float GetSpeed();
+        Color GetColor();
+        bool IsSpeedUpdate();
+        bool IsColorUpdate();
+
         void SetPosition(Vector component, float value);
         void SetPosition(Vector3 pos);
     }

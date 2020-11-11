@@ -1,11 +1,14 @@
 ﻿using System;
-using System.Linq;
+using Assets.Scripts.ConfigurationManagment;
+using Assets.Scripts.Controllers;
+using Assets.Scripts.EventManagment.Events;
+using Assets.Scripts.StorageProvider.Service;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.EventManagment.Provider
 {
     public class EventProvider
     {
@@ -18,21 +21,30 @@ namespace Assets.Scripts
             switch (@event)
             {
                 case GameEvents.GAME_STARTED:
-                    Start();
+                    StartGame();
                     break;
                 case GameEvents.GAME_CLOSED:
-                    Close();
+                    CloseApp();
                     break;
                 case GameEvents.GAME_RESTARTED:
-                    Restart();
+                    ReloadGame();
                     break;
                 case GameEvents.LEVEL_FAILED:
                     break;
-                case GameEvents.GAME_BACK_TO_MENU_2:
-                    Menu();
+                case GameEvents.GAME_BACK_TO_MENU:
+                    OpenMenu();
                     break;
                 case GameEvents.GAME_OPEN_OPTIONS:
-                    Options();
+                    OpenOptions();
+                    break;
+                case GameEvents.RESET_OPTIONS:
+                    ResetOptions();
+                    break;
+                case GameEvents.GAME_PAUSED:
+                    StopGame();
+                    break;
+                case GameEvents.GAME_RESUMED:
+                    ResumeGame();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(@event), @event, null);
@@ -47,105 +59,139 @@ namespace Assets.Scripts
         {
             switch (@event)
             {
-                case GameEvents.GAME_BACK_TO_MENU:
-                    BackToMenu(Convert.ToString(value));
+                case GameEvents.SAVE_OPTIONS:
+                    SaveOptions(value);
                     break;
                 case GameEvents.WIN_RESOLUTION_UPDATED:
-                    SetResolution(Convert.ToInt32(value[0]));
+                    UpdateResolution(Convert.ToInt32(value[0]));
                     break;
                 case GameEvents.SPEED_UPDATED:
-                    SetPlayerSpeed(Convert.ToSingle(value[0]));
+                    UpdateSpeed(Convert.ToSingle(value[0]));
                     break;
                 case GameEvents.PLAYER_COLOR_UPDATED:
-                    SetColor(Convert.ToInt32(value[0]));
+                    UpdateColor(Convert.ToInt32(value[0]));
+                    break;
+                case GameEvents.SCORE_UPDATED:
+                    UpdateScore(Convert.ToInt32(value[0]));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(@event), @event, null);
             }
         }
+        
 
-        private void SetResolution(int index)
+
+
+        private void UpdateResolution(int index)
         {
+            var obj = GameObject.Find("/UI/Settings/Panel/ResolutionDropdown").GetComponent<Dropdown>();
             switch (index)
             {
                 case 0:
                     Screen.SetResolution(640, 360, true);
+                    obj.value = index;
                     break;
                 case 1:
                     Screen.SetResolution(800, 600, true);
+                    obj.value = index;
                     break;
                 case 2:
                     Screen.SetResolution(1024, 768, true);
+                    obj.value = index;
                     break;
                 case 3:
                     Screen.SetResolution(1280, 800, true);
+                    obj.value = index;
                     break;
                 case 4:
                     Screen.SetResolution(1360, 768, true);
+                    obj.value = index;
                     break;
                 case 5:
                     Screen.SetResolution(1440, 900, true);
+                    obj.value = index;
                     break;
                 case 6:
                     Screen.SetResolution(1600, 900, true);
+                    obj.value = index;
                     break;
                 case 7:
                     Screen.SetResolution(1920, 1080, true);
+                    obj.value = index;
                     break;
                 case 8:
                     Screen.SetResolution(1920, 1200, true);
+                    obj.value = index;
                     break;
                 default:
                     break;
             }
         }
 
-        private void SetColor(int value)
+        private void UpdateColor(int value)
         {
+            var obj = GameObject.Find("/UI/Settings/Panel/Dropdown").GetComponent<Dropdown>();
             switch (value)
             {
                 case 0:
                     Settings.PlayerColor = Color.white;
+                    obj.value = value;
                     break;
                 case 1:
                     Settings.PlayerColor = Color.black;
+                    obj.value = value;
                     break;
                 case 2:
                     Settings.PlayerColor = Color.blue;
+                    obj.value = value;
                     break;
                 case 3:
                     Settings.PlayerColor = Color.cyan;
+                    obj.value = value;
                     break;
                 case 4:
                     Settings.PlayerColor = Color.gray;
+                    obj.value = value;
                     break;
                 case 5:
                     Settings.PlayerColor = Color.green;
+                    obj.value = value;
                     break;
                 case 6:
                     Settings.PlayerColor = Color.grey;
+                    obj.value = value;
                     break;
                 case 7:
                     Settings.PlayerColor = Color.magenta;
+                    obj.value = value;
                     break;
                 case 8:
                     Settings.PlayerColor = Color.red;
+                    obj.value = value;
                     break;
                 case 9:
                     Settings.PlayerColor = Color.yellow;
+                    obj.value = value;
                     break;
                 default:
                     break;
             }
         }
 
-        private void SetPlayerSpeed(float value)
+        private void UpdateSpeed(float value)
         {
             GameObject.Find("/UI/Settings/Panel/Slider/value").GetComponent<Text>().text = value.ToString();
+            GameObject.Find("/UI/Settings/Panel/Slider").GetComponent<Slider>().value = value;
             Settings.PlayerSpeed = value;
         }
 
-        private void Close()
+        private void UpdateScore(int value)
+        {
+            GameObject.Find("/UI/Score/Panel/Panel/count").GetComponent<Text>().text = value.ToString();
+            Settings.PlayerScore = value;
+        }
+
+        private void CloseApp()
         {
             #if UNITY_EDITOR
                 EditorApplication.isPlaying = false;
@@ -154,46 +200,63 @@ namespace Assets.Scripts
             #endif
         }
 
-        private void Start()
+        private void StartGame()
         {
             GameObject.Find("/UI/Menu/Panel").SetActive(false);
             GameObject.Find("/UI/Score/Panel").SetActive(true);
-            Restart();
+            ReloadGame();
         }
 
-        private void Restart()
+        private void ReloadGame()
         {
-            //Settings.PlayerScore = 0;
+            Settings.PlayerScore = 0;
             // reload current scene
             SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Additive);
             // unload old scene
             SceneManager.UnloadSceneAsync(1);
             // resume game
-            Time.timeScale = 1;
+            ResumeGame();
             // hide failed window
             GameObject.Find("/UI/Failed/Panel").SetActive(false);
         }
 
-        private void Menu()
+        private void OpenMenu()
         {
             GameObject.Find("/UI/Menu/Panel").SetActive(true);
             GameObject.Find("/UI/Failed/Panel").SetActive(false);
             GameObject.Find("/UI/Score/Panel").SetActive(false);
+            GameObject.Find("/UI/Settings/Panel").SetActive(false);
         }
 
-        private void Options()
+        private void OpenOptions()
         {
             GameObject.Find("/UI/Settings/Panel").SetActive(true);
             GameObject.Find("/UI/Menu/Panel").SetActive(false);
         }
 
-        private void BackToMenu(params string[] value)
+        private void SaveOptions(params string[] value)
         {
-            GameObject.Find("/UI/Settings/Panel").SetActive(false);
-            GameObject.Find("/UI/Menu/Panel").SetActive(true);
             DataManager manager = new DataManager();
             // save user settings
             manager.Save(value);
+        }
+
+        private void ResetOptions()
+        {
+            DataManager manager = new DataManager();
+            manager.Reset();
+            SaveOptions(DefaultSettings.PlayerSpeed.ToString(), DefaultSettings.PlayerColor.ToString(),
+                DefaultSettings.GameResolution.ToString(), DefaultSettings.PlayerScore.ToString());
+        }
+
+        private void StopGame()
+        {
+            Settings.IsGameStopped = true;
+        }
+
+        private void ResumeGame()
+        {
+            Settings.IsGameStopped = false;
         }
     }
 }

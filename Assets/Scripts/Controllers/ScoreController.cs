@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.ConfigurationManagment;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Controllers
 {
-    public class Score: MonoBehaviour
+    public class ScoreController: MonoBehaviour
     {
         [SerializeField] private int score = Settings.PlayerScore;
         
@@ -24,7 +25,6 @@ namespace Assets.Scripts
             score += val;
             Settings.PlayerScore = score;
             // check that Settings get value from class
-            Debug.LogWarning(Settings.PlayerScore);
             // display current score
             _count.text = score.ToString();
         }

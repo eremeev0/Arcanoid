@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using Assets.Scripts.ConfigurationManagment;
+using Assets.Scripts.Performances.Interfaces;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Performances.Services
 {
     /// <summary>
     /// Player logic implementation class
@@ -10,13 +12,15 @@ namespace Assets.Scripts
     public class Platform: MonoBehaviour, IPlatform
     {
         [SerializeField] private Vector3 _position;
-        [SerializeField] private float Speed;
-        [SerializeField] private Color color;
+        [SerializeField] private float _speed = Settings.PlayerSpeed;
+        [SerializeField] private Color _color = Settings.PlayerColor;
+        private bool _isSpeedUpdate = true;
+        private bool _isColorUpdate = true;
+
+
         void Start()
         {
             _position.z = -1f;
-            Speed = Settings.PlayerSpeed;
-            color = Settings.PlayerColor;
         }
 
         void Update()
@@ -24,14 +28,26 @@ namespace Assets.Scripts
 
         }
 
-        public float GetPlayerSpeed()
+        public bool IsSpeedUpdate()
         {
-            return Speed;
+            return _isSpeedUpdate;
         }
 
-        public Color GetPlayerColor()
+        public bool IsColorUpdate()
         {
-            return color;
+            return _isColorUpdate;
+        }
+
+        public float GetSpeed()
+        {
+            _isSpeedUpdate = false;
+            return _speed;
+        }
+
+        public Color GetColor()
+        {
+            _isColorUpdate = false;
+            return _color;
         }
 
         public Vector3 GetPosition()
