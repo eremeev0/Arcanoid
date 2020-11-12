@@ -5,7 +5,7 @@ namespace Assets.Scripts.Contracts
     /// <summary>
     /// this class contain all game properties
     /// </summary>
-    public class Settings
+    public class SettingsDto
     {
         // saved settings
         public static float PlayerSpeed { get; set; } = 5f;

@@ -36,10 +36,10 @@ namespace Assets.Scripts.StorageProvider.Service
         public void Reset()
         {
             EventProvider eProvider = new EventProvider();
-            eProvider.SendEvent(GameEvents.SPEED_UPDATED, DefaultSettings.PlayerSpeed.ToString());
-            eProvider.SendEvent(GameEvents.PLAYER_COLOR_UPDATED, DefaultSettings.PlayerColor.ToString());
-            eProvider.SendEvent(GameEvents.WIN_RESOLUTION_UPDATED, DefaultSettings.GameResolution.ToString());
-            eProvider.SendEvent(GameEvents.SCORE_UPDATED, DefaultSettings.PlayerScore.ToString());
+            eProvider.SendEvent(GameEvents.SPEED_UPDATED, DefaultSettingsDto.PlayerSpeed.ToString());
+            eProvider.SendEvent(GameEvents.PLAYER_COLOR_UPDATED, DefaultSettingsDto.PlayerColor.ToString());
+            eProvider.SendEvent(GameEvents.WIN_RESOLUTION_UPDATED, DefaultSettingsDto.GameResolution.ToString());
+            eProvider.SendEvent(GameEvents.SCORE_UPDATED, DefaultSettingsDto.PlayerScore.ToString());
         }
     }
 }

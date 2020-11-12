@@ -135,43 +135,43 @@ namespace Assets.Scripts.EventManagment.Provider
             switch (value)
             {
                 case 0:
-                    Settings.PlayerColor = Color.white;
+                    SettingsDto.PlayerColor = Color.white;
                     obj.value = value;
                     break;
                 case 1:
-                    Settings.PlayerColor = Color.black;
+                    SettingsDto.PlayerColor = Color.black;
                     obj.value = value;
                     break;
                 case 2:
-                    Settings.PlayerColor = Color.blue;
+                    SettingsDto.PlayerColor = Color.blue;
                     obj.value = value;
                     break;
                 case 3:
-                    Settings.PlayerColor = Color.cyan;
+                    SettingsDto.PlayerColor = Color.cyan;
                     obj.value = value;
                     break;
                 case 4:
-                    Settings.PlayerColor = Color.gray;
+                    SettingsDto.PlayerColor = Color.gray;
                     obj.value = value;
                     break;
                 case 5:
-                    Settings.PlayerColor = Color.green;
+                    SettingsDto.PlayerColor = Color.green;
                     obj.value = value;
                     break;
                 case 6:
-                    Settings.PlayerColor = Color.grey;
+                    SettingsDto.PlayerColor = Color.grey;
                     obj.value = value;
                     break;
                 case 7:
-                    Settings.PlayerColor = Color.magenta;
+                    SettingsDto.PlayerColor = Color.magenta;
                     obj.value = value;
                     break;
                 case 8:
-                    Settings.PlayerColor = Color.red;
+                    SettingsDto.PlayerColor = Color.red;
                     obj.value = value;
                     break;
                 case 9:
-                    Settings.PlayerColor = Color.yellow;
+                    SettingsDto.PlayerColor = Color.yellow;
                     obj.value = value;
                     break;
                 default:
@@ -183,13 +183,13 @@ namespace Assets.Scripts.EventManagment.Provider
         {
             GameObject.Find("/UI/Settings/Panel/Slider/value").GetComponent<Text>().text = value.ToString();
             GameObject.Find("/UI/Settings/Panel/Slider").GetComponent<Slider>().value = value;
-            Settings.PlayerSpeed = value;
+            SettingsDto.PlayerSpeed = value;
         }
 
         private void UpdateScore(int value)
         {
             GameObject.Find("/UI/Score/Panel/Panel/count").GetComponent<Text>().text = value.ToString();
-            Settings.PlayerScore = value;
+            SettingsDto.PlayerScore = value;
         }
 
         private void CloseApp()
@@ -210,7 +210,7 @@ namespace Assets.Scripts.EventManagment.Provider
 
         private void ReloadGame()
         {
-            Settings.PlayerScore = 0;
+            SettingsDto.PlayerScore = 0;
             // reload current scene
             SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Additive);
             // unload old scene
@@ -232,7 +232,7 @@ namespace Assets.Scripts.EventManagment.Provider
 
         private void OpenFailedWindow(string value)
         {
-            Settings.PlayerScore = Convert.ToInt32(value);
+            SettingsDto.PlayerScore = Convert.ToInt32(value);
             GameObject.Find("/UI/Failed/Panel").SetActive(true);
             GameObject.Find("/UI/Failed/Panel/Result").GetComponent<Text>().text += value;
         }
@@ -254,21 +254,20 @@ namespace Assets.Scripts.EventManagment.Provider
         {
             DataManager manager = new DataManager();
             manager.Reset();
-            SaveOptions(DefaultSettings.PlayerSpeed.ToString(), DefaultSettings.PlayerColor.ToString(),
-                DefaultSettings.GameResolution.ToString(), DefaultSettings.PlayerScore.ToString());
+            SaveOptions(DefaultSettingsDto.PlayerSpeed.ToString(), DefaultSettingsDto.PlayerColor.ToString(),
+                DefaultSettingsDto.GameResolution.ToString(), DefaultSettingsDto.PlayerScore.ToString());
         }
 
         private void StopGame()
         {
             GameObject.Find("/Character/playerPillar").GetComponent<PlayerController>().enabled = false;
-            Settings.IsGameStopped = true;
+            SettingsDto.IsGameStopped = true;
         }
 
         private void ResumeGame()
         {
             GameObject.Find("/Character/playerPillar").GetComponent<PlayerController>().enabled = true;
-            GameObject.Find("/ActiveObjects/gameBall").GetComponent<BallController>().enabled = true; 
-            Settings.IsGameStopped = false;
+            SettingsDto.IsGameStopped = false;
         }
     }
 }

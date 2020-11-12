@@ -12,8 +12,8 @@ namespace Assets.Scripts.Performances.Services
     public class PlatformService: MonoBehaviour, IPlatformService
     {
         [SerializeField] private Vector3 _position;
-        [SerializeField] private float _speed = Settings.PlayerSpeed;
-        [SerializeField] private Color _color = Settings.PlayerColor;
+        [SerializeField] private float _speed = SettingsDto.PlayerSpeed;
+        [SerializeField] private Color _color = SettingsDto.PlayerColor;
         private bool _isSpeedUpdate = true;
         private bool _isColorUpdate = true;
 

@@ -11,9 +11,9 @@ namespace Assets.Scripts.Performances.Services
 {
     public class BallService: MonoBehaviour, IBallService
     {
-        private float _speed = Settings.BallSpeed;
-        private float _maxSpeed = Settings.BallMaxSpeed;
-        private float _speedMultiplier = Settings.BallSpeedMultiplier;
+        private float _speed = SettingsDto.BallSpeed;
+        private float _maxSpeed = SettingsDto.BallMaxSpeed;
+        private float _speedMultiplier = SettingsDto.BallSpeedMultiplier;
         private Vector2 _velocity;
         private bool _isSpeedUpdate = false;
 

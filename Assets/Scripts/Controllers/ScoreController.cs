@@ -6,7 +6,7 @@ namespace Assets.Scripts.Controllers
 {
     public class ScoreController
     {
-        private int score = Settings.PlayerScore;
+        private int score = SettingsDto.PlayerScore;
         
         // displayed score
         private Text _count;
@@ -24,7 +24,7 @@ namespace Assets.Scripts.Controllers
         public void UpdateScore(int val)
         {
             score += val;
-            Settings.PlayerScore = score;
+            SettingsDto.PlayerScore = score;
             GameObject.Find("/UI/Score/Panel/Panel/count").GetComponent<Text>().text = score.ToString();
         }
 

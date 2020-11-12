@@ -12,13 +12,13 @@ namespace Assets.Scripts.Contracts
             switch (@event)
             {
                 case UIEvents.INIT_COLOR_LIST:
-                    foreach (var color in UIDataSettings.Colors)
+                    foreach (var color in UIDataSettingsDto.Colors)
                     {
                         obj.options.Add(new Dropdown.OptionData { text = color });
                     }
                     break;
                 case UIEvents.INIT_RESOLUTION_LIST:
-                    foreach (var resolution in UIDataSettings.Resolutions)
+                    foreach (var resolution in UIDataSettingsDto.Resolutions)
                     {
                         obj.options.Add(new Dropdown.OptionData { text = resolution });
                     }

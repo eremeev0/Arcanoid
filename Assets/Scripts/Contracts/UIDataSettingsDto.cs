@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.Contracts
 {
-    public class UIDataSettings
+    public class UIDataSettingsDto
     {
         public static readonly string[] Colors =
         {

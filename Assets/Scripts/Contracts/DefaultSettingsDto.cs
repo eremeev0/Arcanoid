@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.Contracts
 {
-    public class DefaultSettings
+    public class DefaultSettingsDto
     {
         public static float PlayerSpeed { get; set; } = 5f;
         public static int PlayerColor { get; set; } = 0;

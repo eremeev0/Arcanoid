@@ -103,7 +103,7 @@ namespace Assets.Scripts.Controllers
         public void OnSaveButton_Clicked()
         {
             _eventProvider.SendEvent(GameEvents.SAVE_OPTIONS, speedSlider.value.ToString(),
-                colorsList.value.ToString(), resolutions.value.ToString(), Settings.PlayerScore.ToString());
+                colorsList.value.ToString(), resolutions.value.ToString(), SettingsDto.PlayerScore.ToString());
         }
 
         public void OnResetButton_Clicked()
