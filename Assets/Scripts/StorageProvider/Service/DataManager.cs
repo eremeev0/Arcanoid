@@ -10,19 +10,19 @@ namespace Assets.Scripts.StorageProvider.Service
     /// <summary>
     /// class that working with user configuration file
     /// </summary>
-    public class DataManager
+    public class DataManager: FileStorageManager
     {
         /// <summary>
         /// Load user configuration from persistent data path to game settings
         /// </summary>
         public void Load()
         {
+            var values = Load("user.config");
             EventProvider eProvider = new EventProvider();
-            var props = File.ReadAllLines(Application.persistentDataPath + "/user.config");
-            eProvider.SendEvent(GameEvents.SPEED_UPDATED, props[0]);
-            eProvider.SendEvent(GameEvents.PLAYER_COLOR_UPDATED, props[1]);
-            eProvider.SendEvent(GameEvents.WIN_RESOLUTION_UPDATED, props[2]);
-            eProvider.SendEvent(GameEvents.SCORE_UPDATED, props[3]);
+            eProvider.SendEvent(GameEvents.SPEED_UPDATED, values[0]);
+            eProvider.SendEvent(GameEvents.PLAYER_COLOR_UPDATED, values[1]);
+            eProvider.SendEvent(GameEvents.WIN_RESOLUTION_UPDATED, values[2]);
+            eProvider.SendEvent(GameEvents.SCORE_UPDATED, values[3]);
         }
         /// <summary>
         /// Save all received game settings to persistent data path
@@ -30,8 +30,7 @@ namespace Assets.Scripts.StorageProvider.Service
         /// <param name="values">Game settings in string format</param>
         public void Save([NotNull]params string[] values)
         {
-            Debug.Log(Application.persistentDataPath);
-            File.WriteAllLines(Application.persistentDataPath + "/user.config", values);
+            Save("user.config", values);
         }
 
         public void Reset()

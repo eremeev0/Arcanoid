@@ -31,14 +31,11 @@ namespace Assets.Scripts.Controllers
 
         // Update is called once per frame
         void Update()
-        {
-            if (!Settings.IsGameStopped)
-            {
-                if (_ballService.IsSpeedUpdate())
-                    _speed = _ballService.GetSpeed();
-                GetComponent<Rigidbody2D>().inertia = 0;
-                GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + _velocity * Time.fixedDeltaTime * _speed);
-            }
+        { 
+            if (_ballService.IsSpeedUpdate()) 
+                _speed = _ballService.GetSpeed();
+            GetComponent<Rigidbody2D>().inertia = 0;
+            GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + _velocity * Time.fixedDeltaTime * _speed);
         }
 
         void OnCollisionEnter2D(Collision2D col)

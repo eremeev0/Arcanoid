@@ -58,42 +58,39 @@ namespace Assets.Scripts.Controllers
 
         //bug(for select) Update is called once per frame
         void Update()
-        {
-            if (!Settings.IsGameStopped)
-            {
-                var transformRotation = transform.rotation;
-                transformRotation.z = 0;
-                transform.rotation = transformRotation;
-                if (_platform.IsColorUpdate())
-                    gameObject.GetComponent<SpriteRenderer>().color = _platform.GetColor();
+        { 
+            var transformRotation = transform.rotation;
+            transformRotation.z = 0;
+            transform.rotation = transformRotation;
+            if (_platform.IsColorUpdate())
+                gameObject.GetComponent<SpriteRenderer>().color = _platform.GetColor();
 
-                if (_platform.IsSpeedUpdate())
-                    Speed = _platform.GetSpeed();
+            if (_platform.IsSpeedUpdate())
+                Speed = _platform.GetSpeed();
 
-                if (Input.GetKey(KeyCode.UpArrow))
-                    _platform.SetPosition(Vector.Y, transform.position.y + Time.deltaTime * Speed);
+            if (Input.GetKey(KeyCode.UpArrow))
+                _platform.SetPosition(Vector.Y, transform.position.y + Time.deltaTime * Speed);
 
-                if (Input.GetKey(KeyCode.DownArrow))
-                    _platform.SetPosition(Vector.Y, transform.position.y - Time.deltaTime * Speed);
+            if (Input.GetKey(KeyCode.DownArrow))
+                _platform.SetPosition(Vector.Y, transform.position.y - Time.deltaTime * Speed);
 
-                if (Input.GetKey(KeyCode.LeftArrow))
-                    _platform.SetPosition(Vector.X, transform.position.x - Time.deltaTime * Speed);
+            if (Input.GetKey(KeyCode.LeftArrow))
+                _platform.SetPosition(Vector.X, transform.position.x - Time.deltaTime * Speed);
 
-                if (Input.GetKey(KeyCode.RightArrow))
-                    _platform.SetPosition(Vector.X, transform.position.x + Time.deltaTime * Speed);
+            if (Input.GetKey(KeyCode.RightArrow))
+                _platform.SetPosition(Vector.X, transform.position.x + Time.deltaTime * Speed);
 
-                if (Input.GetKey(KeyCode.W))
-                    _platform.SetPosition(Vector.Y, transform.position.y + Time.deltaTime * Speed);
+            if (Input.GetKey(KeyCode.W))
+                _platform.SetPosition(Vector.Y, transform.position.y + Time.deltaTime * Speed);
 
-                if (Input.GetKey(KeyCode.S))
-                    _platform.SetPosition(Vector.Y, transform.position.y - Time.deltaTime * Speed);
+            if (Input.GetKey(KeyCode.S))
+                _platform.SetPosition(Vector.Y, transform.position.y - Time.deltaTime * Speed);
 
-                if (Input.GetKey(KeyCode.A))
-                    _platform.SetPosition(Vector.X, transform.position.x - Time.deltaTime * Speed);
+            if (Input.GetKey(KeyCode.A))
+                _platform.SetPosition(Vector.X, transform.position.x - Time.deltaTime * Speed);
 
-                if (Input.GetKey(KeyCode.D))
-                    _platform.SetPosition(Vector.X, transform.position.x + Time.deltaTime * Speed);
-            }
+            if (Input.GetKey(KeyCode.D))
+                _platform.SetPosition(Vector.X, transform.position.x + Time.deltaTime * Speed);
         }
     }
 }

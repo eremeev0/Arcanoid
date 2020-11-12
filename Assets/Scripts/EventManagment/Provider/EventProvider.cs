@@ -216,10 +216,10 @@ namespace Assets.Scripts.EventManagment.Provider
             // unload old scene
             SceneManager.UnloadSceneAsync(1);
             // resume game
-            ResumeGame();
             // hide failed window
-            GameObject.Find("/UI/Failed/Panel").SetActive(false);
             GameObject.Find("/UI/Failed/Panel/Result").GetComponent<Text>().text = "Score ";
+            GameObject.Find("/UI/Failed/Panel").SetActive(false);
+            ResumeGame();
         }
 
         private void OpenMenu()
@@ -233,8 +233,8 @@ namespace Assets.Scripts.EventManagment.Provider
         private void OpenFailedWindow(string value)
         {
             Settings.PlayerScore = Convert.ToInt32(value);
-            GameObject.Find("/UI/Failed/Panel/Result").GetComponent<Text>().text += value;
             GameObject.Find("/UI/Failed/Panel").SetActive(true);
+            GameObject.Find("/UI/Failed/Panel/Result").GetComponent<Text>().text += value;
         }
 
         private void OpenOptions()
@@ -260,11 +260,15 @@ namespace Assets.Scripts.EventManagment.Provider
 
         private void StopGame()
         {
+            GameObject.Find("/Character/playerPillar").GetComponent<PlayerController>().enabled = false;
+            GameObject.Find("/ActiveObjects/gameBall").GetComponent<BallController>().enabled = false;
             Settings.IsGameStopped = true;
         }
 
         private void ResumeGame()
         {
+            GameObject.Find("/Character/playerPillar").GetComponent<PlayerController>().enabled = true;
+            GameObject.Find("/ActiveObjects/gameBall").GetComponent<BallController>().enabled = true; 
             Settings.IsGameStopped = false;
         }
     }
