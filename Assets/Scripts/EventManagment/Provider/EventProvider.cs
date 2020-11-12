@@ -261,12 +261,14 @@ namespace Assets.Scripts.EventManagment.Provider
         private void StopGame()
         {
             GameObject.Find("/Character/playerPillar").GetComponent<PlayerController>().enabled = false;
+            GameObject.Find("/ActiveObjects/gameBall").GetComponent<BallController>().enabled = false;
             SettingsDto.IsGameStopped = true;
         }
 
         private void ResumeGame()
         {
             GameObject.Find("/Character/playerPillar").GetComponent<PlayerController>().enabled = true;
+            GameObject.Find("/ActiveObjects/gameBall").GetComponent<BallController>().enabled = true;
             SettingsDto.IsGameStopped = false;
         }
     }

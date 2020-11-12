@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Contracts;
 using Assets.Scripts.EventManagment.Events;
+using Assets.Scripts.Performances;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -29,8 +30,9 @@ namespace Assets.Scripts.Controllers
         private readonly EventProvider _eventProvider = new EventProvider();
         void Start()
         {
+            new EventProvider().SendEvent(GameEvents.GAME_PAUSED);
             //resManager = gameObject.AddComponent<ResolutionManager>();
-            
+
             // UI first init 
             GameObject.Find("/UI/Failed/Panel").SetActive(false);
             GameObject.Find("/UI/Score/Panel").SetActive(false);
@@ -102,8 +104,11 @@ namespace Assets.Scripts.Controllers
 
         public void OnSaveButton_Clicked()
         {
-            _eventProvider.SendEvent(GameEvents.SAVE_OPTIONS, speedSlider.value.ToString(),
-                colorsList.value.ToString(), resolutions.value.ToString(), SettingsDto.PlayerScore.ToString());
+            _eventProvider.SendEvent(GameEvents.SAVE_OPTIONS,
+                $"[{nameof(SettingsDto.PlayerSpeed)}] = {SettingsDto.PlayerSpeed}",
+                $"[{nameof(SettingsDto.PlayerColor)}] = {colorsList.value}",
+                $"[{nameof(SettingsDto.GameResolution)}] = {resolutions.value}",
+                $"[{nameof(SettingsDto.PlayerScore)}] = {SettingsDto.PlayerScore}");
         }
 
         public void OnResetButton_Clicked()
