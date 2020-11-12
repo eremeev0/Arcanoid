@@ -22,7 +22,7 @@ namespace Assets.Scripts.Controllers
         {
             _destroyedPlatform = gameObject.AddComponent<DestrPlatformService>();
             _ballService = gameObject.AddComponent<BallService>();
-            _velocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+            _velocity = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
             _speed = _ballService.GetSpeed();
             // get score class for counting
             //score = gameObject.AddComponent<ScoreController>();
@@ -62,6 +62,11 @@ namespace Assets.Scripts.Controllers
                     _velocity.y = -_velocity.y;
                     _ballService.IncrementScore();
                     _destroyedPlatform.Destroy();
+                    if (_destroyedPlatform.IsAllDestroyed())
+                    {
+                        new EventProvider().SendEvent(GameEvents.GAME_PAUSED);
+                        // and level 1 complete
+                    }
                     break;
                 default:
                     break;
@@ -78,7 +83,6 @@ namespace Assets.Scripts.Controllers
                 gameObject.SetActive(false);
                 _ballService.Failed();
                 new EventProvider().SendEvent(GameEvents.GAME_PAUSED);
-                // displayed reached score
             }
         }
     }
