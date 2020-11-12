@@ -1,5 +1,5 @@
 ﻿using System;
-using Assets.Scripts.ConfigurationManagment;
+using Assets.Scripts.Contracts;
 using Assets.Scripts.Controllers;
 using Assets.Scripts.EventManagment.Events;
 using Assets.Scripts.Performances.Interfaces;
@@ -42,7 +42,7 @@ namespace Assets.Scripts.Performances.Services
 
         public void Failed()
         {
-            new EventProvider().SendEvent(GameEvents.LEVEL_FAILED, gameObject.AddComponent<ScoreController>().GetScore().ToString());
+            new EventProvider().SendEvent(GameEvents.LEVEL_FAILED, new ScoreController().GetScore().ToString());
         }
 
         public void SpeedUp()
@@ -54,7 +54,7 @@ namespace Assets.Scripts.Performances.Services
 
         public void IncrementScore()
         {
-            gameObject.AddComponent<ScoreController>().UpdateScore(1);
+            new ScoreController().UpdateScore(1);
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Assets.Scripts.ConfigurationManagment
+﻿namespace Assets.Scripts.Contracts
 {
     public class UIDataSettings
     {

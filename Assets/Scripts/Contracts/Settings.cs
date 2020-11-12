@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.ConfigurationManagment
+namespace Assets.Scripts.Contracts
 {
     /// <summary>
     /// this class contain all game properties

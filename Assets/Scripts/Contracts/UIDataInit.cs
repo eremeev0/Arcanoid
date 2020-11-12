@@ -1,9 +1,8 @@
 ﻿using System;
 using Assets.Scripts.EventManagment.Events;
-using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.ConfigurationManagment
+namespace Assets.Scripts.Contracts
 {
     public class UIDataInit
     {

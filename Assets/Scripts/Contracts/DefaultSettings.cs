@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.ConfigurationManagment
+﻿namespace Assets.Scripts.Contracts
 {
     public class DefaultSettings
     {

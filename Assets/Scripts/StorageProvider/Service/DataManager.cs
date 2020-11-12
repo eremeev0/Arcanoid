@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using Assets.Scripts.ConfigurationManagment;
+using Assets.Scripts.Contracts;
 using Assets.Scripts.EventManagment.Events;
 using JetBrains.Annotations;
 using UnityEngine;

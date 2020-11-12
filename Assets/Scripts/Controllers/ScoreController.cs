@@ -1,21 +1,21 @@
-﻿using Assets.Scripts.ConfigurationManagment;
+﻿using Assets.Scripts.Contracts;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers
 {
-    public class ScoreController: MonoBehaviour
+    public class ScoreController
     {
         private int score = Settings.PlayerScore;
         
         // displayed score
         private Text _count;
 
-        void Start()
+        /*void Start()
         {
             _count = GameObject.Find("/UI/Score/Panel/Panel/count").GetComponent<Text>();
             _count.text = score.ToString();
-        }
+        }*/
         
         /// <summary>
         /// plus the received score value to the current
@@ -25,7 +25,7 @@ namespace Assets.Scripts.Controllers
         {
             score += val;
             Settings.PlayerScore = score;
-            _count.text = score.ToString();
+            GameObject.Find("/UI/Score/Panel/Panel/count").GetComponent<Text>().text = score.ToString();
         }
 
         public int GetScore()

@@ -1,5 +1,5 @@
 ﻿using System;
-using Assets.Scripts.ConfigurationManagment;
+using Assets.Scripts.Contracts;
 using Assets.Scripts.Controllers;
 using Assets.Scripts.EventManagment.Events;
 using Assets.Scripts.StorageProvider.Service;
@@ -261,7 +261,6 @@ namespace Assets.Scripts.EventManagment.Provider
         private void StopGame()
         {
             GameObject.Find("/Character/playerPillar").GetComponent<PlayerController>().enabled = false;
-            GameObject.Find("/ActiveObjects/gameBall").GetComponent<BallController>().enabled = false;
             Settings.IsGameStopped = true;
         }
 

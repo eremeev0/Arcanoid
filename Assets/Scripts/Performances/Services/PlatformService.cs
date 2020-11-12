@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using Assets.Scripts.ConfigurationManagment;
+using Assets.Scripts.Contracts;
 using Assets.Scripts.Performances.Interfaces;
 using UnityEngine;
 

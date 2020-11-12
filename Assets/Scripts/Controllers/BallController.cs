@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.ConfigurationManagment;
-using Assets.Scripts.EventManagment.Events;
+﻿using Assets.Scripts.EventManagment.Events;
 using Assets.Scripts.Performances;
 using Assets.Scripts.Performances.Interfaces;
 using Assets.Scripts.Performances.Services;
@@ -62,7 +61,7 @@ namespace Assets.Scripts.Controllers
                     Destroy(col.gameObject);
                     _velocity.y = -_velocity.y;
                     _ballService.IncrementScore();
-                    _destroyedPlatform.IncrementDestroyed();
+                    _destroyedPlatform.Destroy();
                     break;
                 default:
                     break;

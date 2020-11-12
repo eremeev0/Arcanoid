@@ -2,7 +2,7 @@
 {
     public interface IDestrPlatformService
     {
-        void IncrementDestroyed();
+        void Destroy();
         bool IsAllDestroyed();
     }
 }

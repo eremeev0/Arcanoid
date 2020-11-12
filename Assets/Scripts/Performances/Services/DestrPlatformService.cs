@@ -5,12 +5,12 @@ namespace Assets.Scripts.Performances.Services
 {
     public class DestrPlatformService: MonoBehaviour, IDestrPlatformService
     {
-        private Sprite[] _destroyedPlatforms = GameObject.Find("/ActiveObjects/Platforms/Platform").GetComponents<Sprite>();
+        private Sprite _destroyedPlatforms;
         private int _destroyed = 0;
         private bool _isAllDestroyed = false;
         void Start()
         {
-
+            //_destroyedPlatforms = GameObject.Find("/ActiveObjects/Platforms").GetComponentInChildren<Sprite>();
         }
 
         void Update()
@@ -18,13 +18,14 @@ namespace Assets.Scripts.Performances.Services
             
         }
 
-        public void IncrementDestroyed()
+        public void Destroy()
         {
-            _destroyed++;
-            if (_destroyed >= _destroyedPlatforms.Length)
+            /*Destroy(_destroyedPlatforms);
+            _destroyedPlatforms = GameObject.Find("/ActiveObjects/Platforms").GetComponentInChildren<Sprite>();
+            if (_destroyedPlatforms == null)
             {
                 _isAllDestroyed = true;
-            }
+            }*/
         }
 
         public bool IsAllDestroyed()

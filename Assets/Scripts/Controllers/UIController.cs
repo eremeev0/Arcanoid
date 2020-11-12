@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.ConfigurationManagment;
+﻿using Assets.Scripts.Contracts;
 using Assets.Scripts.EventManagment.Events;
 using UnityEngine;
 using UnityEngine.SceneManagement;
