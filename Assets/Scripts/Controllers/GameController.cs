@@ -9,7 +9,6 @@ namespace Assets.Scripts.Controllers
 {
     public class GameController: MonoBehaviour
     {
-        private GameObject go;
         private IDestrPlatformService _destrService;
         void Start()
         {

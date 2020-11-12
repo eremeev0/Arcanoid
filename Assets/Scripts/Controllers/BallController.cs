@@ -22,7 +22,7 @@ namespace Assets.Scripts.Controllers
         {
             _destroyedPlatform = gameObject.AddComponent<DestrPlatformService>();
             _ballService = gameObject.AddComponent<BallService>();
-            _velocity = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
+            _velocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             _speed = _ballService.GetSpeed();
             // get score class for counting
             //score = gameObject.AddComponent<ScoreController>();
@@ -64,7 +64,7 @@ namespace Assets.Scripts.Controllers
                     _destroyedPlatform.Destroy();
                     if (_destroyedPlatform.IsAllDestroyed())
                     {
-                        new EventProvider().SendEvent(GameEvents.GAME_PAUSED);
+                        GameObject.Find("EventSystem2").GetComponent<EventProvider>().SendEvent(GameEvents.GAME_PAUSED);
                         // and level 1 complete
                     }
                     break;
@@ -82,7 +82,7 @@ namespace Assets.Scripts.Controllers
                 // hide ball and display failed window
                 gameObject.SetActive(false);
                 _ballService.Failed();
-                new EventProvider().SendEvent(GameEvents.GAME_PAUSED);
+                GameObject.Find("EventSystem2").GetComponent<EventProvider>().SendEvent(GameEvents.GAME_PAUSED);
             }
         }
     }

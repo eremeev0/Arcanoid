@@ -42,7 +42,7 @@ namespace Assets.Scripts.Performances.Services
 
         public void Failed()
         {
-            new EventProvider().SendEvent(GameEvents.LEVEL_FAILED, new ScoreController().GetScore().ToString());
+            GameObject.Find("EventSystem2").GetComponent<EventProvider>().SendEvent(GameEvents.LEVEL_FAILED, new ScoreController().GetScore().ToString());
         }
 
         public void SpeedUp()
