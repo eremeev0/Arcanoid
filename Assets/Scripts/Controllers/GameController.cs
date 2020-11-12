@@ -3,7 +3,6 @@ using Assets.Scripts.Performances.Interfaces;
 using Assets.Scripts.Performances.Services;
 using Assets.Scripts.StorageProvider.Service;
 using UnityEngine;
-using EventProvider = Assets.Scripts.EventManagment.Provider.EventProvider;
 
 namespace Assets.Scripts.Controllers
 {

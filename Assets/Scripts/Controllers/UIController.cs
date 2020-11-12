@@ -1,10 +1,10 @@
 ﻿using Assets.Scripts.Contracts;
 using Assets.Scripts.EventManagment.Events;
+using Assets.Scripts.EventManagment.Provider;
 using Assets.Scripts.Performances;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using EventProvider = Assets.Scripts.EventManagment.Provider.EventProvider;
 
 namespace Assets.Scripts.Controllers
 {
@@ -27,10 +27,10 @@ namespace Assets.Scripts.Controllers
         private Dropdown colorsList;
         private Dropdown resolutions;
 
-        private EventProvider _eventProvider;// = new EventProvider();
+        private EventManager _eventProvider;// = new EventProvider();
         void Start()
         {
-            _eventProvider = GameObject.Find("EventSystem2").GetComponent<EventProvider>();
+            _eventProvider = GameObject.Find("EventSystem2").GetComponent<EventManager>();
             _eventProvider.SendEvent(GameEvents.GAME_PAUSED);
             //resManager = gameObject.AddComponent<ResolutionManager>();
 
@@ -73,7 +73,7 @@ namespace Assets.Scripts.Controllers
         {
             // after scene reload try select game scene
             if (SceneManager.sceneCountInBuildSettings == 2)
-            { 
+            {
                 SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(1));
             }
         }

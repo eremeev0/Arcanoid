@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.EventManagment.Provider
 {
-    public class GameEventProvider
+    public class GameEventManager
     {
         public void SendEvent(GameEvents @event)
         {

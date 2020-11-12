@@ -2,9 +2,9 @@
 using Assets.Scripts.Contracts;
 using Assets.Scripts.Controllers;
 using Assets.Scripts.EventManagment.Events;
+using Assets.Scripts.EventManagment.Provider;
 using Assets.Scripts.Performances.Interfaces;
 using UnityEngine;
-using EventProvider = Assets.Scripts.EventManagment.Provider.EventProvider;
 using Random = UnityEngine.Random;
 
 namespace Assets.Scripts.Performances.Services
@@ -42,7 +42,7 @@ namespace Assets.Scripts.Performances.Services
 
         public void Failed()
         {
-            GameObject.Find("EventSystem2").GetComponent<EventProvider>().SendEvent(GameEvents.LEVEL_FAILED, new ScoreController().GetScore().ToString());
+            GameObject.Find("EventSystem2").GetComponent<EventManager>().SendEvent(GameEvents.LEVEL_FAILED, new ScoreController().GetScore().ToString());
         }
 
         public void SpeedUp()

@@ -10,18 +10,18 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.EventManagment.Provider
 {
-    public class EventProvider: MonoBehaviour
+    public class EventManager: MonoBehaviour
     {
-        private GameEventProvider _gameProvider;
-        private UIEventProvider _uiProvider;
-        private EventProvider()
+        private GameEventManager _gameProvider;
+        private UIEventManager _uiProvider;
+        private EventManager()
         { }
 
         
         void Start()
         {
-            _gameProvider = new GameEventProvider();
-            _uiProvider = new UIEventProvider();
+            _gameProvider = new GameEventManager();
+            _uiProvider = new UIEventManager();
         }
 
         /// <summary>

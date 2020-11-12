@@ -1,10 +1,10 @@
 ﻿using Assets.Scripts.EventManagment.Events;
+using Assets.Scripts.EventManagment.Provider;
 using Assets.Scripts.Performances;
 using Assets.Scripts.Performances.Interfaces;
 using Assets.Scripts.Performances.Services;
 using UnityEngine;
 using UnityEngine.UI;
-using EventProvider = Assets.Scripts.EventManagment.Provider.EventProvider;
 using Random = UnityEngine.Random;
 using Rigidbody2D = UnityEngine.Rigidbody2D;
 
@@ -64,7 +64,7 @@ namespace Assets.Scripts.Controllers
                     _destroyedPlatform.Destroy();
                     if (_destroyedPlatform.IsAllDestroyed())
                     {
-                        GameObject.Find("EventSystem2").GetComponent<EventProvider>().SendEvent(GameEvents.GAME_PAUSED);
+                        GameObject.Find("EventSystem2").GetComponent<EventManager>().SendEvent(GameEvents.GAME_PAUSED);
                         // and level 1 complete
                     }
                     break;
@@ -82,7 +82,7 @@ namespace Assets.Scripts.Controllers
                 // hide ball and display failed window
                 gameObject.SetActive(false);
                 _ballService.Failed();
-                GameObject.Find("EventSystem2").GetComponent<EventProvider>().SendEvent(GameEvents.GAME_PAUSED);
+                GameObject.Find("EventSystem2").GetComponent<EventManager>().SendEvent(GameEvents.GAME_PAUSED);
             }
         }
     }

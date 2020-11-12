@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.EventManagment.Provider
 {
-    public class UIEventProvider
+    public class UIEventManager
     {
         public void SendEvent(UIEvents @event)
         {
