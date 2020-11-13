@@ -15,22 +15,22 @@ namespace Assets.Scripts.EventManagment.Provider
         {
             switch (@event)
             {
-                case UIEvents.GAME_STARTED:
+                case UIEvents.START_CLICKED:
                     StartGame();
                     break;
-                case UIEvents.GAME_CLOSED:
+                case UIEvents.EXIT_CLICKED:
                     CloseApp();
                     break;
-                case UIEvents.GAME_RESTARTED:
+                case UIEvents.RESTART_CLICKED:
                     ReloadGame();
                     break;
-                case UIEvents.GAME_BACK_TO_MENU:
+                case UIEvents.BACK_TO_MENU_CLICKED:
                     OpenMenu();
                     break;
-                case UIEvents.GAME_OPEN_OPTIONS:
+                case UIEvents.SETTINGS_CLICKED:
                     OpenOptions();
                     break;
-                case UIEvents.RESET_OPTIONS:
+                case UIEvents.RESET_CLICKED:
                     ResetOptions();
                     break;
                 default:
@@ -42,7 +42,7 @@ namespace Assets.Scripts.EventManagment.Provider
         {
             switch (@event)
             {
-                case UIEvents.SAVE_OPTIONS:
+                case UIEvents.SAVE_CLICKED:
                     SaveOptions(value);
                     break;
                 case UIEvents.WIN_RESOLUTION_UPDATED:

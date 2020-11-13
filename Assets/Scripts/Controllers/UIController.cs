@@ -80,33 +80,33 @@ namespace Assets.Scripts.Controllers
         
         public void OnStartButton_Clicked()
         {
-            _eventProvider.SendEvent(UIEvents.GAME_STARTED);
+            _eventProvider.SendEvent(UIEvents.START_CLICKED);
         }
 
         public void OnExitButton_Clicked()
         {
-            _eventProvider.SendEvent(UIEvents.GAME_CLOSED);
+            _eventProvider.SendEvent(UIEvents.EXIT_CLICKED);
         }
 
         public void OnRestartButton_Clicked()
         {
-            _eventProvider.SendEvent(UIEvents.GAME_RESTARTED);
+            _eventProvider.SendEvent(UIEvents.RESTART_CLICKED);
             _eventProvider.SendEvent(GameEvents.GAME_RESUMED);
         }
 
         public void OnMenuButton_Clicked()
         {
-            _eventProvider.SendEvent(UIEvents.GAME_BACK_TO_MENU);
+            _eventProvider.SendEvent(UIEvents.BACK_TO_MENU_CLICKED);
         }
 
         public void OnOptionsButton_Clicked()
         {
-            _eventProvider.SendEvent(UIEvents.GAME_OPEN_OPTIONS);
+            _eventProvider.SendEvent(UIEvents.SETTINGS_CLICKED);
         }
 
         public void OnSaveButton_Clicked()
         {
-            _eventProvider.SendEvent(UIEvents.SAVE_OPTIONS,
+            _eventProvider.SendEvent(UIEvents.SAVE_CLICKED,
                 $"[{nameof(SettingsDto.PlayerSpeed)}] = {SettingsDto.PlayerSpeed}",
                 $"[{nameof(SettingsDto.PlayerColor)}] = {colorsList.value}",
                 $"[{nameof(SettingsDto.GameResolution)}] = {resolutions.value}",
@@ -115,7 +115,7 @@ namespace Assets.Scripts.Controllers
 
         public void OnResetButton_Clicked()
         {
-            _eventProvider.SendEvent(UIEvents.RESET_OPTIONS);
+            _eventProvider.SendEvent(UIEvents.RESET_CLICKED);
         }
 
         public void OnSpeed_Changed(float value)
