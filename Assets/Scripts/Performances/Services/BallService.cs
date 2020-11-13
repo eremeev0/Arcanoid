@@ -42,7 +42,7 @@ namespace Assets.Scripts.Performances.Services
 
         public void Failed()
         {
-            GameObject.Find("EventSystem2").GetComponent<EventManager>().SendEvent(GameEvents.LEVEL_FAILED, new ScoreController().GetScore().ToString());
+            ContainerDto.Manager.SendEvent(GameEvents.LEVEL_FAILED, new ScoreController().GetScore().ToString());
         }
 
         public void SpeedUp()
@@ -55,6 +55,19 @@ namespace Assets.Scripts.Performances.Services
         public void IncrementScore()
         {
             new ScoreController().UpdateScore(1);
+        }
+
+        void OnTriggerEnter2D(Collider2D col)
+        {
+            // if ball touch bottom trigger
+            if (col.gameObject.name == "GameOver")
+            {
+                print("GameOver");
+                // hide ball and display failed window
+                gameObject.SetActive(false);
+                Failed();
+                ContainerDto.Manager.SendEvent(GameEvents.GAME_PAUSED);
+            }
         }
     }
 }

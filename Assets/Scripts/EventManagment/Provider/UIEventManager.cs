@@ -73,8 +73,8 @@ namespace Assets.Scripts.EventManagment.Provider
 
         private void StartGame()
         {
-            GameObject.Find("/UI/Menu/Panel").SetActive(false);
-            GameObject.Find("/UI/Score/Panel").SetActive(true);
+            ContainerDto.Menu.SetActive(false);
+            ContainerDto.Score.SetActive(true);
             ReloadGame();
         }
 
@@ -87,22 +87,22 @@ namespace Assets.Scripts.EventManagment.Provider
             SceneManager.UnloadSceneAsync(1);
             // resume game
             // hide failed window
-            GameObject.Find("/UI/Failed/Panel/Result").GetComponent<Text>().text = "Score ";
-            GameObject.Find("/UI/Failed/Panel").SetActive(false);
+            ContainerDto.RecordLabel.text = "Score ";
+            ContainerDto.Failed.SetActive(false);
             //ResumeGame();
         }
 
         private void OpenMenu()
         {
-            GameObject.Find("/UI/Menu/Panel").SetActive(true);
-            GameObject.Find("/UI/Failed/Panel").SetActive(false);
-            GameObject.Find("/UI/Score/Panel").SetActive(false);
-            GameObject.Find("/UI/Settings/Panel").SetActive(false);
+            ContainerDto.Menu.SetActive(true);
+            ContainerDto.Failed.SetActive(false);
+            ContainerDto.Score.SetActive(false);
+            ContainerDto.Settings.SetActive(false);
         }
         private void OpenOptions()
         {
-            GameObject.Find("/UI/Settings/Panel").SetActive(true);
-            GameObject.Find("/UI/Menu/Panel").SetActive(false);
+            ContainerDto.Settings.SetActive(true);
+            ContainerDto.Menu.SetActive(false);
         }
 
         private void SaveOptions(params string[] value)
@@ -122,44 +122,43 @@ namespace Assets.Scripts.EventManagment.Provider
 
         private void UpdateResolution(int index)
         {
-            var obj = GameObject.Find("/UI/Settings/Panel/ResolutionDropdown").GetComponent<Dropdown>();
             switch (index)
             {
                 case 0:
                     Screen.SetResolution(640, 360, true);
-                    obj.value = index;
+                    ContainerDto.ResolutionsList.value = index;
                     break;
                 case 1:
                     Screen.SetResolution(800, 600, true);
-                    obj.value = index;
+                    ContainerDto.ResolutionsList.value = index;
                     break;
                 case 2:
                     Screen.SetResolution(1024, 768, true);
-                    obj.value = index;
+                    ContainerDto.ResolutionsList.value = index;
                     break;
                 case 3:
                     Screen.SetResolution(1280, 800, true);
-                    obj.value = index;
+                    ContainerDto.ResolutionsList.value = index;
                     break;
                 case 4:
                     Screen.SetResolution(1360, 768, true);
-                    obj.value = index;
+                    ContainerDto.ResolutionsList.value = index;
                     break;
                 case 5:
                     Screen.SetResolution(1440, 900, true);
-                    obj.value = index;
+                    ContainerDto.ResolutionsList.value = index;
                     break;
                 case 6:
                     Screen.SetResolution(1600, 900, true);
-                    obj.value = index;
+                    ContainerDto.ResolutionsList.value = index;
                     break;
                 case 7:
                     Screen.SetResolution(1920, 1080, true);
-                    obj.value = index;
+                    ContainerDto.ResolutionsList.value = index;
                     break;
                 case 8:
                     Screen.SetResolution(1920, 1200, true);
-                    obj.value = index;
+                    ContainerDto.ResolutionsList.value = index;
                     break;
                 default:
                     break;
@@ -168,48 +167,47 @@ namespace Assets.Scripts.EventManagment.Provider
 
         private void UpdateColor(int value)
         {
-            var obj = GameObject.Find("/UI/Settings/Panel/Dropdown").GetComponent<Dropdown>();
             switch (value)
             {
                 case 0:
                     SettingsDto.PlayerColor = Color.white;
-                    obj.value = value;
+                    ContainerDto.ColorsList.value = value;
                     break;
                 case 1:
                     SettingsDto.PlayerColor = Color.black;
-                    obj.value = value;
+                    ContainerDto.ColorsList.value = value;
                     break;
                 case 2:
                     SettingsDto.PlayerColor = Color.blue;
-                    obj.value = value;
+                    ContainerDto.ColorsList.value = value;
                     break;
                 case 3:
                     SettingsDto.PlayerColor = Color.cyan;
-                    obj.value = value;
+                    ContainerDto.ColorsList.value = value;
                     break;
                 case 4:
                     SettingsDto.PlayerColor = Color.gray;
-                    obj.value = value;
+                    ContainerDto.ColorsList.value = value;
                     break;
                 case 5:
                     SettingsDto.PlayerColor = Color.green;
-                    obj.value = value;
+                    ContainerDto.ColorsList.value = value;
                     break;
                 case 6:
                     SettingsDto.PlayerColor = Color.grey;
-                    obj.value = value;
+                    ContainerDto.ColorsList.value = value;
                     break;
                 case 7:
                     SettingsDto.PlayerColor = Color.magenta;
-                    obj.value = value;
+                    ContainerDto.ColorsList.value = value;
                     break;
                 case 8:
                     SettingsDto.PlayerColor = Color.red;
-                    obj.value = value;
+                    ContainerDto.ColorsList.value = value;
                     break;
                 case 9:
                     SettingsDto.PlayerColor = Color.yellow;
-                    obj.value = value;
+                    ContainerDto.ColorsList.value = value;
                     break;
                 default:
                     break;
@@ -218,14 +216,14 @@ namespace Assets.Scripts.EventManagment.Provider
 
         private void UpdateSpeed(float value)
         {
-            GameObject.Find("/UI/Settings/Panel/Slider/value").GetComponent<Text>().text = value.ToString();
-            GameObject.Find("/UI/Settings/Panel/Slider").GetComponent<Slider>().value = value;
+            ContainerDto.SpeedValue.text = value.ToString();
+            ContainerDto.SpeedSlider.value = value;
             SettingsDto.PlayerSpeed = value;
         }
 
         private void UpdateScore(int value)
         {
-            GameObject.Find("/UI/Score/Panel/Panel/count").GetComponent<Text>().text = value.ToString();
+            ContainerDto.ScoreLabel.text = value.ToString();
             SettingsDto.PlayerScore = value;
         }
     }

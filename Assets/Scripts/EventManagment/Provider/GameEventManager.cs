@@ -38,26 +38,24 @@ namespace Assets.Scripts.EventManagment.Provider
 
         private void StopGame()
         {
-            GameObject player = GameObject.Find("/Character/playerPillar");
-            player.GetComponent<PlayerController>().enabled = false;
-            player.GetComponent<Rigidbody2D>().simulated = false;
-            GameObject.Find("/ActiveObjects/gameBall").GetComponent<BallController>().enabled = false;
+            ContainerDto.Player.GetComponent<PlayerController>().enabled = false;
+            ContainerDto.Player.GetComponent<Rigidbody2D>().simulated = false;
+            ContainerDto.Ball.GetComponent<BallController>().enabled = false;
             //SettingsDto.IsGameStopped = true;
         }
 
         private void ResumeGame()
         {
-            GameObject player = GameObject.Find("/Character/playerPillar");
-            player.GetComponent<PlayerController>().enabled = true;
-            player.GetComponent<Rigidbody2D>().simulated = true;
-            GameObject.Find("/ActiveObjects/gameBall").GetComponent<BallController>().enabled = true;
+            ContainerDto.Player.GetComponent<PlayerController>().enabled = true;
+            ContainerDto.Player.GetComponent<Rigidbody2D>().simulated = true;
+            ContainerDto.Ball.GetComponent<BallController>().enabled = true;
             //SettingsDto.IsGameStopped = false;
         }
         private void OpenFailedWindow(string value)
         {
             SettingsDto.PlayerScore = Convert.ToInt32(value);
-            GameObject.Find("/UI/Failed/Panel").SetActive(true);
-            GameObject.Find("/UI/Failed/Panel/Result").GetComponent<Text>().text += value;
+            ContainerDto.Failed.SetActive(true);
+            ContainerDto.RecordLabel.text += value;
         }
     }
 }

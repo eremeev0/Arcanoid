@@ -13,7 +13,6 @@ namespace Assets.Scripts.StorageProvider.Service
     /// </summary>
     public class DataManager
     {
-        private EventManager eProvider;
         private readonly FileStorageManager manager = new FileStorageManager();
 
         
@@ -24,14 +23,16 @@ namespace Assets.Scripts.StorageProvider.Service
         {
             var values = manager.Load(Application.persistentDataPath + "/user.config");
             if (values == null) return;
-            eProvider = GameObject.Find("EventSystem2").GetComponent<EventManager>();
-            eProvider.SendEvent(UIEvents.SPEED_UPDATED,
+            ContainerDto.Manager.SendEvent(UIEvents.SPEED_UPDATED,
                 values[0].Remove(0, Convert.ToString($"[{nameof(SettingsDto.PlayerSpeed)}] = ").Length));
-            eProvider.SendEvent(UIEvents.PLAYER_COLOR_UPDATED,
+
+            ContainerDto.Manager.SendEvent(UIEvents.PLAYER_COLOR_UPDATED,
                 values[1].Remove(0, Convert.ToString($"[{nameof(SettingsDto.PlayerColor)}] = ").Length));
-            eProvider.SendEvent(UIEvents.WIN_RESOLUTION_UPDATED,
+
+            ContainerDto.Manager.SendEvent(UIEvents.WIN_RESOLUTION_UPDATED,
                 values[2].Remove(0, Convert.ToString($"[{nameof(SettingsDto.GameResolution)}] = ").Length));
-            eProvider.SendEvent(UIEvents.SCORE_UPDATED,
+
+            ContainerDto.Manager.SendEvent(UIEvents.SCORE_UPDATED,
                 values[3].Remove(0, Convert.ToString($"[{nameof(SettingsDto.PlayerScore)}] = ").Length));
         }
         /// <summary>
@@ -45,11 +46,10 @@ namespace Assets.Scripts.StorageProvider.Service
 
         public void Reset()
         {
-            eProvider = GameObject.Find("EventSystem2").GetComponent<EventManager>();
-            eProvider.SendEvent(UIEvents.SPEED_UPDATED, DefaultSettingsDto.PlayerSpeed.ToString());
-            eProvider.SendEvent(UIEvents.PLAYER_COLOR_UPDATED, DefaultSettingsDto.PlayerColor.ToString());
-            eProvider.SendEvent(UIEvents.WIN_RESOLUTION_UPDATED, DefaultSettingsDto.GameResolution.ToString());
-            eProvider.SendEvent(UIEvents.SCORE_UPDATED, DefaultSettingsDto.PlayerScore.ToString());
+            ContainerDto.Manager.SendEvent(UIEvents.SPEED_UPDATED, DefaultSettingsDto.PlayerSpeed.ToString());
+            ContainerDto.Manager.SendEvent(UIEvents.PLAYER_COLOR_UPDATED, DefaultSettingsDto.PlayerColor.ToString());
+            ContainerDto.Manager.SendEvent(UIEvents.WIN_RESOLUTION_UPDATED, DefaultSettingsDto.GameResolution.ToString());
+            ContainerDto.Manager.SendEvent(UIEvents.SCORE_UPDATED, DefaultSettingsDto.PlayerScore.ToString());
         }
     }
 }

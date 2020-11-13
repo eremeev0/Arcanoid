@@ -11,6 +11,7 @@ namespace Assets.Scripts.Controllers
         private IDestrPlatformService _destrService;
         void Start()
         {
+            ContainerService.TryInitialize();
             _destrService = gameObject.AddComponent<DestrPlatformService>(); 
             DataManager manager = new DataManager();
             manager.Load();

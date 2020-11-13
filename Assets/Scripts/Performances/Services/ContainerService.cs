@@ -1,111 +1,46 @@
 ﻿using System;
+using Assets.Scripts.Contracts;
+using Assets.Scripts.EventManagment.Provider;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityException = UnityEngine.UnityException;
 
 namespace Assets.Scripts.Performances.Services
 {
-    public class ContainerService: MonoBehaviour
+    public class ContainerService
     {
-
-        private GameObject _menu;
-        private GameObject _failed;
-        private GameObject _score;
-        private GameObject _settings;
-
-        public Button StartButton;
-        public Button ExitButton;
-        public Button RestartButton;
-        public Button MenuButton;
-        public Button SettingsButton;
-        public Button BackToMenuButton;
-        public Button SaveButton;
-        public Button ResetButton;
-        public Slider SpeedSlider;
-        public Dropdown ColorsList;
-        public Dropdown ResolutionsList;
-        public Text ScoreLabel;
-        public Text RecordLabel;
-
-
-        private static ContainerService _instance;
-
-        private ContainerService()
+        public static void TryInitialize()
         {
-            
+            try
+            {
+                ContainerDto.Menu = GameObject.Find("/UI/Menu/Panel");
+                ContainerDto.Failed = GameObject.Find("/UI/Failed/Panel");
+                ContainerDto.Score = GameObject.Find("/UI/Score/Panel");
+                ContainerDto.Settings = GameObject.Find("/UI/Settings/Panel");
+                ContainerDto.Player = GameObject.Find("/Character/playerPillar");
+                ContainerDto.Ball = GameObject.Find("/ActiveObjects/gameBall");
+                ContainerDto.DestroyedPlatforms = GameObject.Find("/ActiveObjects/Platforms");
+                ContainerDto.StartButton = GameObject.Find("/UI/Menu/Panel/Start").GetComponent<Button>();
+                ContainerDto.RestartButton = GameObject.Find("/UI/Failed/Panel/Restart").GetComponent<Button>();
+                ContainerDto.MenuButton = GameObject.Find("/UI/Failed/Panel/OpenMenu").GetComponent<Button>();
+                ContainerDto.SettingsButton = GameObject.Find("/UI/Menu/Panel/Settings").GetComponent<Button>();
+                ContainerDto.BackToMenuButton = GameObject.Find("/UI/Settings/Panel/Exit").GetComponent<Button>();
+                ContainerDto.SaveButton = GameObject.Find("/UI/Settings/Panel/Save").GetComponent<Button>();
+                ContainerDto.ResetButton = GameObject.Find("/UI/Settings/Panel/Reset").GetComponent<Button>();
+                ContainerDto.ExitButton = GameObject.Find("/UI/Menu/Panel/Exit").GetComponent<Button>();
+                ContainerDto.SpeedSlider = GameObject.Find("/UI/Settings/Panel/Slider").GetComponent<Slider>();
+                ContainerDto.ColorsList = GameObject.Find("/UI/Settings/Panel/Dropdown").GetComponent<Dropdown>();
+                ContainerDto.ResolutionsList = GameObject.Find("/UI/Settings/Panel/ResolutionDropdown").GetComponent<Dropdown>();
+                ContainerDto.ScoreLabel = GameObject.Find("/UI/Score/Panel/Panel/count").GetComponent<Text>();
+                ContainerDto.RecordLabel = GameObject.Find("/UI/Failed/Panel/Result").GetComponent<Text>();
+                ContainerDto.SpeedValue = GameObject.Find("/UI/Settings/Panel/Slider/value").GetComponent<Text>();
+                ContainerDto.Manager = GameObject.Find("EventSystem2").GetComponent<EventManager>();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                throw;
+            }
         }
-
-        public static ContainerService GetInstance()
-        {
-            if (_instance == null)
-                _instance = new ContainerService();
-            return _instance;
-        }
-
-        void Start()
-        {
-            var childs = gameObject.GetComponentsInChildren<GameObject>() ?? throw new MissingComponentException();
-            foreach (var child in childs)
-            {
-                if (child.name == "Menu")
-                    _menu = child.GetComponentInChildren<GameObject>() ?? throw new MissingComponentException();
-                if (child.name == "Failed")
-                    _failed = child.GetComponentInChildren<GameObject>() ?? throw new MissingComponentException();
-                if (child.name == "Score")
-                    _score = child.GetComponentInChildren<GameObject>()
-                                 .GetComponentInChildren<GameObject>() ?? throw new MissingComponentException();
-                if (child.name == "Settings")
-                    _settings = child.GetComponentInChildren<GameObject>() ?? throw new MissingComponentException();
-            }
-
-            childs = _menu.GetComponentsInChildren<GameObject>() ?? throw new MissingComponentException();
-            foreach (var child in childs)
-            {
-                if (child.name == "Start")
-                    StartButton = child.GetComponent<Button>() ?? throw new MissingComponentException();
-                if (child.name == "Exit")
-                    ExitButton = child.GetComponent<Button>() ?? throw new MissingComponentException();
-                if (child.name == "Settings")
-                    SettingsButton = child.GetComponent<Button>() ?? throw new MissingComponentException();
-            }
-
-            childs = _failed.GetComponentsInChildren<GameObject>() ?? throw new MissingComponentException();
-            foreach (var child in childs)
-            {
-                if (child.name == "Restart")
-                    RestartButton = child.GetComponent<Button>() ?? throw new MissingComponentException();
-                if (child.name == "OpenMenu")
-                    MenuButton = child.GetComponent<Button>() ?? throw new MissingComponentException();
-                if (child.name == "Result")
-                    RecordLabel = child.GetComponent<Text>() ?? throw new MissingComponentException();
-                // other "failed" object here too
-            }
-
-            childs = _settings.GetComponentsInChildren<GameObject>() ?? throw new MissingComponentException();
-            foreach (var child in childs)
-            {
-                if (child.name == "Exit")
-                    BackToMenuButton = child.GetComponent<Button>() ?? throw new MissingComponentException();
-                if (child.name == "Save")
-                    SaveButton = child.GetComponent<Button>() ?? throw new MissingComponentException();
-                if (child.name == "Reset")
-                    ResetButton = child.GetComponent<Button>() ?? throw new MissingComponentException();
-                if (child.name == "Slider")
-                    SpeedSlider = child.GetComponent<Slider>() ?? throw new MissingComponentException();
-                if (child.name == "Dropdown")
-                    ColorsList = child.GetComponent<Dropdown>() ?? throw new MissingComponentException();
-                if (child.name == "ResolutionDropdown")
-                    ResolutionsList = child.GetComponent<Dropdown>() ?? throw new MissingComponentException();
-            }
-            childs = _score.GetComponentsInChildren<GameObject>() ?? throw new MissingComponentException();
-            foreach (var child in childs)
-            {
-                if(child.name == "count")
-                    ScoreLabel = child.GetComponent<Text>() ?? throw new MissingComponentException();
-            }
-
-        }
-
-
     }
 }

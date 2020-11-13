@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Scripts.Contracts;
 using Assets.Scripts.EventManagment.Events;
 using Assets.Scripts.EventManagment.Provider;
 using Assets.Scripts.Performances;
@@ -65,7 +66,7 @@ namespace Assets.Scripts.Controllers
                     _destroyedPlatform.Destroy();
                     if (_destroyedPlatform.IsAllDestroyed())
                     {
-                        GameObject.Find("EventSystem2").GetComponent<EventManager>().SendEvent(GameEvents.GAME_PAUSED);
+                        ContainerDto.Manager.SendEvent(GameEvents.GAME_PAUSED);
                         // and level 1 complete
                     }
                     break;
@@ -74,17 +75,5 @@ namespace Assets.Scripts.Controllers
             }
         }
 
-        void OnTriggerEnter2D(Collider2D col)
-        {
-            // if ball touch bottom trigger
-            if (col.gameObject.name == "GameOver")
-            {
-                print("GameOver");
-                // hide ball and display failed window
-                gameObject.SetActive(false);
-                _ballService.Failed();
-                GameObject.Find("EventSystem2").GetComponent<EventManager>().SendEvent(GameEvents.GAME_PAUSED);
-            }
-        }
     }
 }

@@ -25,7 +25,7 @@ namespace Assets.Scripts.Controllers
         {
             score += val;
             SettingsDto.PlayerScore = score;
-            GameObject.Find("/UI/Score/Panel/Panel/count").GetComponent<Text>().text = score.ToString();
+            ContainerDto.ScoreLabel.text = score.ToString();
         }
 
         public int GetScore()

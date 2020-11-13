@@ -28,42 +28,28 @@ namespace Assets.Scripts.Controllers
         private Dropdown colorsList;
         private Dropdown resolutions;
 
-        private EventManager _eventProvider;// = new EventProvider();
-        private ContainerService _uiContainer;
+        private EventManager _eventProvider;
         void Start()
         {
-            _eventProvider = GameObject.Find("EventSystem2").GetComponent<EventManager>();
+            _eventProvider = ContainerDto.Manager;
             _eventProvider.SendEvent(GameEvents.GAME_PAUSED);
-            _uiContainer = gameObject.AddComponent<ContainerService>();
 
-            GameObject.Find("/UI/Failed/Panel").SetActive(false);
-            GameObject.Find("/UI/Score/Panel").SetActive(false);
-            GameObject.Find("/UI/Settings/Panel").SetActive(false);
+            ContainerDto.Failed.SetActive(false);
+            ContainerDto.Score.SetActive(false);
+            ContainerDto.Settings.SetActive(false);
             // UI first init 
 
-            /*start = _uiContainer.StartButton;
-            exit = _uiContainer.ExitButton;
-            restart = _uiContainer.RestartButton;
-            menu = _uiContainer.MenuButton;
-            settings = _uiContainer.SettingsButton;
-            backToMenu = _uiContainer.BackToMenuButton;
-            speedSlider = _uiContainer.SpeedSlider;
-            colorsList = _uiContainer.ColorsList;
-            resolutions = _uiContainer.ResolutionsList;
-            save = _uiContainer.SaveButton;
-            reset = _uiContainer.ResetButton;
-            */
-            start = GameObject.Find("/UI/Menu/Panel/Start").GetComponent<Button>();
-            exit = GameObject.Find("/UI/Menu/Panel/Exit").GetComponent<Button>();
-            restart = GameObject.Find("/UI/Failed/Panel/Restart").GetComponent<Button>();
-            menu = GameObject.Find("/UI/Failed/Panel/OpenMenu").GetComponent<Button>();
-            settings = GameObject.Find("/UI/Menu/Panel/Settings").GetComponent<Button>();
-            backToMenu = GameObject.Find("/UI/Settings/Panel/Exit").GetComponent<Button>();
-            speedSlider = GameObject.Find("/UI/Settings/Panel/Slider").GetComponent<Slider>();
-            colorsList = GameObject.Find("/UI/Settings/Panel/Dropdown").GetComponent<Dropdown>();
-            resolutions = GameObject.Find("/UI/Settings/Panel/ResolutionDropdown").GetComponent<Dropdown>();
-            save = GameObject.Find("/UI/Settings/Panel/Save").GetComponent<Button>();
-            reset = GameObject.Find("UI/Settings/Panel/Reset").GetComponent<Button>();
+            start = ContainerDto.StartButton;
+            exit = ContainerDto.ExitButton;
+            restart = ContainerDto.RestartButton;
+            menu = ContainerDto.MenuButton;
+            settings = ContainerDto.SettingsButton;
+            backToMenu = ContainerDto.BackToMenuButton;
+            speedSlider = ContainerDto.SpeedSlider;
+            colorsList = ContainerDto.ColorsList;
+            resolutions = ContainerDto.ResolutionsList;
+            save = ContainerDto.SaveButton;
+            reset = ContainerDto.ResetButton;
 
             start.onClick.AddListener(OnStartButton_Clicked);
             exit.onClick.AddListener(OnExitButton_Clicked);

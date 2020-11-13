@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Performances.Interfaces;
+﻿using Assets.Scripts.Contracts;
+using Assets.Scripts.Performances.Interfaces;
 using UnityEngine;
 
 namespace Assets.Scripts.Performances.Services
@@ -9,7 +10,7 @@ namespace Assets.Scripts.Performances.Services
         private bool _isAllDestroyed;
         void Start()
         {
-            _list = GameObject.Find("/ActiveObjects/Platforms");
+            _list = ContainerDto.DestroyedPlatforms;
             _isAllDestroyed = false;
         }
 
