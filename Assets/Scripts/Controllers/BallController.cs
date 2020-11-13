@@ -15,16 +15,15 @@ namespace Assets.Scripts.Controllers
     public class BallController : MonoBehaviour
     {
         private IBallService _ballService;
-        private IDestrPlatformService _destroyedPlatform;
-            
+        
         private float _speed = 0f;
         private Vector2 _velocity;
         // Start is called before the first frame update
         void Start()
         {
-            _destroyedPlatform = gameObject.AddComponent<DestrPlatformService>();
             _ballService = gameObject.AddComponent<BallService>();
             _velocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+            _ballService.SetVelocity(_velocity);
             _speed = _ballService.GetSpeed();
             // get score class for counting
             //score = gameObject.AddComponent<ScoreController>();
@@ -35,45 +34,10 @@ namespace Assets.Scripts.Controllers
         { 
             if (_ballService.IsSpeedUpdate()) 
                 _speed = _ballService.GetSpeed();
+            if (_ballService.IsVelocityUpdate())
+                _velocity = _ballService.GetVelocity();
             GetComponent<Rigidbody2D>().inertia = 0;
             GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + _velocity * Time.fixedDeltaTime * _speed);
         }
-
-        void OnCollisionEnter2D(Collision2D col)
-        {
-            _ballService.SpeedUp();
-            switch (col.gameObject.name)
-            {
-                case "playerPillar":
-                    _velocity.y = -_velocity.y;
-                    break;
-                case "topPillar":
-                    _velocity.y = -_velocity.y;
-                    break;
-                case "leftPillar":
-                    _velocity.x = -_velocity.x;
-                    break;
-                case "rightPillar":
-                    _velocity.x = -_velocity.x;
-                    break;
-                case "bottomSide":
-                    _velocity.y = -_velocity.y;
-                    break;
-                case "Platform":
-                    Destroy(col.gameObject);
-                    _velocity.y = -_velocity.y;
-                    _ballService.IncrementScore();
-                    _destroyedPlatform.Destroy();
-                    if (_destroyedPlatform.IsAllDestroyed())
-                    {
-                        ContainerDto.Manager.SendEvent(GameEvents.GAME_PAUSED);
-                        // and level 1 complete
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-
     }
 }

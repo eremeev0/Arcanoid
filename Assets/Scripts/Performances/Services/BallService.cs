@@ -1,11 +1,8 @@
-﻿using System;
-using Assets.Scripts.Contracts;
+﻿using Assets.Scripts.Contracts;
 using Assets.Scripts.Controllers;
 using Assets.Scripts.EventManagment.Events;
-using Assets.Scripts.EventManagment.Provider;
 using Assets.Scripts.Performances.Interfaces;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Assets.Scripts.Performances.Services
 {
@@ -16,13 +13,19 @@ namespace Assets.Scripts.Performances.Services
         private float _speedMultiplier = SettingsDto.BallSpeedMultiplier;
         private Vector2 _velocity;
         private bool _isSpeedUpdate = false;
-
+        private bool _isVelocityUpdate = false;
+        private IDestrPlatformService _destroyedPlatform;
         void Start()
         {
-
+            _destroyedPlatform = gameObject.AddComponent<DestrPlatformService>();
         }
 
 
+        public void SetVelocity(Vector2 velocity)
+        {
+            _velocity = velocity;
+        }
+        
         public float GetSpeed()
         {
             _isSpeedUpdate = false;
@@ -31,13 +34,17 @@ namespace Assets.Scripts.Performances.Services
 
         public Vector2 GetVelocity()
         {
-            print(_velocity);
             return _velocity;
         }
 
         public bool IsSpeedUpdate()
         {
             return _isSpeedUpdate;
+        }
+
+        public bool IsVelocityUpdate()
+        {
+            return _isVelocityUpdate;
         }
 
         public void Failed()
@@ -67,6 +74,42 @@ namespace Assets.Scripts.Performances.Services
                 gameObject.SetActive(false);
                 Failed();
                 ContainerDto.Manager.SendEvent(GameEvents.GAME_PAUSED);
+            }
+        }
+        void OnCollisionEnter2D(Collision2D col)
+        {
+            SpeedUp();
+            _isVelocityUpdate = true;
+            switch (col.gameObject.name)
+            {
+                case "playerPillar":
+                    _velocity.y = -_velocity.y;
+                    break;
+                case "topPillar":
+                    _velocity.y = -_velocity.y;
+                    break;
+                case "leftPillar":
+                    _velocity.x = -_velocity.x;
+                    break;
+                case "rightPillar":
+                    _velocity.x = -_velocity.x;
+                    break;
+                case "bottomSide":
+                    _velocity.y = -_velocity.y;
+                    break;
+                case "Platform":
+                    Destroy(col.gameObject);
+                    _velocity.y = -_velocity.y;
+                    IncrementScore();
+                    _destroyedPlatform.Destroy();
+                    if (_destroyedPlatform.IsAllDestroyed())
+                    {
+                        ContainerDto.Manager.SendEvent(GameEvents.GAME_PAUSED);
+                        // and level 1 complete
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }

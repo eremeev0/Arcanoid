@@ -4,12 +4,10 @@ namespace Assets.Scripts.Performances.Interfaces
 {
     public interface IBallService
     {
-        void IncrementScore();
-        void Failed();
-        void SpeedUp();
-
+        void SetVelocity(Vector2 velocity);
         float GetSpeed();
         Vector2 GetVelocity();
         bool IsSpeedUpdate();
+        bool IsVelocityUpdate();
     }
 }
