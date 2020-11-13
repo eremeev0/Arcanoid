@@ -14,8 +14,10 @@ namespace Assets.Scripts.EventManagment.Provider
             switch (@event)
             {
                 case GameEvents.GAME_PAUSED:
+                    StopGame();
                     break;
                 case GameEvents.GAME_RESUMED:
+                    ResumeGame();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(@event), @event, null);
@@ -36,16 +38,20 @@ namespace Assets.Scripts.EventManagment.Provider
 
         private void StopGame()
         {
-            GameObject.Find("/Character/playerPillar").GetComponent<PlayerController>().enabled = false;
+            GameObject player = GameObject.Find("/Character/playerPillar");
+            player.GetComponent<PlayerController>().enabled = false;
+            player.GetComponent<Rigidbody2D>().simulated = false;
             GameObject.Find("/ActiveObjects/gameBall").GetComponent<BallController>().enabled = false;
-            SettingsDto.IsGameStopped = true;
+            //SettingsDto.IsGameStopped = true;
         }
 
         private void ResumeGame()
         {
-            GameObject.Find("/Character/playerPillar").GetComponent<PlayerController>().enabled = true;
+            GameObject player = GameObject.Find("/Character/playerPillar");
+            player.GetComponent<PlayerController>().enabled = true;
+            player.GetComponent<Rigidbody2D>().simulated = true;
             GameObject.Find("/ActiveObjects/gameBall").GetComponent<BallController>().enabled = true;
-            SettingsDto.IsGameStopped = false;
+            //SettingsDto.IsGameStopped = false;
         }
         private void OpenFailedWindow(string value)
         {
