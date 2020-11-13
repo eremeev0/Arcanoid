@@ -23,6 +23,7 @@ namespace Assets.Scripts.StorageProvider.Service
         public void Load()
         {
             var values = manager.Load(Application.persistentDataPath + "/user.config");
+            if (values == null) return;
             eProvider = GameObject.Find("EventSystem2").GetComponent<EventManager>();
             eProvider.SendEvent(UIEvents.SPEED_UPDATED,
                 values[0].Remove(0, Convert.ToString($"[{nameof(SettingsDto.PlayerSpeed)}] = ").Length));
