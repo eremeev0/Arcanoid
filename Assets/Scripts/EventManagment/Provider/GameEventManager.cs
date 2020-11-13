@@ -4,6 +4,7 @@ using Assets.Scripts.Controllers;
 using Assets.Scripts.EventManagment.Events;
 using UnityEngine;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace Assets.Scripts.EventManagment.Provider
 {
@@ -31,6 +32,8 @@ namespace Assets.Scripts.EventManagment.Provider
                 case GameEvents.LEVEL_FAILED:
                     OpenFailedWindow(value[0]);
                     break;
+                case GameEvents.SPAWN_OBJECTS:
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(@event), @event, null);
             }
@@ -56,6 +59,21 @@ namespace Assets.Scripts.EventManagment.Provider
             SettingsDto.PlayerScore = Convert.ToInt32(value);
             ContainerDto.Failed.SetActive(true);
             ContainerDto.RecordLabel.text += value;
+        }
+
+        private void Spawn(GameObject spawnedObject, int howMuch, Vector3 offset)
+        {
+            GameObject newObject;
+            Vector3 originalPos = spawnedObject.transform.position;
+            for (int i = 0; i < howMuch; i++)
+            {
+                // Clone object
+                newObject = Object.Instantiate(spawnedObject);
+                // Set new Pos
+                newObject.transform.position = new Vector3(originalPos.x + offset.x, originalPos.y + offset.y, originalPos.z + offset.z);
+                // Set parent for new object
+                newObject.transform.parent = spawnedObject.transform;
+            }
         }
     }
 }
