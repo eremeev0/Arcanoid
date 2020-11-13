@@ -5,6 +5,7 @@
         GAME_PAUSED,
         GAME_RESUMED,
         LEVEL_FAILED,
-        LEVEL_COMPLETED
+        LEVEL_COMPLETED,
+        SPAWN_OBJECTS
     }
 }
