@@ -2,6 +2,7 @@
 using Assets.Scripts.EventManagment.Events;
 using Assets.Scripts.EventManagment.Provider;
 using Assets.Scripts.Performances;
+using Assets.Scripts.Performances.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -28,17 +29,30 @@ namespace Assets.Scripts.Controllers
         private Dropdown resolutions;
 
         private EventManager _eventProvider;// = new EventProvider();
+        private ContainerService _uiContainer;
         void Start()
         {
             _eventProvider = GameObject.Find("EventSystem2").GetComponent<EventManager>();
             _eventProvider.SendEvent(GameEvents.GAME_PAUSED);
-            //resManager = gameObject.AddComponent<ResolutionManager>();
+            _uiContainer = gameObject.AddComponent<ContainerService>();
 
-            // UI first init 
             GameObject.Find("/UI/Failed/Panel").SetActive(false);
             GameObject.Find("/UI/Score/Panel").SetActive(false);
             GameObject.Find("/UI/Settings/Panel").SetActive(false);
+            // UI first init 
 
+            /*start = _uiContainer.StartButton;
+            exit = _uiContainer.ExitButton;
+            restart = _uiContainer.RestartButton;
+            menu = _uiContainer.MenuButton;
+            settings = _uiContainer.SettingsButton;
+            backToMenu = _uiContainer.BackToMenuButton;
+            speedSlider = _uiContainer.SpeedSlider;
+            colorsList = _uiContainer.ColorsList;
+            resolutions = _uiContainer.ResolutionsList;
+            save = _uiContainer.SaveButton;
+            reset = _uiContainer.ResetButton;
+            */
             start = GameObject.Find("/UI/Menu/Panel/Start").GetComponent<Button>();
             exit = GameObject.Find("/UI/Menu/Panel/Exit").GetComponent<Button>();
             restart = GameObject.Find("/UI/Failed/Panel/Restart").GetComponent<Button>();
