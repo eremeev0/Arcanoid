@@ -16,20 +16,22 @@ namespace Assets.Scripts.Performances.Services
         [SerializeField] private Color _color = SettingsDto.PlayerColor;
         [SerializeField] private bool _isSpeedUpdate = true;
         [SerializeField] private bool _isColorUpdate = true;
+
         //Start if player touch "invisible wall". Ball ignore it.
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.name == "TerritoryLimiter")
+            /*if (col.name == "TerritoryLimiter")
                 transform.position = new Vector3(transform.position.x, transform.position.y - .2f * (_speed / 4), transform.position.z);
 
             if (col.name == "GameOver")
                 transform.position = new Vector3(transform.position.x, transform.position.y + .2f * (_speed / 4), transform.position.z);
+            */
         }
 
         //Start if player touch walls
         private void OnCollisionEnter2D(Collision2D col)
         {
-            switch (col.gameObject.name)
+            /*switch (col.gameObject.name)
             {
                 case "leftPillar":
                     transform.position = new Vector3(transform.position.x + .2f * (_speed / 4), transform.position.y, transform.position.z);
@@ -37,7 +39,7 @@ namespace Assets.Scripts.Performances.Services
                 case "rightPillar":
                     transform.position = new Vector3(transform.position.x - .2f * (_speed / 4), transform.position.y, transform.position.z);
                     break;
-            }
+            }*/
         }
 
         private void Start()

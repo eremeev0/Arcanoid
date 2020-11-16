@@ -12,9 +12,5 @@
         SAVE_CLICKED,
         RESET_CLICKED,
         SETTINGS_UPDATED,
-        WIN_RESOLUTION_UPDATED,
-        SCORE_UPDATED,
-        SPEED_UPDATED,
-        PLAYER_COLOR_UPDATED,
     }
 }

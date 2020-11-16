@@ -1,12 +1,6 @@
-﻿using System;
-using Assets.Scripts.Contracts;
-using Assets.Scripts.EventManagment.Events;
-using Assets.Scripts.EventManagment.Provider;
-using Assets.Scripts.Performances;
-using Assets.Scripts.Performances.Interfaces;
+﻿using Assets.Scripts.Performances.Interfaces;
 using Assets.Scripts.Performances.Services;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using Rigidbody2D = UnityEngine.Rigidbody2D;
 
@@ -35,7 +29,6 @@ namespace Assets.Scripts.Controllers
                 _speed = _ballService.GetSpeed();
             if (_ballService.IsVelocityUpdate())
                 _velocity = _ballService.GetVelocity();
-            GetComponent<Rigidbody2D>().inertia = 0;
             GetComponent<Rigidbody2D>()
                 .MovePosition(GetComponent<Rigidbody2D>().position + _velocity * Time.fixedDeltaTime * _speed);
         }

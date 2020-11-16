@@ -29,29 +29,25 @@ namespace Assets.Scripts.Controllers
             if (_platform.IsSpeedUpdate())
                 Speed = _platform.GetSpeed();
 
-            if (Input.GetKey(KeyCode.UpArrow))
-                _platform.SetPosition(Vector.Y, transform.position.y + Time.deltaTime * Speed);
+            if (Input.GetAxisRaw("Horizontal") == 1)
+            {
+                _platform.SetPosition(Vector.X, transform.position.x + Time.deltaTime * Speed);
+            }
 
-            if (Input.GetKey(KeyCode.DownArrow))
-                _platform.SetPosition(Vector.Y, transform.position.y - Time.deltaTime * Speed);
-
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetAxisRaw("Horizontal") == -1)
+            {
                 _platform.SetPosition(Vector.X, transform.position.x - Time.deltaTime * Speed);
 
-            if (Input.GetKey(KeyCode.RightArrow))
-                _platform.SetPosition(Vector.X, transform.position.x + Time.deltaTime * Speed);
-
-            if (Input.GetKey(KeyCode.W))
+            }
+            if (Input.GetAxisRaw("Vertical") == 1)
+            {
                 _platform.SetPosition(Vector.Y, transform.position.y + Time.deltaTime * Speed);
+            }
 
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetAxisRaw("Vertical") == -1)
+            {
                 _platform.SetPosition(Vector.Y, transform.position.y - Time.deltaTime * Speed);
-
-            if (Input.GetKey(KeyCode.A))
-                _platform.SetPosition(Vector.X, transform.position.x - Time.deltaTime * Speed);
-
-            if (Input.GetKey(KeyCode.D))
-                _platform.SetPosition(Vector.X, transform.position.x + Time.deltaTime * Speed);
+            }
         }
     }
 }

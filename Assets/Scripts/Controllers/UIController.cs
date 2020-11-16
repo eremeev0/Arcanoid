@@ -121,17 +121,17 @@ namespace Assets.Scripts.Controllers
 
         public void OnSpeed_Changed(float value)
         {
-            _eventProvider.SendEvent(UIEvents.SPEED_UPDATED, value.ToString());
+            _eventProvider.SendEvent(UIEvents.SETTINGS_UPDATED, value.ToString());
         }
 
         public void OnColor_Changed(int value)
         {
-            _eventProvider.SendEvent(UIEvents.PLAYER_COLOR_UPDATED, value.ToString());
+            _eventProvider.SendEvent(UIEvents.SETTINGS_UPDATED, value.ToString());
         }
 
         public void OnResolution_Changed(int index)
         {
-            _eventProvider.SendEvent(UIEvents.WIN_RESOLUTION_UPDATED, index.ToString());
+            _eventProvider.SendEvent(UIEvents.SETTINGS_UPDATED, index.ToString());
         }
         
     }
