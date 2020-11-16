@@ -12,25 +12,26 @@ namespace Assets.Scripts.EventManagment.Provider
 {
     public class EventManager: MonoBehaviour
     {
-        private GameEventManager _gameProvider;
-        private UIEventManager _uiProvider;
-        private EventManager()
-        { }
+        private GameEventManager _gameManager;
+        private UIEventManager _uiManager;
 
-        
         void Start()
         {
-            _gameProvider = new GameEventManager();
-            _uiProvider = new UIEventManager();
+            _gameManager = new GameEventManager();
+            _uiManager = new UIEventManager();
         }
 
+        void Update()
+        {
+
+        }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="event"></param>
         public void SendEvent(UIEvents @event)
         {
-            _uiProvider.SendEvent(@event);
+            _uiManager.SendEvent(@event);
         }
         /// <summary>
         /// 
@@ -38,7 +39,7 @@ namespace Assets.Scripts.EventManagment.Provider
         /// <param name="event"></param>
         public void SendEvent(GameEvents @event)
         {
-            _gameProvider.SendEvent(@event);
+            _gameManager.SendEvent(@event);
         }
 
         /// <summary>
@@ -48,18 +49,23 @@ namespace Assets.Scripts.EventManagment.Provider
         /// <param name="value"></param>
         public void SendEvent(GameEvents @event, string value)
         {
-            _gameProvider.SendEvent(@event, value);
+            _gameManager.SendEvent(@event, value);
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="event"></param>
         /// <param name="object"></param>
-        /// <param name="count"></param>
-        /// <param name="offset"></param>
-        public void SendEvent(GameEvents @event, GameObject @object, (int, int)[]pos)
+        public void SendEvent(GameEvents @event, GameObject @object, (float, int)[]pos)
         {
-            _gameProvider.SendEvent(GameEvents.SPAWN_OBJECTS, @object, pos);
+            if (_gameManager == null)
+                _gameManager = new GameEventManager();
+            print("L-1");
+            print(@object);
+            print(@event);
+            print(pos);
+            print(_gameManager);
+            _gameManager.SendEvent(@event, @object, pos);
         }
         /// <summary>
         /// 
@@ -68,7 +74,7 @@ namespace Assets.Scripts.EventManagment.Provider
         /// <param name="value"></param>
         public void SendEvent(UIEvents @event, params string[] value)
         {
-            _uiProvider.SendEvent(@event, value);
+            _uiManager.SendEvent(@event, value);
         }
     }
 }

@@ -39,12 +39,13 @@ namespace Assets.Scripts.EventManagment.Provider
             }
         }
 
-        public void SendEvent(GameEvents @event, [NotNull] GameObject @object, (int, int)[] pos)
+        public void SendEvent(GameEvents @event, GameObject @object, (float, int)[] pos)
         {
-            if (@object == null) throw new ArgumentNullException(nameof(@object));
+            Debug.Log("L-2");
             switch (@event)
             {
                 case GameEvents.SPAWN_OBJECTS:
+                    Debug.Log("L-3");
                     Spawn(@object, pos);
                     break;
                 default:
@@ -74,18 +75,18 @@ namespace Assets.Scripts.EventManagment.Provider
             ContainerDto.RecordLabel.text += value;
         }
 
-        private void Spawn(GameObject spawnedObject, (int, int)[] pos)
+        private void Spawn(GameObject spawnedObject, (float, int)[] pos)
         {
+            Debug.Log("L-4");
             GameObject newObject;
             Vector3 originalPos = spawnedObject.transform.position;
             for (int i = 0; i < pos.Length; i++)
             {
-                // Clone object
-                newObject = Object.Instantiate(spawnedObject);
-                // Set new Pos
-                newObject.transform.position = new Vector3(originalPos.x + pos[i].Item1, originalPos.y + pos[i].Item2, originalPos.z);
+                // Clone object and set new position
+                newObject = Object.Instantiate(spawnedObject, new Vector3(originalPos.x + pos[i].Item1, originalPos.y + pos[i].Item2, originalPos.z), Quaternion.identity);
+                newObject.name = "Platform";
                 // Set parent for new object
-                newObject.transform.parent = spawnedObject.transform;
+                newObject.transform.parent = ContainerDto.PlatformsList.transform;
             }
         }
     }

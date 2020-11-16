@@ -20,7 +20,10 @@ namespace Assets.Scripts.Performances.Services
                 ContainerDto.Player = GameObject.Find("/Character/playerPillar");
                 ContainerDto.Ball = GameObject.Find("/ActiveObjects/gameBall");
                 ContainerDto.PlatformsList = GameObject.Find("/ActiveObjects/Platforms");
-                ContainerDto.Platform = GameObject.Find("/ActiveObjects/Platforms/Platform");
+
+                //variableForPrefab = (GameObject)Resources.Load("prefabs/prefab1", typeof(GameObject));
+                ContainerDto.Platform = Resources.Load<GameObject>("Prefabs/ActiveObjects/Platform");//GameObject.Find("/ActiveObjects/Platforms/Platform");
+
                 ContainerDto.StartButton = GameObject.Find("/UI/Menu/Panel/Start").GetComponent<Button>();
                 ContainerDto.RestartButton = GameObject.Find("/UI/Failed/Panel/Restart").GetComponent<Button>();
                 ContainerDto.MenuButton = GameObject.Find("/UI/Failed/Panel/OpenMenu").GetComponent<Button>();
