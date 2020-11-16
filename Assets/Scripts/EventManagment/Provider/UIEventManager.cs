@@ -42,20 +42,11 @@ namespace Assets.Scripts.EventManagment.Provider
         {
             switch (@event)
             {
+                case UIEvents.SETTINGS_UPDATED:
+                    UpdateSettings(value);
+                    break;
                 case UIEvents.SAVE_CLICKED:
                     SaveOptions(value);
-                    break;
-                case UIEvents.WIN_RESOLUTION_UPDATED:
-                    UpdateResolution(Convert.ToInt32(value[0]));
-                    break;
-                case UIEvents.SPEED_UPDATED:
-                    UpdateSpeed(Convert.ToSingle(value[0]));
-                    break;
-                case UIEvents.PLAYER_COLOR_UPDATED:
-                    UpdateColor(Convert.ToInt32(value[0]));
-                    break;
-                case UIEvents.SCORE_UPDATED:
-                    UpdateScore(Convert.ToInt32(value[0]));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(@event), @event, null);
@@ -116,8 +107,23 @@ namespace Assets.Scripts.EventManagment.Provider
         {
             DataManager manager = new DataManager();
             manager.Reset();
-            SaveOptions(DefaultSettingsDto.PlayerSpeed.ToString(), DefaultSettingsDto.PlayerColor.ToString(),
-                DefaultSettingsDto.GameResolution.ToString(), DefaultSettingsDto.PlayerScore.ToString());
+            SaveOptions(
+                $"[{nameof(SettingsDto.PlayerSpeed)}] = " + DefaultSettingsDto.PlayerSpeed,
+                $"[{nameof(SettingsDto.PlayerColor)}] = " + DefaultSettingsDto.PlayerColor,
+                $"[{nameof(SettingsDto.GameResolution)}] = " + DefaultSettingsDto.GameResolution,
+                $"[{nameof(SettingsDto.PlayerScore)}] = " + DefaultSettingsDto.PlayerScore);
+        }
+
+        private void UpdateSettings(string[] values)
+        {
+            UpdateSpeed(Convert.ToSingle(values[0].Remove(0,
+                Convert.ToString($"[{nameof(SettingsDto.PlayerSpeed)}] = ").Length)));
+            UpdateColor(Convert.ToInt32(values[1].Remove(0,
+                Convert.ToString($"[{nameof(SettingsDto.PlayerColor)}] = ").Length)));
+            UpdateResolution(Convert.ToInt32(values[2].Remove(0,
+                Convert.ToString($"[{nameof(SettingsDto.GameResolution)}] = ").Length)));
+            UpdateScore(Convert.ToInt32(values[3].Remove(0,
+                Convert.ToString($"[{nameof(SettingsDto.PlayerScore)}] = ").Length)));
         }
 
         private void UpdateResolution(int index)

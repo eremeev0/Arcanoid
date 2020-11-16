@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Assets.Scripts.Contracts;
 using Assets.Scripts.Controllers;
 using Assets.Scripts.EventManagment.Events;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
@@ -25,14 +27,25 @@ namespace Assets.Scripts.EventManagment.Provider
             }
         }
 
-        public void SendEvent(GameEvents @event, params string[] value)
+        public void SendEvent(GameEvents @event, string value)
         {
             switch (@event)
             {
                 case GameEvents.LEVEL_FAILED:
-                    OpenFailedWindow(value[0]);
+                    OpenFailedWindow(value);
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(@event), @event, null);
+            }
+        }
+
+        public void SendEvent(GameEvents @event, [NotNull] GameObject @object, (int, int)[] pos)
+        {
+            if (@object == null) throw new ArgumentNullException(nameof(@object));
+            switch (@event)
+            {
                 case GameEvents.SPAWN_OBJECTS:
+                    Spawn(@object, pos);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(@event), @event, null);
@@ -61,16 +74,16 @@ namespace Assets.Scripts.EventManagment.Provider
             ContainerDto.RecordLabel.text += value;
         }
 
-        private void Spawn(GameObject spawnedObject, int howMuch, Vector3 offset)
+        private void Spawn(GameObject spawnedObject, (int, int)[] pos)
         {
             GameObject newObject;
             Vector3 originalPos = spawnedObject.transform.position;
-            for (int i = 0; i < howMuch; i++)
+            for (int i = 0; i < pos.Length; i++)
             {
                 // Clone object
                 newObject = Object.Instantiate(spawnedObject);
                 // Set new Pos
-                newObject.transform.position = new Vector3(originalPos.x + offset.x, originalPos.y + offset.y, originalPos.z + offset.z);
+                newObject.transform.position = new Vector3(originalPos.x + pos[i].Item1, originalPos.y + pos[i].Item2, originalPos.z);
                 // Set parent for new object
                 newObject.transform.parent = spawnedObject.transform;
             }

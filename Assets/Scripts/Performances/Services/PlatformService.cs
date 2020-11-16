@@ -37,10 +37,6 @@ namespace Assets.Scripts.Performances.Services
                 case "rightPillar":
                     transform.position = new Vector3(transform.position.x - .2f * (_speed / 4), transform.position.y, transform.position.z);
                     break;
-                case "gameBall":
-                    gameObject.GetComponent<Rigidbody2D>().rotation = 0f;
-                    gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-                    break;
             }
         }
 

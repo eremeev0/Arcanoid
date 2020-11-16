@@ -46,9 +46,20 @@ namespace Assets.Scripts.EventManagment.Provider
         /// </summary>
         /// <param name="event"></param>
         /// <param name="value"></param>
-        public void SendEvent(GameEvents @event, params string[] value)
+        public void SendEvent(GameEvents @event, string value)
         {
             _gameProvider.SendEvent(@event, value);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="event"></param>
+        /// <param name="object"></param>
+        /// <param name="count"></param>
+        /// <param name="offset"></param>
+        public void SendEvent(GameEvents @event, GameObject @object, (int, int)[]pos)
+        {
+            _gameProvider.SendEvent(GameEvents.SPAWN_OBJECTS, @object, pos);
         }
         /// <summary>
         /// 
@@ -59,6 +70,5 @@ namespace Assets.Scripts.EventManagment.Provider
         {
             _uiProvider.SendEvent(@event, value);
         }
-
     }
 }

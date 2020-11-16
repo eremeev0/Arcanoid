@@ -12,7 +12,8 @@ namespace Assets.Scripts.Contracts
         public static GameObject Score;
         public static GameObject Player;
         public static GameObject Ball;
-        public static GameObject DestroyedPlatforms;
+        public static GameObject PlatformsList;
+        public static GameObject Platform;
         
         public static Button StartButton;
         public static Button RestartButton;

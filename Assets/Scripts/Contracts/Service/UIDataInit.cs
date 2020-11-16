@@ -2,7 +2,7 @@
 using Assets.Scripts.EventManagment.Events;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Contracts
+namespace Assets.Scripts.Contracts.Service
 {
     public class UIDataInit
     {

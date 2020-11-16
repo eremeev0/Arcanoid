@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.EventManagment.Events;
+﻿using Assets.Scripts.Contracts;
+using Assets.Scripts.EventManagment.Events;
 using Assets.Scripts.Performances.Interfaces;
 using Assets.Scripts.Performances.Services;
 using Assets.Scripts.StorageProvider.Service;
@@ -8,11 +9,10 @@ namespace Assets.Scripts.Controllers
 {
     public class GameController: MonoBehaviour
     {
-        private IDestrPlatformService _destrService;
         void Start()
         {
             ContainerService.TryInitialize();
-            _destrService = gameObject.AddComponent<DestrPlatformService>(); 
+            ContainerDto.Manager.SendEvent(GameEvents.SPAWN_OBJECTS, ContainerDto.Platform, SpawnerDto.GetSpawner().LVL_1);
             DataManager manager = new DataManager();
             manager.Load();
         }
@@ -20,7 +20,6 @@ namespace Assets.Scripts.Controllers
         void Update()
         {
             // get destroyed platform list
-            
         }
     }
 }

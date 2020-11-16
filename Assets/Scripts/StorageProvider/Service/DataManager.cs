@@ -13,27 +13,18 @@ namespace Assets.Scripts.StorageProvider.Service
     /// </summary>
     public class DataManager
     {
-        private readonly FileStorageManager manager = new FileStorageManager();
+        private readonly FileStorageManager _manager = new FileStorageManager();
+        private readonly EventManager _eventManager = ContainerDto.Manager;
 
-        
         /// <summary>
         /// Load user configuration from persistent data path to game settings
         /// </summary>
         public void Load()
         {
-            var values = manager.Load(Application.persistentDataPath + "/user.config");
+            Debug.Log(Application.dataPath);
+            var values = _manager.Load(Application.persistentDataPath + "/user.config");
             if (values == null) return;
-            ContainerDto.Manager.SendEvent(UIEvents.SPEED_UPDATED,
-                values[0].Remove(0, Convert.ToString($"[{nameof(SettingsDto.PlayerSpeed)}] = ").Length));
-
-            ContainerDto.Manager.SendEvent(UIEvents.PLAYER_COLOR_UPDATED,
-                values[1].Remove(0, Convert.ToString($"[{nameof(SettingsDto.PlayerColor)}] = ").Length));
-
-            ContainerDto.Manager.SendEvent(UIEvents.WIN_RESOLUTION_UPDATED,
-                values[2].Remove(0, Convert.ToString($"[{nameof(SettingsDto.GameResolution)}] = ").Length));
-
-            ContainerDto.Manager.SendEvent(UIEvents.SCORE_UPDATED,
-                values[3].Remove(0, Convert.ToString($"[{nameof(SettingsDto.PlayerScore)}] = ").Length));
+            _eventManager.SendEvent(UIEvents.SETTINGS_UPDATED, values);
         }
         /// <summary>
         /// Save all received game settings to persistent data path
@@ -41,15 +32,12 @@ namespace Assets.Scripts.StorageProvider.Service
         /// <param name="values">Game settings in string format</param>
         public void Save([NotNull]params string[] values)
         {
-            manager.Save(Application.persistentDataPath + "/user.config", values);
+            _manager.Save(Application.persistentDataPath + "/user.config", values);
         }
 
         public void Reset()
         {
-            ContainerDto.Manager.SendEvent(UIEvents.SPEED_UPDATED, DefaultSettingsDto.PlayerSpeed.ToString());
-            ContainerDto.Manager.SendEvent(UIEvents.PLAYER_COLOR_UPDATED, DefaultSettingsDto.PlayerColor.ToString());
-            ContainerDto.Manager.SendEvent(UIEvents.WIN_RESOLUTION_UPDATED, DefaultSettingsDto.GameResolution.ToString());
-            ContainerDto.Manager.SendEvent(UIEvents.SCORE_UPDATED, DefaultSettingsDto.PlayerScore.ToString());
+            _eventManager.SendEvent(UIEvents.RESET_CLICKED);
         }
     }
 }

@@ -19,7 +19,8 @@ namespace Assets.Scripts.Performances.Services
                 ContainerDto.Settings = GameObject.Find("/UI/Settings/Panel");
                 ContainerDto.Player = GameObject.Find("/Character/playerPillar");
                 ContainerDto.Ball = GameObject.Find("/ActiveObjects/gameBall");
-                ContainerDto.DestroyedPlatforms = GameObject.Find("/ActiveObjects/Platforms");
+                ContainerDto.PlatformsList = GameObject.Find("/ActiveObjects/Platforms");
+                ContainerDto.Platform = GameObject.Find("/ActiveObjects/Platforms/Platform");
                 ContainerDto.StartButton = GameObject.Find("/UI/Menu/Panel/Start").GetComponent<Button>();
                 ContainerDto.RestartButton = GameObject.Find("/UI/Failed/Panel/Restart").GetComponent<Button>();
                 ContainerDto.MenuButton = GameObject.Find("/UI/Failed/Panel/OpenMenu").GetComponent<Button>();
