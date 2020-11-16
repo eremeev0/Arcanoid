@@ -6,16 +6,20 @@ namespace Assets.Scripts.Controllers
 {
     public class ScoreController
     {
-        private int score = SettingsDto.PlayerScore;
-        
-        // displayed score
-        private Text _count;
-
-        /*void Start()
+        private ScoreController()
         {
-            _count = GameObject.Find("/UI/Score/Panel/Panel/count").GetComponent<Text>();
-            _count.text = score.ToString();
-        }*/
+            
+        }
+
+        private static ScoreController _instance;
+
+        public static ScoreController GetInstance()
+        {
+            if (_instance == null)
+                _instance = new ScoreController();
+            return _instance;
+        }
+        private int _score = SettingsDto.PlayerScore;
         
         /// <summary>
         /// plus the received score value to the current
@@ -23,14 +27,14 @@ namespace Assets.Scripts.Controllers
         /// <param name="val">score</param>
         public void UpdateScore(int val)
         {
-            score += val;
-            SettingsDto.PlayerScore = score;
-            ContainerDto.ScoreLabel.text = score.ToString();
+            _score += val;
+            SettingsDto.PlayerScore = _score;
+            ContainerDto.ScoreLabel.text = _score.ToString();
         }
 
         public int GetScore()
         {
-            return score;
+            return _score;
         }
     }
 }

@@ -9,15 +9,16 @@ namespace Assets.Scripts.Performances.Services
     public class BallService: MonoBehaviour, IBallService
     {
         private float _speed = SettingsDto.BallSpeed;
-        private float _maxSpeed = SettingsDto.BallMaxSpeed;
-        private float _speedMultiplier = SettingsDto.BallSpeedMultiplier;
+        private readonly float _maxSpeed = SettingsDto.BallMaxSpeed;
+        private readonly float _speedMultiplier = SettingsDto.BallSpeedMultiplier;
         private Vector2 _velocity;
+        private IDestrPlatformService _destroyedPlatform;
         private bool _isSpeedUpdate = false;
         private bool _isVelocityUpdate = false;
-        private IDestrPlatformService _destroyedPlatform;
-        void Start()
+
+        private void Start()
         {
-            _destroyedPlatform = gameObject.AddComponent<DestrPlatformService>();
+            _destroyedPlatform = new DestrPlatformService();
         }
 
 
@@ -49,7 +50,7 @@ namespace Assets.Scripts.Performances.Services
 
         public void Failed()
         {
-            ContainerDto.Manager.SendEvent(GameEvents.LEVEL_FAILED, new ScoreController().GetScore().ToString());
+            ContainerDto.Manager.SendEvent(GameEvents.LEVEL_FAILED, ScoreController.GetInstance().GetScore().ToString());
         }
 
         public void SpeedUp()
@@ -61,10 +62,10 @@ namespace Assets.Scripts.Performances.Services
 
         public void IncrementScore()
         {
-            new ScoreController().UpdateScore(1);
+            ScoreController.GetInstance().UpdateScore(1);
         }
 
-        void OnTriggerEnter2D(Collider2D col)
+        private void OnTriggerEnter2D(Collider2D col)
         {
             // if ball touch bottom trigger
             if (col.gameObject.name == "GameOver")
@@ -76,7 +77,8 @@ namespace Assets.Scripts.Performances.Services
                 ContainerDto.Manager.SendEvent(GameEvents.GAME_PAUSED);
             }
         }
-        void OnCollisionEnter2D(Collision2D col)
+
+        private void OnCollisionEnter2D(Collision2D col)
         {
             SpeedUp();
             _isVelocityUpdate = true;

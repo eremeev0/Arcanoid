@@ -4,21 +4,16 @@ using UnityEngine;
 
 namespace Assets.Scripts.Performances.Services
 {
-    public class DestrPlatformService: MonoBehaviour, IDestrPlatformService
+    public class DestrPlatformService: IDestrPlatformService
     {
-        private GameObject _list;
+        private readonly GameObject _list;
         private bool _isAllDestroyed;
-        void Start()
+        public DestrPlatformService()
         {
             _list = ContainerDto.DestroyedPlatforms;
             _isAllDestroyed = false;
         }
-
-        void Update()
-        {
-
-        }
-
+        
         public void Destroy()
         {
             if (_list.transform.childCount == 1)

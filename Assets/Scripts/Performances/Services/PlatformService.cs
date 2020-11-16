@@ -14,11 +14,10 @@ namespace Assets.Scripts.Performances.Services
         [SerializeField] private Vector3 _position;
         [SerializeField] private float _speed = SettingsDto.PlayerSpeed;
         [SerializeField] private Color _color = SettingsDto.PlayerColor;
-        private bool _isSpeedUpdate = true;
-        private bool _isColorUpdate = true;
-
+        [SerializeField] private bool _isSpeedUpdate = true;
+        [SerializeField] private bool _isColorUpdate = true;
         //Start if player touch "invisible wall". Ball ignore it.
-        void OnTriggerEnter2D(Collider2D col)
+        private void OnTriggerEnter2D(Collider2D col)
         {
             if (col.name == "TerritoryLimiter")
                 transform.position = new Vector3(transform.position.x, transform.position.y - .2f * (_speed / 4), transform.position.z);
@@ -28,33 +27,38 @@ namespace Assets.Scripts.Performances.Services
         }
 
         //Start if player touch walls
-        void OnCollisionEnter2D(Collision2D col)
+        private void OnCollisionEnter2D(Collision2D col)
         {
-            if (col.gameObject.name == "leftPillar")
-                transform.position = new Vector3(transform.position.x + .2f * (_speed / 4), transform.position.y, transform.position.z);
-            if (col.gameObject.name == "rightPillar")
-                transform.position = new Vector3(transform.position.x - .2f * (_speed / 4), transform.position.y, transform.position.z);
-
-            // Ball can't push player
-            if (col.gameObject.name == "gameBall")
+            switch (col.gameObject.name)
             {
-                gameObject.GetComponent<Rigidbody2D>().rotation = 0f;
-                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+                case "leftPillar":
+                    transform.position = new Vector3(transform.position.x + .2f * (_speed / 4), transform.position.y, transform.position.z);
+                    break;
+                case "rightPillar":
+                    transform.position = new Vector3(transform.position.x - .2f * (_speed / 4), transform.position.y, transform.position.z);
+                    break;
+                case "gameBall":
+                    gameObject.GetComponent<Rigidbody2D>().rotation = 0f;
+                    gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+                    break;
             }
         }
 
-        void Start()
+        private void Start()
         {
             _position.z = -1f;
         }
 
-        void Update()
+        private void Update()
         {
             var transformRotation = transform.rotation;
             transformRotation.z = 0;
             transform.rotation = transformRotation;
             if (_isColorUpdate)
+            {
                 gameObject.GetComponent<SpriteRenderer>().color = _color;
+                _isColorUpdate = false;
+            }
         }
 
         public bool IsSpeedUpdate()
@@ -62,26 +66,10 @@ namespace Assets.Scripts.Performances.Services
             return _isSpeedUpdate;
         }
 
-        public bool IsColorUpdate()
-        {
-            return _isColorUpdate;
-        }
-
         public float GetSpeed()
         {
             _isSpeedUpdate = false;
             return _speed;
-        }
-
-        public Color GetColor()
-        {
-            _isColorUpdate = false;
-            return _color;
-        }
-
-        public Vector3 GetPosition()
-        {
-            return _position;
         }
 
         public void SetPosition(Vector component, float value)

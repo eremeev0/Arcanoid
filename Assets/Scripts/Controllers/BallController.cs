@@ -22,11 +22,10 @@ namespace Assets.Scripts.Controllers
         void Start()
         {
             _ballService = gameObject.AddComponent<BallService>();
+            
             _velocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             _ballService.SetVelocity(_velocity);
             _speed = _ballService.GetSpeed();
-            // get score class for counting
-            //score = gameObject.AddComponent<ScoreController>();
         }
 
         // Update is called once per frame
@@ -37,7 +36,8 @@ namespace Assets.Scripts.Controllers
             if (_ballService.IsVelocityUpdate())
                 _velocity = _ballService.GetVelocity();
             GetComponent<Rigidbody2D>().inertia = 0;
-            GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + _velocity * Time.fixedDeltaTime * _speed);
+            GetComponent<Rigidbody2D>()
+                .MovePosition(GetComponent<Rigidbody2D>().position + _velocity * Time.fixedDeltaTime * _speed);
         }
     }
 }

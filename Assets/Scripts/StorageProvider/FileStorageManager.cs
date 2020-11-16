@@ -1,7 +1,5 @@
 ﻿using System.IO;
-using Assets.Scripts.EventManagment.Events;
 using JetBrains.Annotations;
-using UnityEngine;
 
 namespace Assets.Scripts.StorageProvider
 {
@@ -9,7 +7,6 @@ namespace Assets.Scripts.StorageProvider
     {
         public void Save(string path,[NotNull] params string[] data)
         {
-            Debug.Log(path);
             if (!File.Exists(path))
                 File.Create(path);
             File.WriteAllLines(path, data);
