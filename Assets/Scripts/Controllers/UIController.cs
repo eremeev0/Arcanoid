@@ -2,6 +2,7 @@
 using Assets.Scripts.Contracts.Service;
 using Assets.Scripts.EventManagment.Events;
 using Assets.Scripts.EventManagment.Provider;
+using Assets.Scripts.Models.UI;
 using Assets.Scripts.Performances;
 using Assets.Scripts.Performances.Services;
 using UnityEngine;
@@ -29,9 +30,19 @@ namespace Assets.Scripts.Controllers
         private Dropdown colorsList;
         private Dropdown resolutions;
 
+        private Menu _menu;
+        private Settings _settings;
+        private Score _score;
+        private Failed _failed;
+
         private EventManager _eventProvider;
         void Start()
         {
+            _menu = new Menu();
+            _failed = new Failed();
+            _settings = new Settings();
+            _score = new Score();
+
             /*_eventProvider = ContainerDto.Manager;
             _eventProvider.SendEvent(GameEvents.GAME_PAUSED);
 

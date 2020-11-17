@@ -628,7 +628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11255932948972915, guid: 4201d4bba4c44d740ab549acfdf05e14, type: 3}
       propertyPath: m_Name
-      value: playerPillar
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 11255934296943950, guid: 4201d4bba4c44d740ab549acfdf05e14, type: 3}
       propertyPath: m_LocalPosition.y
@@ -853,7 +853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4930281158989807472, guid: edd2032cd64fbf541ac87185a94a97bd, type: 3}
       propertyPath: m_Name
-      value: gameBall
+      value: Ball
       objectReference: {fileID: 0}
     - target: {fileID: 8972411214511273796, guid: edd2032cd64fbf541ac87185a94a97bd, type: 3}
       propertyPath: m_GravityScale

@@ -7,14 +7,8 @@ namespace Assets.Scripts.Models.Game
     /// <summary>
     /// This class will be update in future (or not)
     /// </summary>
-    public class Level
+    public class LevelN
     {
-        /// <summary>
-        /// name of the level
-        /// </summary>
-        [Obsolete("Property Name has been deprecated. Use Number instead. ", true)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public string Name { get; set; }
         /// <summary>
         /// level number in level's hierarchy (like a level 1, level 2 etc.)
         /// </summary>
@@ -24,11 +18,16 @@ namespace Assets.Scripts.Models.Game
         /// </summary>
         public Color PlatformsColor { get; set; }
         /// <summary>
-        /// Offsets collection for spawner logic
-        /// <para>
-        ///     Spawner use offsets when set new position relative original game object
-        /// </para>
+        /// player start position on level
         /// </summary>
-        public Vector2[] OffsetsForSpawner { get; set; }
+        public Vector3 PlayerPosition { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3 BallPosition { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector3[] PlatformsPosition { get; set; }
     }
 }
