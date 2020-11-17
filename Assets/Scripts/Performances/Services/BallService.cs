@@ -50,7 +50,7 @@ namespace Assets.Scripts.Performances.Services
 
         public void Failed()
         {
-            ContainerDto.Manager.SendEvent(GameEvents.LEVEL_FAILED, ScoreController.GetInstance().GetScore().ToString());
+            //ContainerDto.Manager.SendEvent(GameEvents.LEVEL_FAILED, ScoreController.GetInstance().GetScore().ToString());
         }
 
         public void SpeedUp()
@@ -74,7 +74,7 @@ namespace Assets.Scripts.Performances.Services
                 // hide ball and display failed window
                 gameObject.SetActive(false);
                 Failed();
-                ContainerDto.Manager.SendEvent(GameEvents.GAME_PAUSED);
+                //ContainerDto.Manager.SendEvent(GameEvents.GAME_PAUSED);
             }
         }
 
@@ -106,7 +106,7 @@ namespace Assets.Scripts.Performances.Services
                     _destroyedPlatform.Destroy();
                     if (_destroyedPlatform.IsAllDestroyed())
                     {
-                        ContainerDto.Manager.SendEvent(GameEvents.GAME_PAUSED);
+                        //ContainerDto.Manager.SendEvent(GameEvents.GAME_PAUSED);
                         // and level 1 complete
                     }
                     break;

@@ -10,7 +10,7 @@ namespace Assets.Scripts.Performances.Services
         private bool _isAllDestroyed;
         public DestrPlatformService()
         {
-            _list = ContainerDto.PlatformsList;
+            //_list = ContainerDto.PlatformsList;
             _isAllDestroyed = false;
         }
         

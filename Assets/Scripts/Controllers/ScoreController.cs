@@ -29,7 +29,7 @@ namespace Assets.Scripts.Controllers
         {
             _score += val;
             SettingsDto.PlayerScore = _score;
-            ContainerDto.ScoreLabel.text = _score.ToString();
+            //ContainerDto.ScoreLabel.text = _score.ToString();
         }
 
         public int GetScore()

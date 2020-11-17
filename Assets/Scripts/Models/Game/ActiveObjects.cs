@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Contracts.Game
+namespace Assets.Scripts.Models.Game
 {
     public class ActiveObjects
     {

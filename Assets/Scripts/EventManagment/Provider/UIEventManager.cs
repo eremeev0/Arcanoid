@@ -64,8 +64,8 @@ namespace Assets.Scripts.EventManagment.Provider
 
         private void StartGame()
         {
-            ContainerDto.Menu.SetActive(false);
-            ContainerDto.Score.SetActive(true);
+            /*ContainerDto.Menu.SetActive(false);
+            ContainerDto.Score.SetActive(true);*/
             ReloadGame();
         }
 
@@ -78,22 +78,22 @@ namespace Assets.Scripts.EventManagment.Provider
             SceneManager.UnloadSceneAsync(1);
             // resume game
             // hide failed window
-            ContainerDto.RecordLabel.text = "Score ";
-            ContainerDto.Failed.SetActive(false);
+            /*ContainerDto.RecordLabel.text = "Score ";
+            ContainerDto.Failed.SetActive(false);*/
             //ResumeGame();
         }
 
         private void OpenMenu()
         {
-            ContainerDto.Menu.SetActive(true);
+            /*ContainerDto.Menu.SetActive(true);
             ContainerDto.Failed.SetActive(false);
             ContainerDto.Score.SetActive(false);
-            ContainerDto.Settings.SetActive(false);
+            ContainerDto.Settings.SetActive(false);*/
         }
         private void OpenOptions()
         {
-            ContainerDto.Settings.SetActive(true);
-            ContainerDto.Menu.SetActive(false);
+            /*ContainerDto.Settings.SetActive(true);
+            ContainerDto.Menu.SetActive(false);*/
         }
 
         private void SaveOptions(params string[] value)
@@ -132,39 +132,39 @@ namespace Assets.Scripts.EventManagment.Provider
             {
                 case 0:
                     Screen.SetResolution(640, 360, true);
-                    ContainerDto.ResolutionsList.value = index;
+                    //ContainerDto.ResolutionsList.value = index;
                     break;
                 case 1:
                     Screen.SetResolution(800, 600, true);
-                    ContainerDto.ResolutionsList.value = index;
+                    //ContainerDto.ResolutionsList.value = index;
                     break;
                 case 2:
                     Screen.SetResolution(1024, 768, true);
-                    ContainerDto.ResolutionsList.value = index;
+                    //ContainerDto.ResolutionsList.value = index;
                     break;
                 case 3:
                     Screen.SetResolution(1280, 800, true);
-                    ContainerDto.ResolutionsList.value = index;
+                    //ContainerDto.ResolutionsList.value = index;
                     break;
                 case 4:
                     Screen.SetResolution(1360, 768, true);
-                    ContainerDto.ResolutionsList.value = index;
+                    //ContainerDto.ResolutionsList.value = index;
                     break;
                 case 5:
                     Screen.SetResolution(1440, 900, true);
-                    ContainerDto.ResolutionsList.value = index;
+                    //ContainerDto.ResolutionsList.value = index;
                     break;
                 case 6:
                     Screen.SetResolution(1600, 900, true);
-                    ContainerDto.ResolutionsList.value = index;
+                    //ContainerDto.ResolutionsList.value = index;
                     break;
                 case 7:
                     Screen.SetResolution(1920, 1080, true);
-                    ContainerDto.ResolutionsList.value = index;
+                    //ContainerDto.ResolutionsList.value = index;
                     break;
                 case 8:
                     Screen.SetResolution(1920, 1200, true);
-                    ContainerDto.ResolutionsList.value = index;
+                    //ContainerDto.ResolutionsList.value = index;
                     break;
                 default:
                     break;
@@ -177,43 +177,43 @@ namespace Assets.Scripts.EventManagment.Provider
             {
                 case 0:
                     SettingsDto.PlayerColor = Color.white;
-                    ContainerDto.ColorsList.value = value;
+                    //ContainerDto.ColorsList.value = value;
                     break;
                 case 1:
                     SettingsDto.PlayerColor = Color.black;
-                    ContainerDto.ColorsList.value = value;
+                    //ContainerDto.ColorsList.value = value;
                     break;
                 case 2:
                     SettingsDto.PlayerColor = Color.blue;
-                    ContainerDto.ColorsList.value = value;
+                    //ContainerDto.ColorsList.value = value;
                     break;
                 case 3:
                     SettingsDto.PlayerColor = Color.cyan;
-                    ContainerDto.ColorsList.value = value;
+                    //ContainerDto.ColorsList.value = value;
                     break;
                 case 4:
                     SettingsDto.PlayerColor = Color.gray;
-                    ContainerDto.ColorsList.value = value;
+                    //ContainerDto.ColorsList.value = value;
                     break;
                 case 5:
                     SettingsDto.PlayerColor = Color.green;
-                    ContainerDto.ColorsList.value = value;
+                    //ContainerDto.ColorsList.value = value;
                     break;
                 case 6:
                     SettingsDto.PlayerColor = Color.grey;
-                    ContainerDto.ColorsList.value = value;
+                    //ContainerDto.ColorsList.value = value;
                     break;
                 case 7:
                     SettingsDto.PlayerColor = Color.magenta;
-                    ContainerDto.ColorsList.value = value;
+                    //ContainerDto.ColorsList.value = value;
                     break;
                 case 8:
                     SettingsDto.PlayerColor = Color.red;
-                    ContainerDto.ColorsList.value = value;
+                    //ContainerDto.ColorsList.value = value;
                     break;
                 case 9:
                     SettingsDto.PlayerColor = Color.yellow;
-                    ContainerDto.ColorsList.value = value;
+                    //ContainerDto.ColorsList.value = value;
                     break;
                 default:
                     break;
@@ -222,14 +222,14 @@ namespace Assets.Scripts.EventManagment.Provider
 
         private void UpdateSpeed(float value)
         {
-            ContainerDto.SpeedValue.text = value.ToString();
-            ContainerDto.SpeedSlider.value = value;
+            //ContainerDto.SpeedValue.text = value.ToString();
+            //ContainerDto.SpeedSlider.value = value;
             SettingsDto.PlayerSpeed = value;
         }
 
         private void UpdateScore(int value)
         {
-            ContainerDto.ScoreLabel.text = value.ToString();
+            //ContainerDto.ScoreLabel.text = value.ToString();
             SettingsDto.PlayerScore = value;
         }
     }

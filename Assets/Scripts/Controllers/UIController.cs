@@ -32,7 +32,7 @@ namespace Assets.Scripts.Controllers
         private EventManager _eventProvider;
         void Start()
         {
-            _eventProvider = ContainerDto.Manager;
+            /*_eventProvider = ContainerDto.Manager;
             _eventProvider.SendEvent(GameEvents.GAME_PAUSED);
 
             ContainerDto.Failed.SetActive(false);
@@ -50,7 +50,7 @@ namespace Assets.Scripts.Controllers
             colorsList = ContainerDto.ColorsList;
             resolutions = ContainerDto.ResolutionsList;
             save = ContainerDto.SaveButton;
-            reset = ContainerDto.ResetButton;
+            reset = ContainerDto.ResetButton;*/
 
             start.onClick.AddListener(OnStartButton_Clicked);
             exit.onClick.AddListener(OnExitButton_Clicked);

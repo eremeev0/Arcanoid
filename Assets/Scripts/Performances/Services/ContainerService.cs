@@ -13,7 +13,7 @@ namespace Assets.Scripts.Performances.Services
         {
             try
             {
-                ContainerDto.Menu = GameObject.Find("/UI/Menu/Panel");
+                /*ContainerDto.Menu = GameObject.Find("/UI/Menu/Panel");
                 ContainerDto.Failed = GameObject.Find("/UI/Failed/Panel");
                 ContainerDto.Score = GameObject.Find("/UI/Score/Panel");
                 ContainerDto.Settings = GameObject.Find("/UI/Settings/Panel");
@@ -38,7 +38,7 @@ namespace Assets.Scripts.Performances.Services
                 ContainerDto.ScoreLabel = GameObject.Find("/UI/Score/Panel/Panel/count").GetComponent<Text>();
                 ContainerDto.RecordLabel = GameObject.Find("/UI/Failed/Panel/Result").GetComponent<Text>();
                 ContainerDto.SpeedValue = GameObject.Find("/UI/Settings/Panel/Slider/value").GetComponent<Text>();
-                ContainerDto.Manager = GameObject.Find("EventSystem2").GetComponent<EventManager>();
+                ContainerDto.Manager = GameObject.Find("EventSystem2").GetComponent<EventManager>();*/
             }
             catch (Exception e)
             {

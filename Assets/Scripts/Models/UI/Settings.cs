@@ -2,15 +2,16 @@
 using System.ComponentModel;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Contracts.UI
+namespace Assets.Scripts.Models.UI
 {
-    public class Settings
+    public class Settings: Panel
     {
         public AButton SaveButton;
         public AButton ResetButton;
-        public AButton Menu;
+        public AButton MenuButton;
         public ASlider PlayerSpeedSlider;
-        [Obsolete("Property PlayerSpeedSliderValue has been deprecated. Use ASlider constructor instead. (Contracts.ASlider)", true)]
+        public ALabel SpeedValueLabel;
+        [Obsolete("Property PlayerSpeedSliderValue has been deprecated. Use SpeedValueLabel instead. (Models.ALabel)", true)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Text PlayerSpeedSliderValue;
         public ADropdown PlayerColorDropdown;

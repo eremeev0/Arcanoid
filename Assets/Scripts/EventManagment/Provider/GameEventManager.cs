@@ -55,24 +55,24 @@ namespace Assets.Scripts.EventManagment.Provider
 
         private void StopGame()
         {
-            ContainerDto.Player.GetComponent<PlayerController>().enabled = false;
+            /*ContainerDto.Player.GetComponent<PlayerController>().enabled = false;
             ContainerDto.Player.GetComponent<Rigidbody2D>().simulated = false;
-            ContainerDto.Ball.GetComponent<BallController>().enabled = false;
+            ContainerDto.Ball.GetComponent<BallController>().enabled = false;*/
             //SettingsDto.IsGameStopped = true;
         }
 
         private void ResumeGame()
         {
-            ContainerDto.Player.GetComponent<PlayerController>().enabled = true;
+            /*ContainerDto.Player.GetComponent<PlayerController>().enabled = true;
             ContainerDto.Player.GetComponent<Rigidbody2D>().simulated = true;
-            ContainerDto.Ball.GetComponent<BallController>().enabled = true;
+            ContainerDto.Ball.GetComponent<BallController>().enabled = true;*/
             //SettingsDto.IsGameStopped = false;
         }
         private void OpenFailedWindow(string value)
         {
             SettingsDto.PlayerScore = Convert.ToInt32(value);
-            ContainerDto.Failed.SetActive(true);
-            ContainerDto.RecordLabel.text += value;
+            /*ContainerDto.Failed.SetActive(true);
+            ContainerDto.RecordLabel.text += value;*/
         }
 
         private void Spawn(GameObject spawnedObject, (float, int)[] pos)
@@ -86,7 +86,7 @@ namespace Assets.Scripts.EventManagment.Provider
                 newObject = Object.Instantiate(spawnedObject, new Vector3(originalPos.x + pos[i].Item1, originalPos.y + pos[i].Item2, originalPos.z), Quaternion.identity);
                 newObject.name = "Platform";
                 // Set parent for new object
-                newObject.transform.parent = ContainerDto.PlatformsList.transform;
+                //newObject.transform.parent = ContainerDto.PlatformsList.transform;
             }
         }
     }

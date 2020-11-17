@@ -14,7 +14,7 @@ namespace Assets.Scripts.StorageProvider.Service
     public class DataManager
     {
         private readonly FileStorageManager _manager = new FileStorageManager();
-        private readonly EventManager _eventManager = ContainerDto.Manager;
+        private readonly EventManager _eventManager = null;
 
         /// <summary>
         /// Load user configuration from persistent data path to game settings
