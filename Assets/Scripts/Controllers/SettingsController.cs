@@ -1,7 +1,9 @@
-﻿namespace Assets.Scripts.Controllers
+﻿using UnityEngine;
+
+namespace Assets.Scripts.Controllers
 {
-    public class SettingsController
+    public class SettingsController : MonoBehaviour
     {
-        
+        public bool _showMenu = false;
     }
 }

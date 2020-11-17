@@ -60,11 +60,6 @@ namespace Assets.Scripts.EventManagment.Provider
         {
             if (_gameManager == null)
                 _gameManager = new GameEventManager();
-            print("L-1");
-            print(@object);
-            print(@event);
-            print(pos);
-            print(_gameManager);
             _gameManager.SendEvent(@event, @object, pos);
         }
         /// <summary>

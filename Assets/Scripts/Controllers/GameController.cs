@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Initializers;
-using Assets.Scripts.StorageProvider.Service;
+﻿using Assets.Scripts.StorageProvider.Service;
 using UnityEngine;
 
 namespace Assets.Scripts.Controllers

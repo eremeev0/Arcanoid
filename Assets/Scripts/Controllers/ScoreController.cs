@@ -1,24 +1,10 @@
 ﻿using Assets.Scripts.Contracts;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers
 {
-    public class ScoreController
+    public class ScoreController: MonoBehaviour
     {
-        private ScoreController()
-        {
-            
-        }
-
-        private static ScoreController _instance;
-
-        public static ScoreController GetInstance()
-        {
-            if (_instance == null)
-                _instance = new ScoreController();
-            return _instance;
-        }
         private int _score = SettingsDto.PlayerScore;
         
         /// <summary>
