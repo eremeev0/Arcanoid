@@ -25,6 +25,16 @@ namespace Assets.Scripts.EventManagment.Provider
         {
 
         }
+
+        /// <summary>
+        /// Call function by selected Global event
+        /// </summary>
+        /// <param name="event">Global event</param>
+        public void Call(GlobalEvents @event)
+        {
+
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -33,10 +43,13 @@ namespace Assets.Scripts.EventManagment.Provider
         {
             _uiManager.SendEvent(@event);
         }
+        
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="event"></param>
+        [Obsolete("Procedure SendEvent(GameEvents) is deprecated. Use Call(GlobalEvents) instead.")]
         public void SendEvent(GameEvents @event)
         {
             _gameManager.SendEvent(@event);
@@ -47,6 +60,7 @@ namespace Assets.Scripts.EventManagment.Provider
         /// </summary>
         /// <param name="event"></param>
         /// <param name="value"></param>
+        [Obsolete("Procedure SendEvent(GameEvents, string) is deprecated. Alternative want be done.")]
         public void SendEvent(GameEvents @event, string value)
         {
             _gameManager.SendEvent(@event, value);
@@ -56,6 +70,7 @@ namespace Assets.Scripts.EventManagment.Provider
         /// </summary>
         /// <param name="event"></param>
         /// <param name="object"></param>
+        [Obsolete("Procedure SendEvent(GameEvents, GameObject, (float, int)[]) is deprecated. Alternative want be done.")]
         public void SendEvent(GameEvents @event, GameObject @object, (float, int)[]pos)
         {
             if (_gameManager == null)
