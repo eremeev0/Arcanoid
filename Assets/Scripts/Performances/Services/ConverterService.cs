@@ -35,26 +35,29 @@ namespace Assets.Scripts.Performances.Services
         {
             Vector2 color = default;
             if (resolutionId == 0)
-                color = new Vector2();
+                color = new Vector2(640, 360);
             if (resolutionId == 1)
-                color = new Vector2();
+                color = new Vector2(800, 600);
             if (resolutionId == 2)
-                color = new Vector2();
+                color = new Vector2(1024, 768);
             if (resolutionId == 3)
-                color = new Vector2();
+                color = new Vector2(1280, 800);
             if (resolutionId == 4)
-                color = new Vector2();
+                color = new Vector2(1360, 768);
             if (resolutionId == 5)
-                color = new Vector2();
+                color = new Vector2(1440, 900);
             if (resolutionId == 6)
-                color = new Vector2();
+                color = new Vector2(1600, 900);
             if (resolutionId == 7)
-                color = new Vector2();
+                color = new Vector2(1920, 1080);
             if (resolutionId == 8)
-                color = new Vector2();
-            if (resolutionId == 9)
-                color = new Vector2();
+                color = new Vector2(1920, 1200);
             return color;
+           
+  
+           
+        
+      
         }
     }
 }

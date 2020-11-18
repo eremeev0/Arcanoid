@@ -24,7 +24,7 @@ namespace Assets.Scripts.StorageProvider.Service
             Debug.Log(Application.dataPath);
             var values = _manager.Load(Application.dataPath + "/user.config");
             if (values == null) return;
-            _eventManager.SendEvent(UIEvents.SETTINGS_UPDATED, values);
+            //_eventManager.SendEvent(UIEvents.SETTINGS_UPDATED, values);
         }
         /// <summary>
         /// Save all received game settings to persistent data path

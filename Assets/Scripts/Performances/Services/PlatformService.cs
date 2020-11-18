@@ -11,11 +11,11 @@ namespace Assets.Scripts.Performances.Services
     /// </summary>
     public class PlatformService: MonoBehaviour, IPlatformService
     {
-        [SerializeField] private Vector3 _position;
-        [SerializeField] private float _speed = SettingsDto.PlayerSpeed;
-        [SerializeField] private Color _color = SettingsDto.PlayerColor;
-        [SerializeField] private bool _isSpeedUpdate = true;
-        [SerializeField] private bool _isColorUpdate = true;
+        private Vector3 _position;
+        private float _speed;
+        private Color _color;
+        private bool _isSpeedUpdate;
+        private bool _isColorUpdate;
 
         //Start if player touch "invisible wall". Ball ignore it.
         private void OnTriggerEnter2D(Collider2D col)
@@ -44,6 +44,10 @@ namespace Assets.Scripts.Performances.Services
 
         private void Start()
         {
+            _speed = SettingsDto.PlayerSpeed;
+            _color = SettingsDto.PlayerColor;
+            _isSpeedUpdate = true;
+            _isColorUpdate = true;
             _position.z = -1f;
         }
 

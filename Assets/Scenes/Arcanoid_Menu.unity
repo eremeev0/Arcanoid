@@ -3801,7 +3801,7 @@ MonoBehaviour:
   ColorDropdown: {fileID: 1559889203}
   ResolutionDropdown: {fileID: 400071920}
   PlayerSpeedSlider: {fileID: 1722731236}
-  SpeedValueLabel: {fileID: 0}
+  SpeedValueLabel: {fileID: 1190404753}
   IsShowMenu: 0
   IsResetSettings: 0
   IsSaveSettings: 0

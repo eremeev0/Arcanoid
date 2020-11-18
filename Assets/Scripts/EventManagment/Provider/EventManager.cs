@@ -53,6 +53,9 @@ namespace Assets.Scripts.EventManagment.Provider
                 case GlobalEvents.RESUME_GAME:
                     _globalEventManager.ResumeGame(gameObjects[0], gameObjects[1]);
                     break;
+                case GlobalEvents.PAUSE_GAME:
+                    _globalEventManager.PauseGame(gameObjects[0], gameObjects[1]);
+                    break;
                 case GlobalEvents.LEVEL_FAILED:
                     _globalEventManager.PauseGame(gameObjects[0], gameObjects[1]);
                     break;
