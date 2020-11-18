@@ -8,10 +8,10 @@ namespace Assets.Scripts.Contracts
     public class SettingsDto
     {
         // saved settings
-        public static float PlayerSpeed { get; set; } = 5f;
-        public static Color PlayerColor { get; set; } = Color.white;
-        public static int PlayerScore { get; set; } = 0;
-        public static int GameResolution { get; set; } = 0;
+        public static float PlayerSpeed { get; set; }
+        public static Color PlayerColor { get; set; }
+        public static int PlayerScore { get; set; }
+        public static Vector2 GameResolution { get; set; }
         
         // unsaved properties
         public static bool IsGameStopped { get; set; } = false;

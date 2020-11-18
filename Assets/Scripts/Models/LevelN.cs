@@ -14,6 +14,10 @@ namespace Assets.Scripts.Models.Game
         /// </summary>
         public int Number { get; set; }
         /// <summary>
+        /// Destroyed platform exemplar
+        /// </summary>
+        public GameObject Platform { get; set; }
+        /// <summary>
         /// color of the destroyed platform's
         /// </summary>
         public Color PlatformsColor { get; set; }

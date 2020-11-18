@@ -11,64 +11,6 @@ namespace Assets.Scripts.EventManagment.Provider
 {
     public class UIEventManager
     {
-        public void SendEvent(UIEvents @event)
-        {
-            switch (@event)
-            {
-                case UIEvents.START_CLICKED:
-                    StartGame();
-                    break;
-                case UIEvents.EXIT_CLICKED:
-                    CloseApp();
-                    break;
-                case UIEvents.RESTART_CLICKED:
-                    ReloadGame();
-                    break;
-                case UIEvents.BACK_TO_MENU_CLICKED:
-                    OpenMenu();
-                    break;
-                case UIEvents.SETTINGS_CLICKED:
-                    OpenOptions();
-                    break;
-                case UIEvents.RESET_CLICKED:
-                    ResetOptions();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(@event), @event, null);
-            }
-        }
-
-        public void SendEvent(UIEvents @event, params string[] value)
-        {
-            switch (@event)
-            {
-                case UIEvents.SETTINGS_UPDATED:
-                    UpdateSettings(value);
-                    break;
-                case UIEvents.SAVE_CLICKED:
-                    SaveOptions(value);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(@event), @event, null);
-            }
-        }
-
-        private void CloseApp()
-        {
-            #if UNITY_EDITOR
-                EditorApplication.isPlaying = false;
-            #else
-                Application.Quit();
-            #endif
-        }
-
-        private void StartGame()
-        {
-            /*ContainerDto.Menu.SetActive(false);
-            ContainerDto.Score.SetActive(true);*/
-            ReloadGame();
-        }
-
         private void ReloadGame()
         {
             SettingsDto.PlayerScore = 0;
@@ -82,38 +24,6 @@ namespace Assets.Scripts.EventManagment.Provider
             ContainerDto.Failed.SetActive(false);*/
             //ResumeGame();
         }
-
-        private void OpenMenu()
-        {
-            /*ContainerDto.Menu.SetActive(true);
-            ContainerDto.Failed.SetActive(false);
-            ContainerDto.Score.SetActive(false);
-            ContainerDto.Settings.SetActive(false);*/
-        }
-        private void OpenOptions()
-        {
-            /*ContainerDto.Settings.SetActive(true);
-            ContainerDto.Menu.SetActive(false);*/
-        }
-
-        private void SaveOptions(params string[] value)
-        {
-            DataManager manager = new DataManager();
-            // save user settings
-            manager.Save(value);
-        }
-
-        private void ResetOptions()
-        {
-            DataManager manager = new DataManager();
-            manager.Reset();
-            SaveOptions(
-                $"[{nameof(SettingsDto.PlayerSpeed)}] = " + DefaultSettingsDto.PlayerSpeed,
-                $"[{nameof(SettingsDto.PlayerColor)}] = " + DefaultSettingsDto.PlayerColor,
-                $"[{nameof(SettingsDto.GameResolution)}] = " + DefaultSettingsDto.GameResolution,
-                $"[{nameof(SettingsDto.PlayerScore)}] = " + DefaultSettingsDto.PlayerScore);
-        }
-
         private void UpdateSettings(string[] values)
         {
             UpdateSpeed(Convert.ToSingle(values[0].Remove(0,

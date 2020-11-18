@@ -22,7 +22,7 @@ namespace Assets.Scripts.StorageProvider.Service
         public void Load()
         {
             Debug.Log(Application.dataPath);
-            var values = _manager.Load(Application.persistentDataPath + "/user.config");
+            var values = _manager.Load(Application.dataPath + "/user.config");
             if (values == null) return;
             _eventManager.SendEvent(UIEvents.SETTINGS_UPDATED, values);
         }
@@ -32,12 +32,8 @@ namespace Assets.Scripts.StorageProvider.Service
         /// <param name="values">Game settings in string format</param>
         public void Save([NotNull]params string[] values)
         {
-            _manager.Save(Application.persistentDataPath + "/user.config", values);
-        }
-
-        public void Reset()
-        {
-            _eventManager.SendEvent(UIEvents.RESET_CLICKED);
+            Debug.Log(Application.dataPath + "/user.config");
+            _manager.Save(Application.dataPath + "/user.config", values);
         }
     }
 }

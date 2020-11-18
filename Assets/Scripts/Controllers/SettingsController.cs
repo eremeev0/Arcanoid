@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using Assets.Scripts.Contracts;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,7 +35,12 @@ namespace Assets.Scripts.Controllers
 
         }
 
-        void SaveSettings(){IsSaveSettings = true;}
+        void SaveSettings()
+        {
+            //SettingsDto.PlayerSpeed = PlayerSpeedSlider.value;
+            //RunSettingsDto.PlayerColor = ;
+            IsSaveSettings = true;
+        }
         void ResetSettings(){IsResetSettings = true;}
         void ShowMenu(){IsShowMenu = true;}
         void DisplaySpeedValue(float value){SpeedValueLabel.text = value.ToString(CultureInfo.CurrentCulture);}

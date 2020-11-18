@@ -34,6 +34,7 @@ namespace Assets.Scripts.Controllers
             FailedPanel.SetActive(false);
             ScorePanel.SetActive(false);
             SettingsPanel.SetActive(false);
+            _eventProvider = gameObject.AddComponent<EventManager>();
         }
 
         void Update()

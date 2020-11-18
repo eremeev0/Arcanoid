@@ -372,6 +372,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 107375152}
+  - component: {fileID: 107375153}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -399,6 +400,20 @@ RectTransform:
   m_AnchoredPosition: {x: -0.5225817, y: -186}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &107375153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107375151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b4a16f5d7210c4d9a45aec1e312949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScoreLabel: {fileID: 1512936812}
+  IsScoreUpdate: 0
 --- !u!1 &112826696
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,7 +1568,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3975c67e6745404aaa4933eec1dd6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _showMenu: 0
+  IsShowMenu: 0
+  IsRestartGame: 0
+  RestartButton: {fileID: 18310218}
+  MenuButton: {fileID: 821864676}
+  ScoreLabel: {fileID: 324242690}
 --- !u!1 &426318071
 GameObject:
   m_ObjectHideFlags: 0
@@ -3645,9 +3664,9 @@ MonoBehaviour:
   StartButton: {fileID: 368560838}
   SettingsButton: {fileID: 1725138907}
   ExitButton: {fileID: 459635725}
-  _showScore: 0
-  _showSettings: 0
-  _closeGame: 0
+  IsShowScore: 0
+  IsShowSettings: 0
+  IsCloseGame: 0
 --- !u!1 &1190404751
 GameObject:
   m_ObjectHideFlags: 0
@@ -3782,8 +3801,10 @@ MonoBehaviour:
   ColorDropdown: {fileID: 1559889203}
   ResolutionDropdown: {fileID: 400071920}
   PlayerSpeedSlider: {fileID: 1722731236}
-  SpeedValue: {fileID: 1190404753}
-  _showMenu: 0
+  SpeedValueLabel: {fileID: 0}
+  IsShowMenu: 0
+  IsResetSettings: 0
+  IsSaveSettings: 0
 --- !u!1 &1268714483
 GameObject:
   m_ObjectHideFlags: 0

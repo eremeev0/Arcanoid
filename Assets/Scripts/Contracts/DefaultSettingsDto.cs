@@ -1,10 +1,12 @@
-﻿namespace Assets.Scripts.Contracts
+﻿using UnityEngine;
+
+namespace Assets.Scripts.Contracts
 {
     public class DefaultSettingsDto
     {
         public static float PlayerSpeed { get; set; } = 5f;
-        public static int PlayerColor { get; set; } = 0;
+        public static Color PlayerColor { get; set; } = Color.white;
         public static int PlayerScore { get; set; } = 0;
-        public static int GameResolution { get; set; } = 1;
+        public static Vector2 GameResolution { get; set; } = new Vector2(800, 600);
     }
 }
