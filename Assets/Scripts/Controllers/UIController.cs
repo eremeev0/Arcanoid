@@ -45,6 +45,7 @@ namespace Assets.Scripts.Controllers
                 _menu.IsShowScore = false;
                 MenuPanel.SetActive(false);
                 ScorePanel.SetActive(true);
+                _eventProvider.Call(GlobalEvents.START_GAME);
                 // start game
             }
 
@@ -57,6 +58,7 @@ namespace Assets.Scripts.Controllers
 
             if (_menu.IsCloseGame)
             {
+                _eventProvider.Call(GlobalEvents.CLOSE_GAME);
                 // close app
             }
 
@@ -72,12 +74,14 @@ namespace Assets.Scripts.Controllers
             if (_settings.IsSaveSettings)
             {
                 _settings.IsSaveSettings = false;
+                _eventProvider.Call(GlobalEvents.SAVE_SETTINGS);
                 // save game settings
             }
 
             if (_settings.IsResetSettings)
             {
                 _settings.IsResetSettings = false;
+                _eventProvider.Call(GlobalEvents.RESET_SETTINGS);
                 // reset game settings
             }
 
@@ -94,6 +98,7 @@ namespace Assets.Scripts.Controllers
             if (_failed.IsRestartGame)
             {
                 _failed.IsRestartGame = false;
+                _eventProvider.Call(GlobalEvents.RESTART_GAME);
                 // restart game
             }
 
