@@ -1,5 +1,6 @@
 ﻿using System;
 using Assets.Scripts.EventManagment.Events;
+using Assets.Scripts.Models.Game;
 using UnityEngine;
 
 namespace Assets.Scripts.EventManagment.Provider
@@ -62,6 +63,10 @@ namespace Assets.Scripts.EventManagment.Provider
                 default:
                     throw new ArgumentOutOfRangeException(nameof(@event), @event, null);
             }
+        }
+        public void GenerateLevel(LevelN Level)
+        {
+            _globalEventManager.GenerateLevel(Level);
         }
     }
 }

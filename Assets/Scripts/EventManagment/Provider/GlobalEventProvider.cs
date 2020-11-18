@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Contracts;
 using Assets.Scripts.Controllers;
 using Assets.Scripts.Models.Game;
+using Assets.Scripts.Performances.Services;
 using Assets.Scripts.StorageProvider.Service;
 using UnityEditor;
 using UnityEngine;
@@ -10,10 +11,11 @@ namespace Assets.Scripts.EventManagment.Provider
     public class GlobalEventManager
     {
         private readonly DataManager _settings;
-        
+        private readonly LevelHelperService _levelHelper;
         public GlobalEventManager()
         {
             _settings = new DataManager();
+            _levelHelper = new LevelHelperService();
         }
 
         public void StartGame()
@@ -45,13 +47,14 @@ namespace Assets.Scripts.EventManagment.Provider
             ball.GetComponent<BallController>().enabled = false;
         }
 
-        public void SetNextLevel(LevelN level)
+        public void GenerateLevel(LevelN level)
         {
             level.Number++;
-            level.BallPosition = default;
-            level.PlayerPosition = default;
-            level.PlatformsColor = default;
-            level.PlatformsPosition = default;
+            level.Platform = _levelHelper.GetGameObjectFromResources("Prefabs/ActiveObjects/Platform");
+            level.BallPosition = _levelHelper.GetStaticBallPosition();
+            level.PlayerPosition = _levelHelper.GetStaticPlayerPosition();
+            level.PlatformsColor = _levelHelper.GetPlatformsColor(level.Number);
+            level.PlatformsPosition = _levelHelper.GetPlatformsRelativePosition(level.Number, level.Platform.transform.localPosition);
         }
 
         public void SaveSettings()
