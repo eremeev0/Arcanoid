@@ -9,14 +9,18 @@ namespace Assets.Scripts.Controllers
         public Button SettingsButton;
         public Button ExitButton;
 
-        public bool _showScore = false;
+        public bool IsShowScore = false;
+
+        public bool IsShowSettings = false;
+
+        public bool IsCloseGame = false;
         //private
         private void Start()
         {
 
             StartButton.onClick.AddListener(ShowScore);
-            //SettingsButton.onClick.AddListener();
-            //ExitButton.onClick.AddListener();
+            SettingsButton.onClick.AddListener(ShowSettings);
+            ExitButton.onClick.AddListener(CloseGame);
         }
 
         private void Update()
@@ -24,9 +28,10 @@ namespace Assets.Scripts.Controllers
 
         }
 
-        void ShowScore()
-        {
-            _showScore = true;
-        }
+        void ShowScore(){IsShowScore = true;}
+
+        void ShowSettings(){IsShowSettings = true;}
+
+        void CloseGame(){IsCloseGame = true;}
     }
 }

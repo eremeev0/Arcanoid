@@ -62,7 +62,7 @@ namespace Assets.Scripts.Performances.Services
 
         public void IncrementScore()
         {
-            ScoreController.GetInstance().UpdateScore(1);
+            //ScoreController.GetInstance().UpdateScore(1);
         }
 
         private void OnTriggerEnter2D(Collider2D col)

@@ -17,6 +17,12 @@ namespace Assets.Scripts.Controllers
         private SettingsController _settings;
         private FailedController _failed;
         private ScoreController _score;
+
+        public GameObject MenuPanel;
+        public GameObject FailedPanel;
+        public GameObject ScorePanel;
+        public GameObject SettingsPanel;
+
         private EventManager _eventProvider;
         void Start()
         {
@@ -25,34 +31,81 @@ namespace Assets.Scripts.Controllers
             _failed = GetComponentInChildren<FailedController>();
             _score = GetComponentInChildren<ScoreController>();
 
-            _settings.gameObject.SetActive(false);
-            _score.gameObject.SetActive(false);
-            _failed.gameObject.SetActive(false);
+            FailedPanel.SetActive(false);
+            ScorePanel.SetActive(false);
+            SettingsPanel.SetActive(false);
         }
 
         void Update()
         {
-            if (_menu._showScore)
+            /////////////////////////////////////////////////////////////
+            //////////////////////////Menu//////////////////////////////
+            if (_menu.IsShowScore)
             {
-                _menu._showScore = false;
-                _menu.gameObject.SetActive(false);
-                _score.gameObject.SetActive(true);
+                _menu.IsShowScore = false;
+                MenuPanel.SetActive(false);
+                ScorePanel.SetActive(true);
+                // start game
             }
 
-            if (_settings._showMenu)
+            if (_menu.IsShowSettings)
             {
-                _settings._showMenu = false;
-                _settings.gameObject.SetActive(false);
-                _menu.gameObject.SetActive(true);
+                _menu.IsShowSettings = false;
+                MenuPanel.SetActive(false);
+                SettingsPanel.SetActive(true);
             }
 
-            if (_failed._showMenu)
+            if (_menu.IsCloseGame)
             {
-                _failed._showMenu = false;
-                _failed.gameObject.SetActive(false);
-                _score.gameObject.SetActive(false);
-                _menu.gameObject.SetActive(true);
+                // close app
             }
+
+            /////////////////////////////////////////////////////////////
+            ////////////////////////Settings////////////////////////////
+            if (_settings.IsShowMenu)
+            {
+                _settings.IsShowMenu = false;
+                SettingsPanel.SetActive(false);
+                MenuPanel.SetActive(true);
+            }
+
+            if (_settings.IsSaveSettings)
+            {
+                _settings.IsSaveSettings = false;
+                // save game settings
+            }
+
+            if (_settings.IsResetSettings)
+            {
+                _settings.IsResetSettings = false;
+                // reset game settings
+            }
+
+            /////////////////////////////////////////////////////////////
+            /////////////////////////Failed/////////////////////////////
+            if (_failed.IsShowMenu)
+            {
+                _failed.IsShowMenu = false;
+                FailedPanel.SetActive(false);
+                ScorePanel.SetActive(false);
+                MenuPanel.SetActive(true);
+            }
+
+            if (_failed.IsRestartGame)
+            {
+                _failed.IsRestartGame = false;
+                // restart game
+            }
+
+            /////////////////////////////////////////////////////////////
+            //////////////////////////Score/////////////////////////////
+            if (_score.IsScoreUpdate)
+            {
+                _score.IsScoreUpdate = false;
+                _failed.ScoreLabel.text = $"Score {_score.GetScore()}";
+            }
+
+            /////////////////////////////////////////////////////////////
         }
     }
 }
