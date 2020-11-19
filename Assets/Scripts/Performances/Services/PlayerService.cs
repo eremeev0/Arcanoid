@@ -45,7 +45,7 @@ namespace Assets.Scripts.Performances.Services
         }
         /////////////////////////////////////////////////////////////
         /////////////////////////Setters////////////////////////////
-        public void SetPosition(Vector3 pos){transform.position = pos;}
+        public void SetPosition(Vector3 pos){_position  = pos;}
         public void SetPosition(Vector coordinate, float value)
         {
             switch (coordinate)

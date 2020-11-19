@@ -2,6 +2,8 @@
 using Assets.Scripts.EventManagment.Events;
 using Assets.Scripts.EventManagment.Provider;
 using Assets.Scripts.Models.Game;
+using Assets.Scripts.Performances.Interfaces;
+using Assets.Scripts.Performances.Services;
 using Assets.Scripts.StorageProvider.Service;
 using UnityEngine;
 
@@ -17,22 +19,21 @@ namespace Assets.Scripts.Controllers
         private DataManager _settingsStorage;
         private EventManager _eventManager;
         private LevelN level;
+        private IBallService _ballService;
 
         private void Start()
         {
+            _ballService = Ball.GetComponent<BallService>();
             _settingsStorage = new DataManager();
             _settingsStorage.Load();
+            
             _eventManager = EventSender.GetComponent<EventManager>();
-            print("Level 1 init start");
+            _eventManager.Call(@event: GlobalEvents.PAUSE_GAME, Player, Ball);
+            SettingsDto.IsGameStopped = true;
             level = new LevelN();
-            print(level.GetType());
-            level = _eventManager.GenerateLevel(level);
-            print(level.GetType());
-            print("Level 1 init end");
-            print("Spawning...");
-            SpawnPlatforms(level.Platform, level.PlatformsPosition, PlatformsContainer);
-            print("Spawning end");
-            _eventManager.Call(GlobalEvents.PAUSE_GAME, Player, Ball);
+            level = _eventManager.GenerateLevel(level: level);
+            
+            SpawnPlatforms(sourceGameObject: level.Platform, clonePositions: level.PlatformsPosition, clonesContainer: PlatformsContainer);
         }
 
         private void Update()
@@ -47,6 +48,11 @@ namespace Assets.Scripts.Controllers
                 SettingsDto.IsLevelComplete = false;
                 level = _eventManager.GenerateLevel(level);
                 SpawnPlatforms(level.Platform, level.PlatformsPosition, PlatformsContainer);
+            }
+
+            if (SettingsDto.IsLevelFailed)
+            {
+                _eventManager.Call(GlobalEvents.PAUSE_GAME, Player, Ball);
             }
         }
 

@@ -9,7 +9,6 @@
         SAVE_SETTINGS,
         RESET_SETTINGS,
         RESTART_GAME,
-        LEVEL_FAILED,
         LEVEL_COMPLETED,
     }
 }

@@ -1,6 +1,4 @@
 ﻿using Assets.Scripts.Contracts;
-using Assets.Scripts.Controllers;
-using Assets.Scripts.EventManagment.Events;
 using Assets.Scripts.Performances.Interfaces;
 using UnityEngine;
 
@@ -12,20 +10,21 @@ namespace Assets.Scripts.Performances.Services
         private readonly float _maxSpeed = SettingsDto.BallMaxSpeed;
         private readonly float _speedMultiplier = SettingsDto.BallSpeedMultiplier;
         private Vector2 _velocity;
+        
         private IDestrPlatformService _destroyedPlatform;
-        private bool _isSpeedUpdate = false;
-        private bool _isVelocityUpdate = false;
+       
+        private bool _isSpeedUpdate;
+        private bool _isVelocityUpdate;
 
         private void Start()
         {
+            _isSpeedUpdate = false;
+            _isVelocityUpdate = false;
             _destroyedPlatform = new DestrPlatformService();
         }
 
 
-        public void SetVelocity(Vector2 velocity)
-        {
-            _velocity = velocity;
-        }
+        //public void SetVelocity(Vector2 velocity){_velocity = velocity;}
         
         public float GetSpeed()
         {
@@ -35,33 +34,40 @@ namespace Assets.Scripts.Performances.Services
 
         public Vector2 GetVelocity()
         {
+            if (_velocity == default)
+            {
+                int x = 0, y = 0;
+                while (x == 0)
+                {
+                    x = Random.Range(-1, 1);
+                }
+
+                while (y == 0)
+                {
+                    y = Random.Range(-1, 1);
+                }
+                _velocity = new Vector2(x, y);
+            }
+
+            _isVelocityUpdate = false;
             return _velocity;
         }
 
-        public bool IsSpeedUpdate()
-        {
-            return _isSpeedUpdate;
-        }
+        public bool IsSpeedUpdate(){return _isSpeedUpdate;}
 
-        public bool IsVelocityUpdate()
-        {
-            return _isVelocityUpdate;
-        }
-
-        public void Failed()
-        {
-            //ContainerDto.Manager.SendEvent(GameEvents.LEVEL_FAILED, ScoreController.GetInstance().GetScore().ToString());
-        }
+        public bool IsVelocityUpdate(){return _isVelocityUpdate;}
 
         public void SpeedUp()
         {
-            if (_speed < _maxSpeed)
-                _speed += _speedMultiplier;
+            if (!(_speed < _maxSpeed)) return;
+            _speed += _speedMultiplier;
             _isSpeedUpdate = true;
         }
 
         public void IncrementScore()
         {
+            SettingsDto.PlayerScore++;
+            SettingsDto.IsScoreUpdate = true;
             //ScoreController.GetInstance().UpdateScore(1);
         }
 
@@ -73,7 +79,7 @@ namespace Assets.Scripts.Performances.Services
                 print("GameOver");
                 // hide ball and display failed window
                 gameObject.SetActive(false);
-                Failed();
+                SettingsDto.IsLevelFailed = true;
                 //ContainerDto.Manager.SendEvent(GameEvents.GAME_PAUSED);
             }
         }
@@ -110,8 +116,6 @@ namespace Assets.Scripts.Performances.Services
                         //ContainerDto.Manager.SendEvent(GameEvents.GAME_PAUSED);
                         // and level 1 complete
                     }
-                    break;
-                default:
                     break;
             }
         }

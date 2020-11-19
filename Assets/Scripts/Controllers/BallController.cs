@@ -17,8 +17,8 @@ namespace Assets.Scripts.Controllers
         {
             _ballService = gameObject.AddComponent<BallService>();
             
-            _velocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-            _ballService.SetVelocity(_velocity);
+            _velocity = _ballService.GetVelocity();
+            
             _speed = _ballService.GetSpeed();
         }
 
@@ -27,8 +27,10 @@ namespace Assets.Scripts.Controllers
         { 
             if (_ballService.IsSpeedUpdate()) 
                 _speed = _ballService.GetSpeed();
+           
             if (_ballService.IsVelocityUpdate())
                 _velocity = _ballService.GetVelocity();
+            
             GetComponent<Rigidbody2D>()
                 .MovePosition(GetComponent<Rigidbody2D>().position + _velocity * Time.fixedDeltaTime * _speed);
         }

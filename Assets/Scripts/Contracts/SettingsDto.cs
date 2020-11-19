@@ -16,6 +16,8 @@ namespace Assets.Scripts.Contracts
         // unsaved properties
         public static bool IsGameStopped { get; set; } = false;
         public static bool IsLevelComplete { get; set; } = false;
+        public static bool IsLevelFailed { get; set; } = false;
+        public static bool IsScoreUpdate { get; set; } = true;
         public static float BallSpeed { get; set; } = 2f;
         public static float BallMaxSpeed { get; set; } = 14f;
         public static float BallSpeedMultiplier { get; set; } = .5f;

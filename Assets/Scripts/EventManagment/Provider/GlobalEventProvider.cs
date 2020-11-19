@@ -23,11 +23,13 @@ namespace Assets.Scripts.EventManagment.Provider
             SettingsDto.IsGameStopped = false;
         }
 
+
         public void ResumeGame(GameObject player, GameObject ball)
         {
             player.GetComponent<PlayerController>().enabled = true;
             player.GetComponent<Rigidbody2D>().simulated = true;
             ball.GetComponent<BallController>().enabled = true;
+            SettingsDto.IsGameStopped = false;
 
         }
 
@@ -45,17 +47,17 @@ namespace Assets.Scripts.EventManagment.Provider
             player.GetComponent<PlayerController>().enabled = false;
             player.GetComponent<Rigidbody2D>().simulated = false;
             ball.GetComponent<BallController>().enabled = false;
+            SettingsDto.IsGameStopped = true;
         }
 
         public LevelN GenerateLevel(LevelN level)
         {
-            Debug.Log(level.Number++);
-            Debug.Log(level.Platform = _levelHelper.GetGameObjectFromResources("Prefabs/ActiveObjects/Platform"));
-            Debug.Log(level.BallPosition = _levelHelper.GetStaticBallPosition());
-            Debug.Log(level.PlayerPosition = _levelHelper.GetStaticPlayerPosition());
-            Debug.Log(level.PlatformsColor = _levelHelper.GetPlatformsColor(level.Number));
-            Debug.Log(level.PlatformsPosition = _levelHelper.GetPlatformsRelativePosition(level.Number, level.Platform.transform.localPosition));
-            Debug.Log(level.ToString());
+            level.Number++;
+            level.Platform = _levelHelper.GetGameObjectFromResources("Prefabs/ActiveObjects/Platform");
+            level.BallPosition = _levelHelper.GetStaticBallPosition();
+            level.PlayerPosition = _levelHelper.GetStaticPlayerPosition();
+            level.PlatformsColor = _levelHelper.GetPlatformsColor(level.Number);
+            level.PlatformsPosition = _levelHelper.GetPlatformsRelativePosition(level.Number, level.Platform.transform.localPosition);
             return level;
         }
 

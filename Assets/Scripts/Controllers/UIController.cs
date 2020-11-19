@@ -99,16 +99,22 @@ namespace Assets.Scripts.Controllers
             if (_failed.IsRestartGame)
             {
                 _failed.IsRestartGame = false;
+                FailedPanel.SetActive(false);
                 _eventProvider.Call(GlobalEvents.RESTART_GAME);
                 // restart game
             }
-
+            if (SettingsDto.IsLevelFailed)
+            {
+                FailedPanel.SetActive(true);
+                SettingsDto.IsLevelFailed = false;
+            }
             /////////////////////////////////////////////////////////////
             //////////////////////////Score/////////////////////////////
-            if (_score.IsScoreUpdate)
+            if (SettingsDto.IsScoreUpdate)
             {
-                _score.IsScoreUpdate = false;
+                _score.UpdateScore();
                 _failed.ScoreLabel.text = $"Score {_score.GetScore()}";
+                SettingsDto.IsScoreUpdate = false;
             }
 
             /////////////////////////////////////////////////////////////

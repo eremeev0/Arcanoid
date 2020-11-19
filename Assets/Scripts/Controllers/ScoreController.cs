@@ -7,26 +7,22 @@ namespace Assets.Scripts.Controllers
     public class ScoreController: MonoBehaviour
     {
         public Text ScoreLabel;
-        public bool IsScoreUpdate;
-        
         private int _score;
 
         private void Start()
         {
             _score = SettingsDto.PlayerScore;
-            IsScoreUpdate = true;
         }
 
 
         /// <summary>
         /// plus the received score value to the current
         /// </summary>
-        /// <param name="val">score</param>
-        public void UpdateScore(int val)
+        public void UpdateScore()
         {
-            _score += val;
-            SettingsDto.PlayerScore = _score;
-            IsScoreUpdate = true;
+            _score = SettingsDto.PlayerScore;
+            SettingsDto.IsScoreUpdate = false;
+            ScoreLabel.text = _score.ToString();
             //ContainerDto.ScoreLabel.text = _score.ToString();
         }
 

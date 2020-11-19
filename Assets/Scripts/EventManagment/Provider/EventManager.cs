@@ -59,18 +59,13 @@ namespace Assets.Scripts.EventManagment.Provider
                 case GlobalEvents.PAUSE_GAME:
                     _globalEventManager.PauseGame(gameObjects[0], gameObjects[1]);
                     break;
-                case GlobalEvents.LEVEL_FAILED:
-                    _globalEventManager.PauseGame(gameObjects[0], gameObjects[1]);
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(@event), @event, null);
             }
         }
         public LevelN GenerateLevel(LevelN level)
         {
-            Debug.Log("1:"+level);
             var a = new GlobalEventManager().GenerateLevel(level);
-            Debug.Log(a.Number);
             return a;
         }
     }
