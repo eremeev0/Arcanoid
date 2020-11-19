@@ -84,7 +84,7 @@ namespace Assets.Scripts.Performances.Services
             _isVelocityUpdate = true;
             switch (col.gameObject.name)
             {
-                case "playerPillar":
+                case "Player":
                     _velocity.y = -_velocity.y;
                     break;
                 case "topPillar":

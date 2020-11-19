@@ -64,9 +64,10 @@ namespace Assets.Scripts.EventManagment.Provider
                     throw new ArgumentOutOfRangeException(nameof(@event), @event, null);
             }
         }
-        public void GenerateLevel(LevelN Level)
+        public LevelN GenerateLevel(LevelN level)
         {
-            _globalEventManager.GenerateLevel(Level);
+            Debug.Log("1:"+level);
+            return _globalEventManager.GenerateLevel(level);
         }
     }
 }

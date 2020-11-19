@@ -47,7 +47,7 @@ namespace Assets.Scripts.EventManagment.Provider
             ball.GetComponent<BallController>().enabled = false;
         }
 
-        public void GenerateLevel(LevelN level)
+        public LevelN GenerateLevel(LevelN level)
         {
             level.Number++;
             level.Platform = _levelHelper.GetGameObjectFromResources("Prefabs/ActiveObjects/Platform");
@@ -55,6 +55,8 @@ namespace Assets.Scripts.EventManagment.Provider
             level.PlayerPosition = _levelHelper.GetStaticPlayerPosition();
             level.PlatformsColor = _levelHelper.GetPlatformsColor(level.Number);
             level.PlatformsPosition = _levelHelper.GetPlatformsRelativePosition(level.Number, level.Platform.transform.localPosition);
+            Debug.Log(level);
+            return level;
         }
 
         public void SaveSettings()
