@@ -101,6 +101,8 @@ namespace Assets.Scripts.Controllers
                 _failed.IsRestartGame = false;
                 FailedPanel.SetActive(false);
                 _eventProvider.Call(GlobalEvents.RESTART_GAME);
+                SettingsDto.PlayerScore = 0;
+                SettingsDto.IsScoreUpdate = true;
                 // restart game
             }
             if (SettingsDto.IsLevelFailed)
