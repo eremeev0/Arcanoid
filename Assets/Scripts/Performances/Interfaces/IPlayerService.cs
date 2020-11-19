@@ -5,7 +5,7 @@ namespace Assets.Scripts.Performances.Interfaces
     /// <summary>
     /// Player logic interface class
     /// </summary>
-    public interface IPlatformService
+    public interface IPlayerService
     {
         float GetSpeed();
         bool IsSpeedUpdate();

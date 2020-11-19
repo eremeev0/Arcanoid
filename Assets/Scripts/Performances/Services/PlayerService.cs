@@ -9,7 +9,7 @@ namespace Assets.Scripts.Performances.Services
     /// <summary>
     /// Player logic implementation class
     /// </summary>
-    public class PlatformService: MonoBehaviour, IPlatformService
+    public class PlayerService: MonoBehaviour, IPlayerService
     {
         private Vector3 _position;
         private float _speed;

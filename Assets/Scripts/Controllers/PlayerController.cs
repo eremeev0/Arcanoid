@@ -13,12 +13,12 @@ namespace Assets.Scripts.Controllers
         public float Speed = 0f;
 
         // player interface
-        private IPlatformService _platform;
+        private IPlayerService _platform;
         
         //Start is called before the first frame update
         void Start()
         {
-            _platform = gameObject.AddComponent<PlatformService>();
+            _platform = gameObject.AddComponent<PlayerService>();
             _platform.SetPosition(transform.position);
         }
 
