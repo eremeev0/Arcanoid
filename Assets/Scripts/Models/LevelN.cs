@@ -12,7 +12,7 @@ namespace Assets.Scripts.Models.Game
         /// <summary>
         /// level number in level's hierarchy (like a level 1, level 2 etc.)
         /// </summary>
-        public int Number { get; set; }
+        public int Number { get; set; } = 0;
         /// <summary>
         /// Destroyed platform exemplar
         /// </summary>

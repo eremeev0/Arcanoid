@@ -49,13 +49,13 @@ namespace Assets.Scripts.EventManagment.Provider
 
         public LevelN GenerateLevel(LevelN level)
         {
-            level.Number++;
-            level.Platform = _levelHelper.GetGameObjectFromResources("Prefabs/ActiveObjects/Platform");
-            level.BallPosition = _levelHelper.GetStaticBallPosition();
-            level.PlayerPosition = _levelHelper.GetStaticPlayerPosition();
-            level.PlatformsColor = _levelHelper.GetPlatformsColor(level.Number);
-            level.PlatformsPosition = _levelHelper.GetPlatformsRelativePosition(level.Number, level.Platform.transform.localPosition);
-            Debug.Log(level);
+            Debug.Log(level.Number++);
+            Debug.Log(level.Platform = _levelHelper.GetGameObjectFromResources("Prefabs/ActiveObjects/Platform"));
+            Debug.Log(level.BallPosition = _levelHelper.GetStaticBallPosition());
+            Debug.Log(level.PlayerPosition = _levelHelper.GetStaticPlayerPosition());
+            Debug.Log(level.PlatformsColor = _levelHelper.GetPlatformsColor(level.Number));
+            Debug.Log(level.PlatformsPosition = _levelHelper.GetPlatformsRelativePosition(level.Number, level.Platform.transform.localPosition));
+            Debug.Log(level.ToString());
             return level;
         }
 

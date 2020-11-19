@@ -9,7 +9,10 @@ namespace Assets.Scripts.Performances.Interfaces
     {
         float GetSpeed();
         bool IsSpeedUpdate();
-
+        bool IsFreezeUp();
+        bool IsFreezeDown();
+        bool IsFreezeLeft();
+        bool IsFreezeRight();
         void SetPosition(Vector component, float value);
         void SetPosition(Vector3 pos);
     }

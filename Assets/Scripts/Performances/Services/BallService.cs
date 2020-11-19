@@ -106,6 +106,7 @@ namespace Assets.Scripts.Performances.Services
                     _destroyedPlatform.Destroy();
                     if (_destroyedPlatform.IsAllDestroyed())
                     {
+                        SettingsDto.IsLevelComplete = true;
                         //ContainerDto.Manager.SendEvent(GameEvents.GAME_PAUSED);
                         // and level 1 complete
                     }

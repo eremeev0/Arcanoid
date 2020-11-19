@@ -30,22 +30,26 @@ namespace Assets.Scripts.Controllers
 
             if (Input.GetAxisRaw("Horizontal") == 1)
             {
-                _platform.SetPosition(Vector.X, transform.position.x + Time.deltaTime * Speed);
+                if (!_platform.IsFreezeRight())
+                    _platform.SetPosition(Vector.X, transform.position.x + Time.deltaTime * Speed);
             }
 
             if (Input.GetAxisRaw("Horizontal") == -1)
             {
-                _platform.SetPosition(Vector.X, transform.position.x - Time.deltaTime * Speed);
+                if (!_platform.IsFreezeLeft())
+                    _platform.SetPosition(Vector.X, transform.position.x - Time.deltaTime * Speed);
 
             }
             if (Input.GetAxisRaw("Vertical") == 1)
             {
-                _platform.SetPosition(Vector.Y, transform.position.y + Time.deltaTime * Speed);
+                if (!_platform.IsFreezeUp())
+                    _platform.SetPosition(Vector.Y, transform.position.y + Time.deltaTime * Speed);
             }
 
             if (Input.GetAxisRaw("Vertical") == -1)
             {
-                _platform.SetPosition(Vector.Y, transform.position.y - Time.deltaTime * Speed);
+                if (!_platform.IsFreezeDown())
+                    _platform.SetPosition(Vector.Y, transform.position.y - Time.deltaTime * Speed);
             }
         }
     }

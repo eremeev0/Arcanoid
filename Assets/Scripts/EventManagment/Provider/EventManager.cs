@@ -25,6 +25,7 @@ namespace Assets.Scripts.EventManagment.Provider
         /// <param name="event">Global event</param>
         public void Call(GlobalEvents @event)
         {
+            Start();
             switch (@event)
             {
                 case GlobalEvents.START_GAME:
@@ -49,6 +50,7 @@ namespace Assets.Scripts.EventManagment.Provider
 
         public void Call(GlobalEvents @event, params GameObject[] gameObjects)
         {
+            Start();
             switch (@event)
             {
                 case GlobalEvents.RESUME_GAME:
@@ -67,7 +69,9 @@ namespace Assets.Scripts.EventManagment.Provider
         public LevelN GenerateLevel(LevelN level)
         {
             Debug.Log("1:"+level);
-            return _globalEventManager.GenerateLevel(level);
+            var a = new GlobalEventManager().GenerateLevel(level);
+            Debug.Log(a.Number);
+            return a;
         }
     }
 }

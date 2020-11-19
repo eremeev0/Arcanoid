@@ -28,7 +28,10 @@ namespace Assets.Scripts.Controllers
             print(level.GetType());
             level = _eventManager.GenerateLevel(level);
             print(level.GetType());
+            print("Level 1 init end");
+            print("Spawning...");
             SpawnPlatforms(level.Platform, level.PlatformsPosition, PlatformsContainer);
+            print("Spawning end");
             _eventManager.Call(GlobalEvents.PAUSE_GAME, Player, Ball);
         }
 
@@ -41,6 +44,7 @@ namespace Assets.Scripts.Controllers
 
             if (SettingsDto.IsLevelComplete)
             {
+                SettingsDto.IsLevelComplete = false;
                 level = _eventManager.GenerateLevel(level);
                 SpawnPlatforms(level.Platform, level.PlatformsPosition, PlatformsContainer);
             }
