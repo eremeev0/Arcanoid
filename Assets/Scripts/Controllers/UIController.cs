@@ -1,10 +1,7 @@
 ﻿using Assets.Scripts.Contracts;
-using Assets.Scripts.Contracts.Service;
 using Assets.Scripts.EventManagment.Events;
 using Assets.Scripts.EventManagment.Provider;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers
 {
@@ -13,6 +10,8 @@ namespace Assets.Scripts.Controllers
     /// </summary>
     public class UIController: MonoBehaviour
     {
+        public delegate void CallbackHandler(bool value);
+
         private MenuController _menu;
         private SettingsController _settings;
         private FailedController _failed;
@@ -24,37 +23,43 @@ namespace Assets.Scripts.Controllers
         public GameObject SettingsPanel;
 
         private EventManager _eventProvider;
+        private CallbackHandler _callback;
         void Start()
         {
             _menu = GetComponentInChildren<MenuController>();
             _settings = GetComponentInChildren<SettingsController>();
             _failed = GetComponentInChildren<FailedController>();
             _score = GetComponentInChildren<ScoreController>();
-
+            
+            _callback = Callback;
+            
             FailedPanel.SetActive(false);
             ScorePanel.SetActive(false);
             SettingsPanel.SetActive(false);
             _eventProvider = gameObject.AddComponent<EventManager>();
         }
 
+        void Callback(bool value){}
+
+        // move from update, switch to CallBack
         void Update()
         {
             /////////////////////////////////////////////////////////////
             //////////////////////////Menu//////////////////////////////
             if (_menu.IsShowScore)
             {
-                _menu.IsShowScore = false;
                 MenuPanel.SetActive(false);
                 ScorePanel.SetActive(true);
                 _eventProvider.Call(GlobalEvents.START_GAME);
+                _menu.IsShowScore = false;
                 // start game
             }
 
             if (_menu.IsShowSettings)
             {
-                _menu.IsShowSettings = false;
                 MenuPanel.SetActive(false);
                 SettingsPanel.SetActive(true);
+                _menu.IsShowSettings = false;
             }
 
             if (_menu.IsCloseGame)
@@ -67,22 +72,22 @@ namespace Assets.Scripts.Controllers
             ////////////////////////Settings////////////////////////////
             if (_settings.IsShowMenu)
             {
-                _settings.IsShowMenu = false;
                 SettingsPanel.SetActive(false);
                 MenuPanel.SetActive(true);
+                _settings.IsShowMenu = false;
             }
 
             if (_settings.IsSaveSettings)
             {
-                _settings.IsSaveSettings = false;
                 _eventProvider.Call(GlobalEvents.SAVE_SETTINGS);
+                _settings.IsSaveSettings = false;
                 // save game settings
             }
 
             if (_settings.IsResetSettings)
             {
-                _settings.IsResetSettings = false;
                 _eventProvider.Call(GlobalEvents.RESET_SETTINGS);
+                _settings.IsResetSettings = false;
                 // reset game settings
             }
 
@@ -90,33 +95,33 @@ namespace Assets.Scripts.Controllers
             /////////////////////////Failed/////////////////////////////
             if (_failed.IsShowMenu)
             {
-                _failed.IsShowMenu = false;
                 FailedPanel.SetActive(false);
                 ScorePanel.SetActive(false);
                 MenuPanel.SetActive(true);
+                _failed.IsShowMenu = false;
             }
 
             if (_failed.IsRestartGame)
             {
-                _failed.IsRestartGame = false;
                 FailedPanel.SetActive(false);
                 _eventProvider.Call(GlobalEvents.RESTART_GAME);
-                SettingsDto.PlayerScore = 0;
-                SettingsDto.IsScoreUpdate = true;
+                SettingsSingleton.GetSettings().PlayerScore = 0;
+                SettingsSingleton.GetSettings().IsScoreUpdate = true;
+                _failed.IsRestartGame = false;
                 // restart game
             }
-            if (SettingsDto.IsLevelFailed)
+            if (SettingsSingleton.GetSettings().IsLevelFailed)
             {
                 FailedPanel.SetActive(true);
-                SettingsDto.IsLevelFailed = false;
+                SettingsSingleton.GetSettings().IsLevelFailed = false;
             }
             /////////////////////////////////////////////////////////////
             //////////////////////////Score/////////////////////////////
-            if (SettingsDto.IsScoreUpdate)
+            if (SettingsSingleton.GetSettings().IsScoreUpdate)
             {
                 _score.UpdateScore();
                 _failed.ScoreLabel.text = $"Score {_score.GetScore()}";
-                SettingsDto.IsScoreUpdate = false;
+                SettingsSingleton.GetSettings().IsScoreUpdate = false;
             }
 
             /////////////////////////////////////////////////////////////

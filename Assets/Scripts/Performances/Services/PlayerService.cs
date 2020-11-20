@@ -128,8 +128,8 @@ namespace Assets.Scripts.Performances.Services
 
         private void Start()
         {
-            _speed = SettingsDto.PlayerSpeed;
-            _color = SettingsDto.PlayerColor;
+            _speed = SettingsSingleton.GetSettings().PlayerSpeed;
+            _color = SettingsSingleton.GetSettings().PlayerColor;
             _isSpeedUpdate = true;
             _isColorUpdate = true;
             _position.z = -1f;

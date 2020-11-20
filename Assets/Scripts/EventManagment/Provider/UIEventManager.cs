@@ -13,7 +13,7 @@ namespace Assets.Scripts.EventManagment.Provider
     {
         private void ReloadGame()
         {
-            SettingsDto.PlayerScore = 0;
+            SettingsSingleton.GetSettings().PlayerScore = 0;
             // reload current scene
             SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Additive);
             // unload old scene

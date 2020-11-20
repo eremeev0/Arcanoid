@@ -6,7 +6,6 @@ namespace Assets.Scripts.Performances.Services
 {
     public class DestrPlatformService: IDestrPlatformService
     {
-        private readonly GameObject _list;
         private bool _isAllDestroyed;
         public DestrPlatformService()
         {
@@ -14,12 +13,13 @@ namespace Assets.Scripts.Performances.Services
             _isAllDestroyed = false;
         }
         
-        public void Destroy()
+        public void Destroy(GameObject obj)
         {
-            if (_list.transform.childCount == 1)
+            if (obj.transform.parent.childCount == 1)
             {
                 _isAllDestroyed = true;
             }
+            Object.Destroy(obj);
         }
 
         public bool IsAllDestroyed()

@@ -5,7 +5,7 @@ namespace Assets.Scripts.Performances.Services
 {
     public class LevelHelperService
     {
-        private readonly (float, float)[] _lvl1Offsets =
+        private readonly (float, float)[] _platformOffsetsAtLevel1 =
         {
             (-.2f, 0), (1.6f, 0), (3.4f, 0), (5.2f, 0), (7f, 0), (8.8f, 0),
             (-.2f, 1), (1.6f, 1), (3.4f, 1), (5.2f, 1), (7f, 1), (8.8f, 1),
@@ -13,7 +13,7 @@ namespace Assets.Scripts.Performances.Services
             (-.2f, 3), (1.6f, 3), (3.4f, 3), (5.2f, 3), (7f, 3), (8.8f, 3)
         };
 
-        private readonly (float, float)[] _lvl2Offsets =
+        private readonly (float, float)[] _platformsOffsetsAtLevel2 =
         {
             (-.2f, 0), (1.6f, 0), (3.4f, 0), (5.2f, 0), (7f, 0), (8.8f, 0),
             (-.2f, 1), (1.6f, 1), (3.4f, 1), (5.2f, 1), (7f, 1), (8.8f, 1),
@@ -21,9 +21,10 @@ namespace Assets.Scripts.Performances.Services
             (-.2f, 3), (1.6f, 3), (3.4f, 3), (5.2f, 3), (7f, 3), (8.8f, 3)
         };
         
-        private Color _lvl1Color = new Color(185, 85, 85, 255);
-        private Color _lvl2Color = new Color(Random.Range(0, 255), Random.Range(0, 255), Random.Range(0, 255), 255);
-
+        private readonly Color _platformsColorAtLevel1 = new Color(185, 85, 85, 255);
+        private readonly Color _platformsColorAtLevel2 = new Color(Random.Range(0, 255), Random.Range(0, 255), Random.Range(0, 255), 255);
+        private readonly Vector3 _initialPlayerPosition = new Vector3(0.2929382f, -5.564697f, -1f);
+        private readonly Vector3 _initialBallPosition = new Vector3(0.34f, -3.75f, -1f);
         /// <summary>
         /// Returns an array of positions relative to the position of the actual game object
         /// </summary>
@@ -35,7 +36,7 @@ namespace Assets.Scripts.Performances.Services
             List<Vector3> clonedObjectsPosition = new List<Vector3>();
             Vector2 offsetVector;
             if (levelNumber == 1)
-                foreach (var lvl1Offset in _lvl1Offsets)
+                foreach (var lvl1Offset in _platformOffsetsAtLevel1)
                 {
                     offsetVector = ConverterService.ToVector2(lvl1Offset);
                     clonedObjectsPosition.Add(new Vector3(offsetVector.x + originalPosition.x,
@@ -44,7 +45,7 @@ namespace Assets.Scripts.Performances.Services
 
             if (levelNumber == 2)
             {
-                foreach (var lvl2Offset in _lvl2Offsets)
+                foreach (var lvl2Offset in _platformsOffsetsAtLevel2)
                 {
                     offsetVector = ConverterService.ToVector2(lvl2Offset);
                     clonedObjectsPosition.Add(new Vector3(offsetVector.x + originalPosition.x,
@@ -59,6 +60,7 @@ namespace Assets.Scripts.Performances.Services
         /// </summary>
         /// <param name="gameObjectLocation">game object location in resource folder</param>
         /// <returns>UnityEngine GameObject</returns>
+        // assets boundle
         public GameObject GetGameObjectFromResources(string gameObjectLocation)
         {
             return Resources.Load<GameObject>(gameObjectLocation);
@@ -67,17 +69,17 @@ namespace Assets.Scripts.Performances.Services
         /// Get static player position
         /// </summary>
         /// <returns>UnityEngine Vector3</returns>
-        public Vector3 GetStaticPlayerPosition()
+        public Vector3 GetInitialPlayerPosition()
         {
-            return new Vector3(0.2929382f, -5.564697f, -1f);
+            return _initialPlayerPosition;
         }
         /// <summary>
         /// Get static ball position
         /// </summary>
         /// <returns>UnityEngine Vector3</returns>
-        public Vector3 GetStaticBallPosition()
+        public Vector3 GetInitialBallPosition()
         {
-            return new Vector3(0.34f, -3.75f, -1f);
+            return _initialBallPosition;
         }
         /// <summary>
         /// depending on the level number, returns the color for destructible platforms
@@ -87,9 +89,9 @@ namespace Assets.Scripts.Performances.Services
         public Color GetPlatformsColor(int levelNumber)
         {
             if (levelNumber == 1)
-                return _lvl1Color;
+                return _platformsColorAtLevel1;
             if (levelNumber == 2)
-                return _lvl2Color;
+                return _platformsColorAtLevel2;
             return default;
         }
     }

@@ -6,13 +6,14 @@ namespace Assets.Scripts.Performances.Services
 {
     public class BallService: MonoBehaviour, IBallService
     {
-        private float _speed = SettingsDto.BallSpeed;
-        private readonly float _maxSpeed = SettingsDto.BallMaxSpeed;
-        private readonly float _speedMultiplier = SettingsDto.BallSpeedMultiplier;
+        private float _speed = SettingsSingleton.GetSettings().BallSpeed;
+        private readonly float _maxSpeed = SettingsSingleton.GetSettings().BallMaxSpeed;
+        private readonly float _speedMultiplier = SettingsSingleton.GetSettings().BallSpeedMultiplier;
         private Vector2 _velocity;
         
-        private IDestrPlatformService _destroyedPlatform;
-       
+        //private IDestrPlatformService destroyedPlatform;
+        public IDestrPlatformService destroyedPlatform { get; set; }
+
         private bool _isSpeedUpdate;
         private bool _isVelocityUpdate;
 
@@ -20,12 +21,17 @@ namespace Assets.Scripts.Performances.Services
         {
             _isSpeedUpdate = false;
             _isVelocityUpdate = false;
-            _destroyedPlatform = new DestrPlatformService();
+            destroyedPlatform = new DestrPlatformService();
+        }
+        private void Update() {
+            if (destroyedPlatform == null)
+            {
+                destroyedPlatform = new DestrPlatformService();
+            }
         }
 
-
         //public void SetVelocity(Vector2 velocity){_velocity = velocity;}
-        
+
         public float GetSpeed()
         {
             _isSpeedUpdate = false;
@@ -66,8 +72,8 @@ namespace Assets.Scripts.Performances.Services
 
         public void IncrementScore()
         {
-            SettingsDto.PlayerScore++;
-            SettingsDto.IsScoreUpdate = true;
+            SettingsSingleton.GetSettings().PlayerScore++;
+            SettingsSingleton.GetSettings().IsScoreUpdate = true;
             //ScoreController.GetInstance().UpdateScore(1);
         }
 
@@ -79,7 +85,7 @@ namespace Assets.Scripts.Performances.Services
                 print("GameOver");
                 // hide ball and display failed window
                 gameObject.SetActive(false);
-                SettingsDto.IsLevelFailed = true;
+                SettingsSingleton.GetSettings().IsLevelFailed = true;
                 //ContainerDto.Manager.SendEvent(GameEvents.GAME_PAUSED);
             }
         }
@@ -106,16 +112,9 @@ namespace Assets.Scripts.Performances.Services
                     _velocity.y = -_velocity.y;
                     break;
                 case "Platform":
-                    Destroy(col.gameObject);
                     _velocity.y = -_velocity.y;
                     IncrementScore();
-                    _destroyedPlatform.Destroy();
-                    if (_destroyedPlatform.IsAllDestroyed())
-                    {
-                        SettingsDto.IsLevelComplete = true;
-                        //ContainerDto.Manager.SendEvent(GameEvents.GAME_PAUSED);
-                        // and level 1 complete
-                    }
+                    destroyedPlatform.Destroy(col.gameObject);
                     break;
             }
         }

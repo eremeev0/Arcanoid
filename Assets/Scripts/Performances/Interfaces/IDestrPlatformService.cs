@@ -1,8 +1,10 @@
-﻿namespace Assets.Scripts.Performances.Interfaces
+﻿using UnityEngine;
+
+namespace Assets.Scripts.Performances.Interfaces
 {
     public interface IDestrPlatformService
     {
-        void Destroy();
+        void Destroy(GameObject obj);
         bool IsAllDestroyed();
     }
 }

@@ -22,14 +22,14 @@ namespace Assets.Scripts.Controllers
         private IBallService _ballService;
 
         private void Start()
-        {
+        {;
             _ballService = Ball.GetComponent<BallService>();
             _settingsStorage = new DataManager();
             _settingsStorage.Load();
             
             _eventManager = EventSender.GetComponent<EventManager>();
             _eventManager.Call(@event: GlobalEvents.PAUSE_GAME, Player, Ball);
-            SettingsDto.IsGameStopped = true;
+            SettingsSingleton.GetSettings().IsGameStopped = true;
             level = new LevelN();
             level = _eventManager.GenerateLevel(level: level);
             
@@ -38,21 +38,27 @@ namespace Assets.Scripts.Controllers
 
         private void Update()
         {
-            if (!SettingsDto.IsGameStopped)
+            if (!SettingsSingleton.GetSettings().IsGameStopped)
             {
                 _eventManager.Call(GlobalEvents.RESUME_GAME, Player, Ball);
             }
 
-            if (SettingsDto.IsLevelComplete)
+            if (SettingsSingleton.GetSettings().IsLevelComplete)
             {
-                SettingsDto.IsLevelComplete = false;
                 level = _eventManager.GenerateLevel(level);
                 SpawnPlatforms(level.Platform, level.PlatformsPosition, PlatformsContainer);
+                SettingsSingleton.GetSettings().IsLevelComplete = false;
+
             }
 
-            if (SettingsDto.IsLevelFailed)
+            if (SettingsSingleton.GetSettings().IsLevelFailed)
             {
                 _eventManager.Call(GlobalEvents.PAUSE_GAME, Player, Ball);
+            }
+
+            if (_ballService.destroyedPlatform.IsAllDestroyed())
+            {
+                SettingsSingleton.GetSettings().IsLevelComplete = true;
             }
         }
 

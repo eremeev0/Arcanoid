@@ -41,9 +41,9 @@ namespace Assets.Scripts.Controllers
 
         void SaveSettings()
         {
-            SettingsDto.PlayerSpeed = PlayerSpeedSlider.value;
-            SettingsDto.PlayerColor = ConverterService.ToColor(ColorDropdown.value);
-            SettingsDto.GameResolution = ConverterService.ToVector2(ResolutionDropdown.value);
+            SettingsSingleton.GetSettings().PlayerSpeed = PlayerSpeedSlider.value;
+            SettingsSingleton.GetSettings().PlayerColor = ConverterService.ToColor(ColorDropdown.value);
+            SettingsSingleton.GetSettings().GameResolution = ConverterService.ToVector2(ResolutionDropdown.value);
             IsSaveSettings = true;
         }
         void ResetSettings(){IsResetSettings = true;}

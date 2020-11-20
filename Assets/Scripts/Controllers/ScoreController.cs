@@ -11,7 +11,7 @@ namespace Assets.Scripts.Controllers
 
         private void Start()
         {
-            _score = SettingsDto.PlayerScore;
+            _score = SettingsSingleton.GetSettings().PlayerScore;
         }
 
 
@@ -20,8 +20,8 @@ namespace Assets.Scripts.Controllers
         /// </summary>
         public void UpdateScore()
         {
-            _score = SettingsDto.PlayerScore;
-            SettingsDto.IsScoreUpdate = false;
+            _score = SettingsSingleton.GetSettings().PlayerScore;
+            SettingsSingleton.GetSettings().IsScoreUpdate = false;
             ScoreLabel.text = _score.ToString();
             //ContainerDto.ScoreLabel.text = _score.ToString();
         }

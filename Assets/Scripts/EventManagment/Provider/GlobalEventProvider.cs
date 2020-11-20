@@ -20,7 +20,7 @@ namespace Assets.Scripts.EventManagment.Provider
 
         public void StartGame()
         {
-            SettingsDto.IsGameStopped = false;
+            SettingsSingleton.GetSettings().IsGameStopped = false;
         }
 
 
@@ -29,7 +29,7 @@ namespace Assets.Scripts.EventManagment.Provider
             player.GetComponent<PlayerController>().enabled = true;
             player.GetComponent<Rigidbody2D>().simulated = true;
             ball.GetComponent<BallController>().enabled = true;
-            SettingsDto.IsGameStopped = false;
+            SettingsSingleton.GetSettings().IsGameStopped = false;
 
         }
 
@@ -47,15 +47,15 @@ namespace Assets.Scripts.EventManagment.Provider
             player.GetComponent<PlayerController>().enabled = false;
             player.GetComponent<Rigidbody2D>().simulated = false;
             ball.GetComponent<BallController>().enabled = false;
-            SettingsDto.IsGameStopped = true;
+            SettingsSingleton.GetSettings().IsGameStopped = true;
         }
 
         public LevelN GenerateLevel(LevelN level)
         {
             level.Number++;
-            level.Platform = _levelHelper.GetGameObjectFromResources("Prefabs/ActiveObjects/Platform");
-            level.BallPosition = _levelHelper.GetStaticBallPosition();
-            level.PlayerPosition = _levelHelper.GetStaticPlayerPosition();
+            level.Platform = _levelHelper.GetGameObjectFromResources("Prefabs/ActiveObjects/Platform"); // remove
+            level.BallPosition = _levelHelper.GetInitialBallPosition();
+            level.PlayerPosition = _levelHelper.GetInitialPlayerPosition();
             level.PlatformsColor = _levelHelper.GetPlatformsColor(level.Number);
             level.PlatformsPosition = _levelHelper.GetPlatformsRelativePosition(level.Number, level.Platform.transform.localPosition);
             return level;
@@ -64,10 +64,10 @@ namespace Assets.Scripts.EventManagment.Provider
         public void SaveSettings()
         {
             _settings.Save(
-                $"[{nameof(SettingsDto.PlayerSpeed)}] = {SettingsDto.PlayerSpeed}",
-                           $"[{nameof(SettingsDto.PlayerColor)}] = {JsonUtility.ToJson(SettingsDto.PlayerColor)}",
-                           $"[{nameof(SettingsDto.GameResolution)}] = {JsonUtility.ToJson(SettingsDto.GameResolution)}",
-                           $"[{nameof(SettingsDto.PlayerScore)}] = {SettingsDto.PlayerScore}");
+                $"[{nameof(SettingsDto.PlayerSpeed)}] = {SettingsSingleton.GetSettings().PlayerSpeed}",
+                           $"[{nameof(SettingsDto.PlayerColor)}] = {JsonUtility.ToJson(SettingsSingleton.GetSettings().PlayerColor)}",
+                           $"[{nameof(SettingsDto.GameResolution)}] = {JsonUtility.ToJson(SettingsSingleton.GetSettings().GameResolution)}",
+                           $"[{nameof(SettingsDto.PlayerScore)}] = {SettingsSingleton.GetSettings().PlayerScore}");
         }
 
         public void ResetSettings()

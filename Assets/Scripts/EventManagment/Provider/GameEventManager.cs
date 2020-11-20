@@ -14,7 +14,7 @@ namespace Assets.Scripts.EventManagment.Provider
     {
         private void OpenFailedWindow(string value)
         {
-            SettingsDto.PlayerScore = Convert.ToInt32(value);
+            SettingsSingleton.GetSettings().PlayerScore = Convert.ToInt32(value);
             /*ContainerDto.Failed.SetActive(true);
             ContainerDto.RecordLabel.text += value;*/
         }
