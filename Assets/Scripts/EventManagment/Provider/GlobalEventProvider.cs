@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Contracts;
+﻿using System.IO;
+using Assets.Scripts.Contracts;
 using Assets.Scripts.Controllers;
 using Assets.Scripts.Models.Game;
 using Assets.Scripts.Performances.Services;
@@ -10,6 +11,10 @@ namespace Assets.Scripts.EventManagment.Provider
 {
     public class GlobalEventManager
     {
+        private const string _boundleName = "Boundles\\platform";
+        private const string _assetName = "Platform";
+        private AssetBundle _localAssetBundle;
+
         private readonly DataManager _settings;
         private readonly LevelHelperService _levelHelper;
         public GlobalEventManager()
@@ -52,8 +57,14 @@ namespace Assets.Scripts.EventManagment.Provider
 
         public LevelN GenerateLevel(LevelN level)
         {
+            _localAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.dataPath, _boundleName));
+            if (_localAssetBundle == null)
+            {
+                Debug.LogError("Failed to load AssetBoundle");
+                return null;
+            }
             level.Number++;
-            level.Platform = _levelHelper.GetGameObjectFromResources("Prefabs/ActiveObjects/Platform"); // remove
+            level.Platform = _localAssetBundle.LoadAsset<GameObject>(_assetName);//_levelHelper.GetGameObjectFromResources("Prefabs/ActiveObjects/Platform"); // remove
             level.BallPosition = _levelHelper.GetInitialBallPosition();
             level.PlayerPosition = _levelHelper.GetInitialPlayerPosition();
             level.PlatformsColor = _levelHelper.GetPlatformsColor(level.Number);

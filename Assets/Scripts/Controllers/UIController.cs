@@ -10,8 +10,6 @@ namespace Assets.Scripts.Controllers
     /// </summary>
     public class UIController: MonoBehaviour
     {
-        public delegate void CallbackHandler(bool value);
-
         private MenuController _menu;
         private SettingsController _settings;
         private FailedController _failed;
@@ -23,29 +21,20 @@ namespace Assets.Scripts.Controllers
         public GameObject SettingsPanel;
 
         private EventManager _eventProvider;
-        private CallbackHandler _callback;
         void Start()
         {
             _menu = GetComponentInChildren<MenuController>();
             _settings = GetComponentInChildren<SettingsController>();
             _failed = GetComponentInChildren<FailedController>();
             _score = GetComponentInChildren<ScoreController>();
-            
-            _callback = Callback;
-            
             FailedPanel.SetActive(false);
             ScorePanel.SetActive(false);
             SettingsPanel.SetActive(false);
             _eventProvider = gameObject.AddComponent<EventManager>();
         }
 
-        void Callback(bool value){}
-
-        // move from update, switch to CallBack
-        void Update()
+        void Menu()
         {
-            /////////////////////////////////////////////////////////////
-            //////////////////////////Menu//////////////////////////////
             if (_menu.IsShowScore)
             {
                 MenuPanel.SetActive(false);
@@ -67,9 +56,10 @@ namespace Assets.Scripts.Controllers
                 _eventProvider.Call(GlobalEvents.CLOSE_GAME);
                 // close app
             }
+        }
 
-            /////////////////////////////////////////////////////////////
-            ////////////////////////Settings////////////////////////////
+        void Settings()
+        {
             if (_settings.IsShowMenu)
             {
                 SettingsPanel.SetActive(false);
@@ -90,9 +80,20 @@ namespace Assets.Scripts.Controllers
                 _settings.IsResetSettings = false;
                 // reset game settings
             }
+        }
 
-            /////////////////////////////////////////////////////////////
-            /////////////////////////Failed/////////////////////////////
+        void Score()
+        {
+            if (SettingsSingleton.GetSettings().IsScoreUpdate)
+            {
+                _score.UpdateScore();
+                _failed.ScoreLabel.text = $"Score {_score.GetScore()}";
+                SettingsSingleton.GetSettings().IsScoreUpdate = false;
+            }
+        }
+
+        void Failed()
+        {
             if (_failed.IsShowMenu)
             {
                 FailedPanel.SetActive(false);
@@ -115,15 +116,23 @@ namespace Assets.Scripts.Controllers
                 FailedPanel.SetActive(true);
                 SettingsSingleton.GetSettings().IsLevelFailed = false;
             }
+        }
+
+        // move from update, switch to CallBack
+        void Update()
+        {
+            /////////////////////////////////////////////////////////////
+            //////////////////////////Menu//////////////////////////////
+            Menu();
+            /////////////////////////////////////////////////////////////
+            ////////////////////////Settings////////////////////////////
+            Settings();
+            /////////////////////////////////////////////////////////////
+            /////////////////////////Failed/////////////////////////////
+            Failed();
             /////////////////////////////////////////////////////////////
             //////////////////////////Score/////////////////////////////
-            if (SettingsSingleton.GetSettings().IsScoreUpdate)
-            {
-                _score.UpdateScore();
-                _failed.ScoreLabel.text = $"Score {_score.GetScore()}";
-                SettingsSingleton.GetSettings().IsScoreUpdate = false;
-            }
-
+            Score();
             /////////////////////////////////////////////////////////////
         }
     }
