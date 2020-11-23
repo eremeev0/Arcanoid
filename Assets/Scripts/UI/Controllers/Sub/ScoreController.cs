@@ -1,12 +1,11 @@
 ﻿using Assets.Scripts.Cross.Contracts;
-using Assets.Scripts.Performances.Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.UI.Controllers.Root
+namespace Assets.Scripts.UI.Controllers.Sub
 {
-    public class ScoreController: MonoBehaviour, ICallBack
+    public class ScoreController: MonoBehaviour
     {
         public Text ScoreLabel;
         private int _score;

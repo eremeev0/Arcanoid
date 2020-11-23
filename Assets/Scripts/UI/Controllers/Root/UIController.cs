@@ -1,10 +1,11 @@
-﻿using Assets.Scripts.Cross.Contracts;
+﻿using System;
+using Assets.Scripts.Cross.Contracts;
 using Assets.Scripts.Cross.StatesManagament.Provider;
 using Assets.Scripts.EventManagment.States;
-using Assets.Scripts.UI.Controllers.Root;
+using Assets.Scripts.UI.Controllers.Sub;
 using UnityEngine;
 
-namespace Assets.Scripts.UI.Controllers
+namespace Assets.Scripts.UI.Controllers.Root
 {
     /// <summary>
     /// class responsible for the logic of the game's user interface
@@ -43,51 +44,44 @@ namespace Assets.Scripts.UI.Controllers
 
         /////////////////////////////////////////////////////////////
         //////////////////////////Menu//////////////////////////////
-        void Menu()
+        void Menu(MenuEvents @event)
         {
-            if (_menu.IsShowScore)
+            switch (@event)
             {
-                MenuPanel.SetActive(false);
-                ScorePanel.SetActive(true);
-                _eventProvider.Call(GlobalStates.GameStarted);
-                _menu.IsShowScore = false;
-                // start game
-            }
-            if (_menu.IsShowSettings)
-            {
-                MenuPanel.SetActive(false);
-                SettingsPanel.SetActive(true);
-                _menu.IsShowSettings = false;
-            }
-            if (_menu.IsCloseGame)
-            {
-                _eventProvider.Call(GlobalStates.GameClosed);
-                // close app
+                case MenuEvents.StartClicked:
+                    MenuPanel.SetActive(false);
+                    ScorePanel.SetActive(true);
+                    _eventProvider.Call(GlobalStates.GameStarted);
+                    break;
+                case MenuEvents.SettingsClicked:
+                    MenuPanel.SetActive(false);
+                    SettingsPanel.SetActive(true);
+                    break;
+                case MenuEvents.ExitClicked:
+                    _eventProvider.Call(GlobalStates.GameClosed);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(@event), @event, null);
             }
         }
         /////////////////////////////////////////////////////////////
         ////////////////////////Settings////////////////////////////
-        void Settings()
+        void Settings(SettingsEvents @event)
         {
-            if (_settings.IsShowMenu)
+            switch (@event)
             {
-                SettingsPanel.SetActive(false);
-                MenuPanel.SetActive(true);
-                _settings.IsShowMenu = false;
-            }
-
-            if (_settings.IsSaveSettings)
-            {
-                _eventProvider.Call(GlobalStates.SAVE_SETTINGS);
-                _settings.IsSaveSettings = false;
-                // save game settings
-            }
-
-            if (_settings.IsResetSettings)
-            {
-                _eventProvider.Call(GlobalStates.RESET_SETTINGS);
-                _settings.IsResetSettings = false;
-                // reset game settings
+                case SettingsEvents.SaveClicked:
+                    _eventProvider.Call(GlobalStates.SAVE_SETTINGS);
+                    break;
+                case SettingsEvents.ResetClicked:
+                    _eventProvider.Call(GlobalStates.RESET_SETTINGS);
+                    break;
+                case SettingsEvents.BackToMenuClicked:
+                    SettingsPanel.SetActive(false);
+                    MenuPanel.SetActive(true);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(@event), @event, null);
             }
         }
         /////////////////////////////////////////////////////////////
@@ -103,34 +97,35 @@ namespace Assets.Scripts.UI.Controllers
         }
         /////////////////////////////////////////////////////////////
         /////////////////////////Failed/////////////////////////////
-        void Failed()
+        void Failed(FailedEvent @event)
         {
-            if (_failed.IsShowMenu)
+            switch (@event)
             {
-                FailedPanel.SetActive(false);
-                ScorePanel.SetActive(false);
-                MenuPanel.SetActive(true);
-                _failed.IsShowMenu = false;
-            }
-
-            if (_failed.IsRestartGame)
-            {
-                FailedPanel.SetActive(false);
-                _eventProvider.Call(GlobalStates.GameRestarted);
-                SettingsSingleton.GetSettings().PlayerScore = 0;
-                SettingsSingleton.GetSettings().IsScoreUpdate = true;
-                _failed.IsRestartGame = false;
-                // restart game
-            }
-            if (SettingsSingleton.GetSettings().IsLevelFailed)
-            {
-                FailedPanel.SetActive(true);
-                SettingsSingleton.GetSettings().IsLevelFailed = false;
+                case FailedEvent.RestartClicked:
+                    FailedPanel.SetActive(false);
+                    _eventProvider.Call(GlobalStates.GameRestarted);
+                    SettingsSingleton.GetSettings().PlayerScore = 0;
+                    SettingsSingleton.GetSettings().IsScoreUpdate = true;
+                    break;
+                case FailedEvent.BackToMenuClicked:
+                    FailedPanel.SetActive(false);
+                    ScorePanel.SetActive(false);
+                    MenuPanel.SetActive(true);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(@event), @event, null);
             }
         }
 
         // move from update, switch to CallBack
         void Update()
-        { }
+        {
+            if (SettingsSingleton.GetSettings().IsLevelFailed)
+            {
+                FailedPanel.SetActive(true);
+                SettingsSingleton.GetSettings().IsLevelFailed = false;
+            }
+            Score();
+        }
     }
 }

@@ -1,23 +1,19 @@
 ﻿using Assets.Scripts.Cross.Contracts;
 using Assets.Scripts.EventManagment.States;
-using Assets.Scripts.Performances.Interfaces;
 using Assets.Scripts.UI.Contracts;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.UI.Controllers.Root
+namespace Assets.Scripts.UI.Controllers.Sub
 {
-    public class SettingsController : MonoBehaviour, ICallBack
+    public class SettingsController : MonoBehaviour
     {
         public Button SaveButton, ResetButton, MenuButton;
         public Dropdown ColorDropdown, ResolutionDropdown;
         public Slider PlayerSpeedSlider;
         public Text SpeedValueLabel;
-        public bool IsShowMenu;
-        public bool IsResetSettings;
-        public bool IsSaveSettings;
-        private UnityAction _action;
+        private UnityAction<SettingsEvents> _action;
         void Start()
         {
             SaveButton.onClick.AddListener(SaveSettings);
@@ -29,9 +25,6 @@ namespace Assets.Scripts.UI.Controllers.Root
             PlayerSpeedSlider.onValueChanged.AddListener(DisplaySpeedValue);
             ColorDropdown = UIDataInit.InitDropdown(ColorDropdown, UIStates.INIT_COLOR_LIST);
             ResolutionDropdown = UIDataInit.InitDropdown(ResolutionDropdown, UIStates.INIT_RESOLUTION_LIST);
-            IsShowMenu = false;
-            IsResetSettings = false;
-            IsSaveSettings = false;
         }
 
         private void Update()
@@ -44,14 +37,13 @@ namespace Assets.Scripts.UI.Controllers.Root
             SettingsSingleton.GetSettings().PlayerSpeed = PlayerSpeedSlider.value;
             SettingsSingleton.GetSettings().PlayerColor = IdConverter.ToColor(ColorDropdown.value);
             SettingsSingleton.GetSettings().GameResolution = IdConverter.ToVector2(ResolutionDropdown.value);
-            IsSaveSettings = true;
-            _action.Invoke();
+            _action.Invoke(SettingsEvents.SaveClicked);
         }
-        void ResetSettings(){IsResetSettings = true; _action.Invoke();}
-        void ShowMenu(){IsShowMenu = true; _action.Invoke();}
-        void DisplaySpeedValue(float value){SpeedValueLabel.text = value.ToString(); _action.Invoke();}
+        void ResetSettings(){_action.Invoke(SettingsEvents.ResetClicked);}
+        void ShowMenu(){_action.Invoke(SettingsEvents.BackToMenuClicked);}
+        void DisplaySpeedValue(float value){SpeedValueLabel.text = value.ToString();}
 
-        public void AddListener(UnityAction action)
+        public void AddListener(UnityAction<SettingsEvents> action)
         {
             _action = action;
         }
