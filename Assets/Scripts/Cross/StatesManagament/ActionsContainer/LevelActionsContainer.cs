@@ -27,24 +27,21 @@ namespace Assets.Scripts.Cross.StatesManagament.ActionsContainer
         {
             GenerateLevel(level);
             var data = _levelManager.Load(saveName);
-            var value = string.Empty;
-
-            value = $"[LevelNumber] = ";
-            level.Number = JsonUtility.FromJson<int>(data[0].Remove(0, value.Length));
-
-            value = $"[PlatformsPosition] = ";
-            level.PlatformsPosition = JsonUtility.FromJson<Vector3[]>(data[1].Remove(0, value.Length));
-            
-            value = $"[PlatformsColor] = ";
-            level.PlatformsColor = JsonUtility.FromJson<Color>(data[2].Remove(0, value.Length));
+            level.Number = JsonUtility.FromJson<int>(data[0]);
+            level.PlatformsColor = JsonUtility.FromJson<Color>(data[1]);
+            level.PlayerPosition = JsonUtility.FromJson<Vector3>(data[2]);
+            level.BallPosition = JsonUtility.FromJson<Vector3>(data[3]);
+            level.PlatformsPosition = JsonUtility.FromJson<Vector3[]>(data[4]);
         }
 
         public void SaveLevel(LevelN level, string saveName)
         {
             _levelManager.Save(saveName,
-                $"[LevelNumber] = {level.Number}",
-                $"[PlatformsPosition] = {level.PlatformsPosition}",
-                $"[PlatformsColor] = {level.PlatformsColor}"
+                JsonUtility.ToJson(level.Number),
+                JsonUtility.ToJson(level.PlatformsColor),
+                JsonUtility.ToJson(level.PlayerPosition),
+                JsonUtility.ToJson(level.BallPosition),
+                JsonUtility.ToJson(level.PlatformsPosition)
                 );
         }
 
@@ -64,11 +61,11 @@ namespace Assets.Scripts.Cross.StatesManagament.ActionsContainer
                 return;
             }
             level.Number++;
-            level.Platform = _localAssetBundle.LoadAsset<GameObject>(_assetName);//_levelHelper.GetGameObjectFromResources("Prefabs/ActiveObjects/Platform"); // remove
+            var Platform = _localAssetBundle.LoadAsset<GameObject>(_assetName);
             level.BallPosition = _levelHelper.GetInitialBallPosition();
             level.PlayerPosition = _levelHelper.GetInitialPlayerPosition();
             level.PlatformsColor = _levelHelper.GetPlatformsColor(level.Number);
-            level.PlatformsPosition = _levelHelper.GetPlatformsRelativePosition(level.Number, level.Platform.transform.localPosition);
+            level.PlatformsPosition = _levelHelper.GetPlatformsRelativePosition(level.Number, Platform.transform.localPosition);
         }
     }
 }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7922461083793313458}
   - component: {fileID: 2499283884489209883}
   m_Layer: 12
-  m_Name: gameBall
+  m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,17 +131,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4930281158989807472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d274ff1fc71066541b7729957dc943a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f4a85cd178af5b4f9df0325867d3d1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Collider2Ds:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  offsetX: 0
-  offsetY: 0
-  speed: 2
-  speedLimit: 14
-  speedMultiplier: 0.01

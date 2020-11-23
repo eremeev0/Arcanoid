@@ -64,11 +64,11 @@ namespace Assets.Scripts.Cross.StatesManagament.ActionsContainer
                 return null;
             }
             level.Number++;
-            level.Platform = _localAssetBundle.LoadAsset<GameObject>(_assetName);//_levelHelper.GetGameObjectFromResources("Prefabs/ActiveObjects/Platform"); // remove
+            //level.Platform = _localAssetBundle.LoadAsset<GameObject>(_assetName);//_levelHelper.GetGameObjectFromResources("Prefabs/ActiveObjects/Platform"); // remove
             level.BallPosition = _levelHelper.GetInitialBallPosition();
             level.PlayerPosition = _levelHelper.GetInitialPlayerPosition();
             level.PlatformsColor = _levelHelper.GetPlatformsColor(level.Number);
-            level.PlatformsPosition = _levelHelper.GetPlatformsRelativePosition(level.Number, level.Platform.transform.localPosition);
+            //level.PlatformsPosition = _levelHelper.GetPlatformsRelativePosition(level.Number, level.Platform.transform.localPosition);
             return level;
         }
 

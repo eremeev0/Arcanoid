@@ -1,12 +1,7 @@
-﻿using System;
-using Assets.Scripts.Contracts;
-using Assets.Scripts.Cross.Contracts;
-using UnityEditor;
-using UnityEngine;
+﻿using Assets.Scripts.Cross.Contracts;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-namespace Assets.Scripts.EventManagment.Provider
+namespace Assets.Scripts.Cross.StatesManagament.Provider
 {
     public class UIEventManager
     {

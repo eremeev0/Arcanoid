@@ -34,7 +34,7 @@ namespace Assets.Scripts.Game.Controllers.Root
             level = new LevelN();
             level = _eventManager.GenerateLevel(level);
             
-            SpawnPlatforms(level.Platform, level.PlatformsPosition, PlatformsContainer);
+            //SpawnPlatforms(level.Platform, level.PlatformsPosition, PlatformsContainer);
         }
 
         private void Update()
@@ -47,7 +47,7 @@ namespace Assets.Scripts.Game.Controllers.Root
             if (SettingsSingleton.GetSettings().IsLevelComplete)
             {
                 level = _eventManager.GenerateLevel(level);
-                SpawnPlatforms(level.Platform, level.PlatformsPosition, PlatformsContainer);
+               // SpawnPlatforms(level.Platform, level.PlatformsPosition, PlatformsContainer);
                 SettingsSingleton.GetSettings().IsLevelComplete = false;
 
             }

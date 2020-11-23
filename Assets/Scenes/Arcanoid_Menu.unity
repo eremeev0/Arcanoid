@@ -409,7 +409,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 107375151}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6b4a16f5d7210c4d9a45aec1e312949, type: 3}
+  m_Script: {fileID: 11500000, guid: cd1ad1d2fb29f1a4ab318df895c232be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreLabel: {fileID: 1512936812}
@@ -525,7 +525,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 112826696}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f23b8b14b54d514aa22feef79b59b88, type: 3}
+  m_Script: {fileID: 11500000, guid: a109363d7a58e3548a455fa44342fc7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MenuPanel: {fileID: 1182358958}
@@ -1564,7 +1564,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 406587828}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3975c67e6745404aaa4933eec1dd6ca, type: 3}
+  m_Script: {fileID: 11500000, guid: a4c0534c512ef2146b056bbda93ca3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsShowMenu: 0
@@ -3657,7 +3657,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1182358958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf3f8fda942964b47bca1d10d929d76d, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c54b6ac2e816fb49978907f74290e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   StartButton: {fileID: 368560838}
@@ -3791,7 +3791,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1222118391}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f641f1cae0935643bdb1a9c08295f5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4dc69a92d07a67d43978d7216314ac80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SaveButton: {fileID: 47289477}

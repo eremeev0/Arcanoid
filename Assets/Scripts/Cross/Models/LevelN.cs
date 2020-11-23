@@ -11,10 +11,12 @@ namespace Assets.Scripts.Cross.Models
         /// level number in level's hierarchy (like a level 1, level 2 etc.)
         /// </summary>
         public int Number { get; set; } = 0;
+        /*
         /// <summary>
         /// Destroyed platform exemplar
         /// </summary>
         public GameObject Platform { get; set; }
+        */ 
         /// <summary>
         /// color of the destroyed platform's
         /// </summary>

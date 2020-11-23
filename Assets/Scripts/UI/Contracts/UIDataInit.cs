@@ -1,5 +1,4 @@
 ﻿using System;
-using Assets.Scripts.Contracts;
 using Assets.Scripts.EventManagment.States;
 using UnityEngine.UI;
 
