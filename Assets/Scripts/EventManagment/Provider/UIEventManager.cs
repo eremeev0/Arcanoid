@@ -1,6 +1,5 @@
 ﻿using System;
 using Assets.Scripts.Contracts;
-using Assets.Scripts.EventManagment.Events;
 using Assets.Scripts.StorageProvider.Service;
 using UnityEditor;
 using UnityEngine;

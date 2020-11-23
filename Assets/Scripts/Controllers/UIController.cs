@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts.Contracts;
-using Assets.Scripts.EventManagment.Events;
 using Assets.Scripts.EventManagment.Provider;
+using Assets.Scripts.EventManagment.States;
 using UnityEngine;
 
 namespace Assets.Scripts.Controllers
@@ -27,9 +27,16 @@ namespace Assets.Scripts.Controllers
             _settings = GetComponentInChildren<SettingsController>();
             _failed = GetComponentInChildren<FailedController>();
             _score = GetComponentInChildren<ScoreController>();
+
+            _menu.AddListener(Menu);
+            _settings.AddListener(Settings);
+            _failed.AddListener(Failed);
+            _score.AddListener(Score);
+
             FailedPanel.SetActive(false);
             ScorePanel.SetActive(false);
             SettingsPanel.SetActive(false);
+            
             _eventProvider = gameObject.AddComponent<EventManager>();
         }
 
@@ -39,21 +46,19 @@ namespace Assets.Scripts.Controllers
             {
                 MenuPanel.SetActive(false);
                 ScorePanel.SetActive(true);
-                _eventProvider.Call(GlobalEvents.START_GAME);
+                _eventProvider.Call(GlobalStates.GameStarted);
                 _menu.IsShowScore = false;
                 // start game
             }
-
             if (_menu.IsShowSettings)
             {
                 MenuPanel.SetActive(false);
                 SettingsPanel.SetActive(true);
                 _menu.IsShowSettings = false;
             }
-
             if (_menu.IsCloseGame)
             {
-                _eventProvider.Call(GlobalEvents.CLOSE_GAME);
+                _eventProvider.Call(GlobalStates.GameClosed);
                 // close app
             }
         }
@@ -69,14 +74,14 @@ namespace Assets.Scripts.Controllers
 
             if (_settings.IsSaveSettings)
             {
-                _eventProvider.Call(GlobalEvents.SAVE_SETTINGS);
+                _eventProvider.Call(GlobalStates.SAVE_SETTINGS);
                 _settings.IsSaveSettings = false;
                 // save game settings
             }
 
             if (_settings.IsResetSettings)
             {
-                _eventProvider.Call(GlobalEvents.RESET_SETTINGS);
+                _eventProvider.Call(GlobalStates.RESET_SETTINGS);
                 _settings.IsResetSettings = false;
                 // reset game settings
             }
@@ -105,7 +110,7 @@ namespace Assets.Scripts.Controllers
             if (_failed.IsRestartGame)
             {
                 FailedPanel.SetActive(false);
-                _eventProvider.Call(GlobalEvents.RESTART_GAME);
+                _eventProvider.Call(GlobalStates.GameRestarted);
                 SettingsSingleton.GetSettings().PlayerScore = 0;
                 SettingsSingleton.GetSettings().IsScoreUpdate = true;
                 _failed.IsRestartGame = false;
@@ -123,16 +128,20 @@ namespace Assets.Scripts.Controllers
         {
             /////////////////////////////////////////////////////////////
             //////////////////////////Menu//////////////////////////////
-            Menu();
+            
+            //Menu();
             /////////////////////////////////////////////////////////////
             ////////////////////////Settings////////////////////////////
-            Settings();
+
+            //Settings();
             /////////////////////////////////////////////////////////////
             /////////////////////////Failed/////////////////////////////
-            Failed();
+            
+            //Failed();
             /////////////////////////////////////////////////////////////
             //////////////////////////Score/////////////////////////////
-            Score();
+            
+            //Score();
             /////////////////////////////////////////////////////////////
         }
     }

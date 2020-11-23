@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts.Contracts;
-using Assets.Scripts.EventManagment.Events;
 using Assets.Scripts.EventManagment.Provider;
+using Assets.Scripts.EventManagment.States;
 using Assets.Scripts.Models.Game;
 using Assets.Scripts.Performances.Interfaces;
 using Assets.Scripts.Performances.Services;
@@ -28,7 +28,7 @@ namespace Assets.Scripts.Controllers
             _settingsStorage.Load();
             
             _eventManager = EventSender.GetComponent<EventManager>();
-            _eventManager.Call(@event: GlobalEvents.PAUSE_GAME, Player, Ball);
+            _eventManager.Call(@event: GlobalStates.GamePaused, Player, Ball);
             SettingsSingleton.GetSettings().IsGameStopped = true;
             level = new LevelN();
             level = _eventManager.GenerateLevel(level: level);
@@ -40,7 +40,7 @@ namespace Assets.Scripts.Controllers
         {
             if (!SettingsSingleton.GetSettings().IsGameStopped)
             {
-                _eventManager.Call(GlobalEvents.RESUME_GAME, Player, Ball);
+                _eventManager.Call(GlobalStates.GameResumed, Player, Ball);
             }
 
             if (SettingsSingleton.GetSettings().IsLevelComplete)
@@ -53,7 +53,7 @@ namespace Assets.Scripts.Controllers
 
             if (SettingsSingleton.GetSettings().IsLevelFailed)
             {
-                _eventManager.Call(GlobalEvents.PAUSE_GAME, Player, Ball);
+                _eventManager.Call(GlobalStates.GamePaused, Player, Ball);
             }
 
             if (_ballService.destroyedPlatform.IsAllDestroyed())

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Assets.Scripts.Performances.Services
 {
@@ -60,7 +62,8 @@ namespace Assets.Scripts.Performances.Services
         /// </summary>
         /// <param name="gameObjectLocation">game object location in resource folder</param>
         /// <returns>UnityEngine GameObject</returns>
-        // assets boundle
+        // switch to assets boundle
+        [Obsolete("Method GetGameObjectFromResources deprecated. Use AssetBoundles.LoadFromFile(string) instead.", true)]
         public GameObject GetGameObjectFromResources(string gameObjectLocation)
         {
             return Resources.Load<GameObject>(gameObjectLocation);

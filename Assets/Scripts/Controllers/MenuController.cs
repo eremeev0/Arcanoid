@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Performances.Interfaces;
+using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers
 {
-    public class MenuController : MonoBehaviour
+    public class MenuController : MonoBehaviour, ICallBack
     {
         public Button StartButton;
         public Button SettingsButton;
@@ -14,6 +16,8 @@ namespace Assets.Scripts.Controllers
         public bool IsShowSettings = false;
 
         public bool IsCloseGame = false;
+
+        private UnityAction _action;
         //private
         private void Start()
         {
@@ -25,13 +29,18 @@ namespace Assets.Scripts.Controllers
 
         private void Update()
         {
-
+            
+        }
+        public void AddListener(UnityAction action)
+        {
+            _action = action;
         }
 
-        void ShowScore(){IsShowScore = true;}
 
-        void ShowSettings(){IsShowSettings = true;}
+        void ShowScore(){IsShowScore = true; _action.Invoke();}
 
-        void CloseGame(){IsCloseGame = true;}
+        void ShowSettings(){IsShowSettings = true; _action.Invoke(); }
+
+        void CloseGame(){IsCloseGame = true; _action.Invoke(); }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using Assets.Scripts.Contracts;
-using Assets.Scripts.EventManagment.Events;
 using Assets.Scripts.EventManagment.Provider;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -19,11 +18,11 @@ namespace Assets.Scripts.StorageProvider.Service
         /// <summary>
         /// Load user configuration from persistent data path to game settings
         /// </summary>
-        public void Load()
+        public string[] Load()
         {
             Debug.Log(Application.dataPath);
             var values = _manager.Load(Application.dataPath + "/user.config");
-            if (values == null) return;
+            return values;
             //_eventManager.SendEvent(UIEvents.SETTINGS_UPDATED, values);
         }
         /// <summary>

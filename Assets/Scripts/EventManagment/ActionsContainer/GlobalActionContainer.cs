@@ -7,9 +7,9 @@ using Assets.Scripts.StorageProvider.Service;
 using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Scripts.EventManagment.Provider
+namespace Assets.Scripts.EventManagment.ActionsContainer
 {
-    public class GlobalEventManager
+    public class GlobalActionContainer
     {
         private const string _boundleName = "Boundles\\platform";
         private const string _assetName = "Platform";
@@ -17,7 +17,7 @@ namespace Assets.Scripts.EventManagment.Provider
 
         private readonly DataManager _settings;
         private readonly LevelHelperService _levelHelper;
-        public GlobalEventManager()
+        public GlobalActionContainer()
         {
             _settings = new DataManager();
             _levelHelper = new LevelHelperService();
@@ -75,19 +75,19 @@ namespace Assets.Scripts.EventManagment.Provider
         public void SaveSettings()
         {
             _settings.Save(
-                $"[{nameof(SettingsDto.PlayerSpeed)}] = {SettingsSingleton.GetSettings().PlayerSpeed}",
+                $"[{nameof(SettingsDto.PlayerSpeed)}] = {JsonUtility.ToJson(SettingsSingleton.GetSettings().PlayerSpeed)}",
                            $"[{nameof(SettingsDto.PlayerColor)}] = {JsonUtility.ToJson(SettingsSingleton.GetSettings().PlayerColor)}",
                            $"[{nameof(SettingsDto.GameResolution)}] = {JsonUtility.ToJson(SettingsSingleton.GetSettings().GameResolution)}",
-                           $"[{nameof(SettingsDto.PlayerScore)}] = {SettingsSingleton.GetSettings().PlayerScore}");
+                           $"[{nameof(SettingsDto.PlayerScore)}] = {JsonUtility.ToJson(SettingsSingleton.GetSettings().PlayerScore)}");
         }
 
         public void ResetSettings()
         {
             _settings.Save(
-                $"[{nameof(SettingsDto.PlayerSpeed)}] = {DefaultSettingsDto.PlayerSpeed}",
+                $"[{nameof(SettingsDto.PlayerSpeed)}] = {JsonUtility.ToJson(DefaultSettingsDto.PlayerSpeed)}",
                 $"[{nameof(SettingsDto.PlayerColor)}] = {JsonUtility.ToJson(DefaultSettingsDto.PlayerColor)}",
                 $"[{nameof(SettingsDto.GameResolution)}] = {JsonUtility.ToJson(DefaultSettingsDto.GameResolution)}",
-                $"[{nameof(SettingsDto.PlayerScore)}] = {DefaultSettingsDto.PlayerScore}");
+                $"[{nameof(SettingsDto.PlayerScore)}] = {JsonUtility.ToJson(DefaultSettingsDto.PlayerScore)}");
         }
     }
 }

@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Performances.Interfaces;
+using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers
 {
-    public class FailedController : MonoBehaviour
+    public class FailedController : MonoBehaviour, ICallBack
     {
+
         public bool IsShowMenu;
         public bool IsRestartGame;
 
@@ -12,6 +15,7 @@ namespace Assets.Scripts.Controllers
         public Button MenuButton;
         public Text ScoreLabel;
 
+        private UnityAction _action;
         private void Start()
         {
             IsShowMenu = false;
@@ -25,7 +29,11 @@ namespace Assets.Scripts.Controllers
 
         }
 
-        void RestartGame(){IsRestartGame = true;}
-        void ShowMenu(){IsShowMenu = true;}
+        void RestartGame(){IsRestartGame = true; _action.Invoke();}
+        void ShowMenu(){IsShowMenu = true; _action.Invoke();}
+        public void AddListener(UnityAction action)
+        {
+            _action = action;
+        }
     }
 }
