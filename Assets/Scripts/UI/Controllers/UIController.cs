@@ -43,9 +43,6 @@ namespace Assets.Scripts.UI.Controllers
 
         /////////////////////////////////////////////////////////////
         //////////////////////////Menu//////////////////////////////
-        void IsShowScore() { }
-        void IsShowSettings() { }
-        void IsCloseGame() { }
         void Menu()
         {
             if (_menu.IsShowScore)
@@ -70,9 +67,6 @@ namespace Assets.Scripts.UI.Controllers
         }
         /////////////////////////////////////////////////////////////
         ////////////////////////Settings////////////////////////////
-        void IsShowMenu() { }
-        void IsSaveSettings() { }
-        void IsResetSettings() { }
         void Settings()
         {
             if (_settings.IsShowMenu)
@@ -98,7 +92,6 @@ namespace Assets.Scripts.UI.Controllers
         }
         /////////////////////////////////////////////////////////////
         //////////////////////////Score/////////////////////////////
-        void IsScoreUpdate() { }
         void Score()
         {
             if (SettingsSingleton.GetSettings().IsScoreUpdate)
@@ -110,9 +103,6 @@ namespace Assets.Scripts.UI.Controllers
         }
         /////////////////////////////////////////////////////////////
         /////////////////////////Failed/////////////////////////////
-        void IsShowMenu2() { }
-        void IsRestartGame() { }
-        void IsShowFailed() { }
         void Failed()
         {
             if (_failed.IsShowMenu)
