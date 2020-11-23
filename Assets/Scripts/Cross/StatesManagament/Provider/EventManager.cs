@@ -47,27 +47,29 @@ namespace Assets.Scripts.Cross.StatesManagament.Provider
                     throw new ArgumentOutOfRangeException(nameof(states), states, null);
             }
         }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="states"></param>
-        /// <param name="gameObjects"></param>
-        public void Call(GlobalStates states, params GameObject[] gameObjects)
+        /// <param name="player"></param>
+        /// <param name="ball"></param>
+        public void Call(GlobalStates states, GameObject player, GameObject ball)
         {
             Start();
             switch (states)
             {
                 case GlobalStates.GameResumed:
-                    _globalAction.ResumeGame(gameObjects[0], gameObjects[1]);
+                    _globalAction.ResumeGame(player, ball);
                     break;
                 case GlobalStates.GamePaused:
-                    _globalAction.PauseGame(gameObjects[0], gameObjects[1]);
+                    _globalAction.PauseGame(player, ball);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(states), states, null);
             }
         }
-        /// <summary>
+/*        /// <summary>
         /// 
         /// </summary>
         /// <param name="states"></param>
@@ -114,7 +116,7 @@ namespace Assets.Scripts.Cross.StatesManagament.Provider
                     throw new ArgumentOutOfRangeException(nameof(states), states, null);
             }
         }
-
+*/
 
         public LevelN GenerateLevel(LevelN level)
         {
