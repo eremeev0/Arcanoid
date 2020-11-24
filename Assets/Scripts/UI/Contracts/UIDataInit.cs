@@ -1,5 +1,5 @@
 ﻿using System;
-using Assets.Scripts.EventManagment.States;
+using Assets.Scripts.MultiOriented.StatesManagament.States;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.Contracts

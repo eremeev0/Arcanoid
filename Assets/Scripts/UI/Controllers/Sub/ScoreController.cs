@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Cross.Contracts;
+﻿using Assets.Scripts.MultiOriented.Contracts;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;

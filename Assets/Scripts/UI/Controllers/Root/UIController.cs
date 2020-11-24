@@ -1,7 +1,7 @@
 ﻿using System;
-using Assets.Scripts.Cross.Contracts;
-using Assets.Scripts.Cross.StatesManagament.Provider;
-using Assets.Scripts.EventManagment.States;
+using Assets.Scripts.MultiOriented.Contracts;
+using Assets.Scripts.MultiOriented.StatesManagament.Provider;
+using Assets.Scripts.MultiOriented.StatesManagament.States;
 using Assets.Scripts.UI.Controllers.Sub;
 using UnityEngine;
 

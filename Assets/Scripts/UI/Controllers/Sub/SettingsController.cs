@@ -1,5 +1,5 @@
-﻿using Assets.Scripts.Cross.Contracts;
-using Assets.Scripts.EventManagment.States;
+﻿using Assets.Scripts.MultiOriented.Contracts;
+using Assets.Scripts.MultiOriented.StatesManagament.States;
 using Assets.Scripts.UI.Contracts;
 using UnityEngine;
 using UnityEngine.Events;
