@@ -1,8 +1,8 @@
 ﻿using System;
 using Assets.Scripts.Cross.Contracts;
 using Assets.Scripts.Game.Performances.Interfaces;
-using Assets.Scripts.Performances;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Assets.Scripts.Game.Performances.Services
 {
@@ -146,5 +146,16 @@ namespace Assets.Scripts.Game.Performances.Services
                 _isColorUpdate = false;
             }
         }
+
+        /////////////////////////////////////////////////////////////
+        ///////////////////UnityAction Listener/////////////////////
+        public void AddListener(UnityAction action)
+        {
+
+        }
+        
+        /////////////////////////////////////////////////////////////
+        ////////////////////UnityAction Field///////////////////////
+        private UnityAction _action;
     }
 }

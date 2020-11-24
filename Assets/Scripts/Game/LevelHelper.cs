@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Assets.Scripts.UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -57,17 +58,6 @@ namespace Assets.Scripts.Game
                 
             }
             return clonedObjectsPosition.ToArray();
-        }
-        /// <summary>
-        /// Searches for an object in the specified path and return game object
-        /// </summary>
-        /// <param name="gameObjectLocation">game object location in resource folder</param>
-        /// <returns>UnityEngine GameObject</returns>
-        // switch to assets boundle
-        [Obsolete("Method GetGameObjectFromResources deprecated. Use AssetBoundles.LoadFromFile(string) instead.", true)]
-        public GameObject GetGameObjectFromResources(string gameObjectLocation)
-        {
-            return Resources.Load<GameObject>(gameObjectLocation);
         }
         /// <summary>
         /// Get static player position

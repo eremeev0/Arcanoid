@@ -1,7 +1,5 @@
 ﻿using Assets.Scripts.Game.Performances.Interfaces;
 using Assets.Scripts.Game.Performances.Services;
-using Assets.Scripts.Performances;
-using Assets.Scripts.Performances.Interfaces;
 using UnityEngine;
 
 namespace Assets.Scripts.Game.Controllers.Sub

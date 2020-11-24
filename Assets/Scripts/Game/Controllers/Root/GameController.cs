@@ -5,7 +5,6 @@ using Assets.Scripts.EventManagment.States;
 using Assets.Scripts.Game.Performances.Interfaces;
 using Assets.Scripts.Game.Performances.Services;
 using Assets.Scripts.Game.Storage;
-using Assets.Scripts.Performances.Interfaces;
 using UnityEngine;
 
 namespace Assets.Scripts.Game.Controllers.Root
@@ -19,11 +18,12 @@ namespace Assets.Scripts.Game.Controllers.Root
 
         private DataManager _settingsStorage;
         private EventManager _eventManager;
-        private LevelN level;
+        private LevelN _level;
         private IBallService _ballService;
-
+        private ActionContainer _action;
+        private BoundlessLoader _loader;
         private void Start()
-        {;
+        {  
             _ballService = Ball.GetComponent<BallService>();
             _settingsStorage = new DataManager();
             _settingsStorage.Load();
@@ -31,47 +31,68 @@ namespace Assets.Scripts.Game.Controllers.Root
             _eventManager = EventSender.GetComponent<EventManager>();
             _eventManager.Call(GlobalStates.GamePaused, Player, Ball);
             SettingsSingleton.GetSettings().IsGameStopped = true;
-            level = new LevelN();
-            level = _eventManager.GenerateLevel(level);
-            
+            _level = new LevelN();
+            _level = _eventManager.GenerateLevel(_level);
+            _loader = BoundlessLoader.GetLoader();
             //SpawnPlatforms(level.Platform, level.PlatformsPosition, PlatformsContainer);
         }
 
+        void StartPlay()
+        {
+            // _action.PlayGame();
+        }
+
+        void LevelCompleted()
+        {
+            _action.GenerateLevel(_level);
+            _action.SpawnObjects(_loader.GetGameObject("platform", "Platform"), _level.PlatformsPosition, PlatformsContainer);
+        }
+
+        void LevelInitial()
+        {
+            if (_level == null)
+            {
+               _level = _action.LevelInit();
+            }
+            else
+            {
+               _level = _action.LoadLevel("default");
+            }
+        }
+
+        void UpdatePlatformsList(Vector3 removedPlatformPosition)
+        {
+            _action.UpdatePlatformsList(_level, removedPlatformPosition);
+        }
         private void Update()
         {
             if (!SettingsSingleton.GetSettings().IsGameStopped)
             {
-                _eventManager.Call(GlobalStates.GameResumed, Player, Ball);
+                _eventManager.Call(GlobalStates.GameResumed);
+                _action.UnFreezeObject(Player);
+                _action.UnFreezeObject(Ball);
             }
 
-            if (SettingsSingleton.GetSettings().IsLevelComplete)
+            /*if (SettingsSingleton.GetSettings().IsLevelComplete)
             {
-                level = _eventManager.GenerateLevel(level);
+                _level = _eventManager.GenerateLevel(_level);
                // SpawnPlatforms(level.Platform, level.PlatformsPosition, PlatformsContainer);
                 SettingsSingleton.GetSettings().IsLevelComplete = false;
 
             }
 
-            if (SettingsSingleton.GetSettings().IsLevelFailed)
-            {
-                _eventManager.Call(GlobalStates.GamePaused, Player, Ball);
-            }
-
             if (_ballService.destroyedPlatform.IsAllDestroyed())
             {
                 SettingsSingleton.GetSettings().IsLevelComplete = true;
+            }*/
+
+            if (SettingsSingleton.GetSettings().IsLevelFailed)
+            {
+                _action.FreezeObject(Player);
+                _action.FreezeObject(Ball);
+                _eventManager.Call(GlobalStates.GamePaused);
             }
         }
 
-        private static void SpawnPlatforms(GameObject sourceGameObject, Vector3[] clonePositions, GameObject clonesContainer = null)
-        {
-            GameObject clone;
-            foreach (var clonePosition in clonePositions)
-            {
-                clone = Object.Instantiate(sourceGameObject, clonePosition, Quaternion.identity);
-                clone.name = "Platform";
-                clone.transform.parent = clonesContainer.transform;
-            }
-        }
     }
 }

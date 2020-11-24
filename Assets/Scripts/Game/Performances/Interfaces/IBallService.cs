@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Performances.Interfaces;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Game.Performances.Interfaces
 {

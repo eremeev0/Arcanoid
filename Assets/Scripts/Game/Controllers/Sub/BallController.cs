@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.Game.Performances.Interfaces;
 using Assets.Scripts.Game.Performances.Services;
-using Assets.Scripts.Performances.Interfaces;
 using UnityEngine;
 using Rigidbody2D = UnityEngine.Rigidbody2D;
 

@@ -409,7 +409,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 107375151}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd1ad1d2fb29f1a4ab318df895c232be, type: 3}
+  m_Script: {fileID: 11500000, guid: c3ef85681aee6e642904c30318e26bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreLabel: {fileID: 1512936812}
@@ -1564,13 +1564,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 406587828}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4c0534c512ef2146b056bbda93ca3a3, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ee6820fdb096e3458cf549e542cd559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsShowMenu: 0
   IsRestartGame: 0
   RestartButton: {fileID: 18310218}
-  MenuButton: {fileID: 821864676}
+  MenuButton: {fileID: 1337406703}
   ScoreLabel: {fileID: 324242690}
 --- !u!1 &426318071
 GameObject:
@@ -3657,15 +3657,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1182358958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c54b6ac2e816fb49978907f74290e1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 795e42861a15aca4d81e420ea9dc0c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   StartButton: {fileID: 368560838}
   SettingsButton: {fileID: 1725138907}
   ExitButton: {fileID: 459635725}
-  IsShowScore: 0
-  IsShowSettings: 0
-  IsCloseGame: 0
 --- !u!1 &1190404751
 GameObject:
   m_ObjectHideFlags: 0
@@ -3791,19 +3788,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1222118391}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dc69a92d07a67d43978d7216314ac80, type: 3}
+  m_Script: {fileID: 11500000, guid: 84eb6222e1a3c744b99e799d3481e8a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SaveButton: {fileID: 47289477}
   ResetButton: {fileID: 1747200088}
-  MenuButton: {fileID: 1337406703}
+  MenuButton: {fileID: 821864676}
   ColorDropdown: {fileID: 1559889203}
   ResolutionDropdown: {fileID: 400071920}
   PlayerSpeedSlider: {fileID: 1722731236}
   SpeedValueLabel: {fileID: 1190404753}
-  IsShowMenu: 0
-  IsResetSettings: 0
-  IsSaveSettings: 0
 --- !u!1 &1268714483
 GameObject:
   m_ObjectHideFlags: 0
