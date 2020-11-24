@@ -8,17 +8,24 @@ namespace Assets.Scripts.Game.Performances.Services
     {
         private bool _isAllDestroyed;
         private UnityAction<Vector3> _action;
+        private UnityAction _action2;
         public DestrPlatformService()
         {
             //_list = ContainerDto.PlatformsList;
             _isAllDestroyed = false;
         }
-        
+
+        public void AddListener(UnityAction action)
+        {
+            _action2 = action;
+        }
+
         public void Destroy(GameObject obj)
         {
             if (obj.transform.parent.childCount == 1)
             {
-                _isAllDestroyed = true;
+                _action2.Invoke();
+                //_isAllDestroyed = true;
             }
             _action.Invoke(obj.transform.position);
             Object.Destroy(obj);

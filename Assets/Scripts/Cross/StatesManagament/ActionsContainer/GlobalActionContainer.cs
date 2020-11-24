@@ -11,16 +11,11 @@ namespace Assets.Scripts.Cross.StatesManagament.ActionsContainer
 {
     public class GlobalActionContainer
     {
-        private const string _boundleName = "Boundles\\platform";
-        private const string _assetName = "Platform";
-        private AssetBundle _localAssetBundle;
 
         private readonly DataManager _settings;
-        private readonly LevelHelper _levelHelper;
         public GlobalActionContainer()
         {
             _settings = new DataManager();
-            _levelHelper = new LevelHelper();
         }
 
         public void StartGame()
@@ -29,11 +24,8 @@ namespace Assets.Scripts.Cross.StatesManagament.ActionsContainer
         }
 
 
-        public void ResumeGame(GameObject player, GameObject ball)
+        public void ResumeGame()
         {
-            player.GetComponent<PlayerController>().enabled = true;
-            player.GetComponent<Rigidbody2D>().simulated = true;
-            ball.GetComponent<BallController>().enabled = true;
             SettingsSingleton.GetSettings().IsGameStopped = false;
 
         }
@@ -47,29 +39,9 @@ namespace Assets.Scripts.Cross.StatesManagament.ActionsContainer
             #endif
         }
 
-        public void PauseGame(GameObject player, GameObject ball)
+        public void PauseGame()
         {
-            player.GetComponent<PlayerController>().enabled = false;
-            player.GetComponent<Rigidbody2D>().simulated = false;
-            ball.GetComponent<BallController>().enabled = false;
             SettingsSingleton.GetSettings().IsGameStopped = true;
-        }
-
-        public LevelN GenerateLevel(LevelN level)
-        {
-            _localAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.dataPath, _boundleName));
-            if (_localAssetBundle == null)
-            {
-                Debug.LogError("Failed to load AssetBoundle");
-                return null;
-            }
-            level.Number++;
-            //level.Platform = _localAssetBundle.LoadAsset<GameObject>(_assetName);//_levelHelper.GetGameObjectFromResources("Prefabs/ActiveObjects/Platform"); // remove
-            level.BallPosition = _levelHelper.GetInitialBallPosition();
-            level.PlayerPosition = _levelHelper.GetInitialPlayerPosition();
-            level.PlatformsColor = _levelHelper.GetPlatformsColor(level.Number);
-            //level.PlatformsPosition = _levelHelper.GetPlatformsRelativePosition(level.Number, level.Platform.transform.localPosition);
-            return level;
         }
 
         public void SaveSettings()

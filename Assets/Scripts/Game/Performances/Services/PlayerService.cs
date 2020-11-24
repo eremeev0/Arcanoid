@@ -146,16 +146,5 @@ namespace Assets.Scripts.Game.Performances.Services
                 _isColorUpdate = false;
             }
         }
-
-        /////////////////////////////////////////////////////////////
-        ///////////////////UnityAction Listener/////////////////////
-        public void AddListener(UnityAction action)
-        {
-
-        }
-        
-        /////////////////////////////////////////////////////////////
-        ////////////////////UnityAction Field///////////////////////
-        private UnityAction _action;
     }
 }

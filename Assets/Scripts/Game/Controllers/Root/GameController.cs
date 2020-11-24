@@ -29,10 +29,17 @@ namespace Assets.Scripts.Game.Controllers.Root
             _settingsStorage.Load();
             
             _eventManager = EventSender.GetComponent<EventManager>();
-            _eventManager.Call(GlobalStates.GamePaused, Player, Ball);
+            _action.FreezeObject(Player);
+            _action.FreezeObject(Ball);
+            _eventManager.Call(GlobalStates.GamePaused);
+         
             SettingsSingleton.GetSettings().IsGameStopped = true;
+            
+            _ballService.destroyedPlatform.AddListener(UpdatePlatformsList);
+            _ballService.destroyedPlatform.AddListener(LevelCompleted);
+
             _level = new LevelN();
-            _level = _eventManager.GenerateLevel(_level);
+            _level = _action.GenerateLevel(_level);
             _loader = BoundlessLoader.GetLoader();
             //SpawnPlatforms(level.Platform, level.PlatformsPosition, PlatformsContainer);
         }
@@ -44,7 +51,7 @@ namespace Assets.Scripts.Game.Controllers.Root
 
         void LevelCompleted()
         {
-            _action.GenerateLevel(_level);
+            _level = _action.GenerateLevel(_level);
             _action.SpawnObjects(_loader.GetGameObject("platform", "Platform"), _level.PlatformsPosition, PlatformsContainer);
         }
 
@@ -68,9 +75,9 @@ namespace Assets.Scripts.Game.Controllers.Root
         {
             if (!SettingsSingleton.GetSettings().IsGameStopped)
             {
-                _eventManager.Call(GlobalStates.GameResumed);
                 _action.UnFreezeObject(Player);
                 _action.UnFreezeObject(Ball);
+                _eventManager.Call(GlobalStates.GameResumed);
             }
 
             /*if (SettingsSingleton.GetSettings().IsLevelComplete)
