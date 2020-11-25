@@ -5,8 +5,8 @@ namespace Assets.Scripts.GameScene.Performances.Interfaces
 {
     public interface IDestrPlatformService
     {
-        void AddListener(UnityAction<Vector3> action);
-        void AddListener(UnityAction action);
+        void OnPlatformDestroyed(UnityAction<Vector3> action);
+        void OnAllPlatformDestroyed(UnityAction action);
         void Destroy(GameObject obj);
         bool IsAllDestroyed();
     }
