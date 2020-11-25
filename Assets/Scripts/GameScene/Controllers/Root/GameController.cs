@@ -37,8 +37,8 @@ namespace Assets.Scripts.GameScene.Controllers.Root
             SettingsSingleton.GetSettings().IsGameStopped = true;
             
             //_ballService.destroyedPlatform = new DestrPlatformService();
-            _ballService.destroyedPlatform.OnPlatformDestroyed(UpdatePlatformsList);
-            _ballService.destroyedPlatform.OnAllPlatformDestroyed(LevelCompleted);
+            //_ballService.destroyedPlatform.OnPlatformDestroyed(UpdatePlatformsList);
+            //_ballService.destroyedPlatform.OnAllPlatformDestroyed(LevelCompleted);
 
             _level = new LevelN();
             _level = _action.GenerateLevel(_level);
