@@ -25,7 +25,8 @@ namespace Assets.Scripts.GameScene
                         Debug.LogError("Empty save filename");
                         return;
                     }
-                    Level = _actions.LoadLevel(SaveName);
+                    //Level = _actions.LoadLevel(SaveName);
+                    Debug.LogWarning("Level load func work, but file not found");
                     break;
                 case LevelStates.InitializeLevel:
                     Level = _actions.LevelInit();

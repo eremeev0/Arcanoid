@@ -9,6 +9,7 @@ namespace Assets.Scripts.UI.Controllers.Sub
         public Button StartButton;
         public Button SettingsButton;
         public Button ExitButton;
+        public Button LoadButton;
 
         private UnityAction<MenuEvents> _action;
         //private
@@ -18,6 +19,7 @@ namespace Assets.Scripts.UI.Controllers.Sub
             StartButton.onClick.AddListener(ShowScore);
             SettingsButton.onClick.AddListener(ShowSettings);
             ExitButton.onClick.AddListener(CloseGame);
+            LoadButton.onClick.AddListener(ShowSaves);
         }
 
         private void Update()
@@ -30,10 +32,12 @@ namespace Assets.Scripts.UI.Controllers.Sub
         }
 
 
-        void ShowScore(){_action.Invoke(MenuEvents.StartClicked);}
+        void ShowScore() { _action.Invoke(MenuEvents.StartClicked);}
 
-        void ShowSettings(){_action.Invoke(MenuEvents.SettingsClicked); }
+        void ShowSettings() { _action.Invoke(MenuEvents.SettingsClicked); }
 
-        void CloseGame(){_action.Invoke(MenuEvents.ExitClicked); }
+        void CloseGame() { _action.Invoke(MenuEvents.ExitClicked); }
+
+        void ShowSaves() { _action.Invoke(MenuEvents.SavesClicked);}
     }
 }

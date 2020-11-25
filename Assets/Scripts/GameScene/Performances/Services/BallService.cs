@@ -6,9 +6,9 @@ namespace Assets.Scripts.GameScene.Performances.Services
 {
     public class BallService: MonoBehaviour, IBallService
     {
-        private float _speed = SettingsSingleton.GetSettings().BallSpeed;
-        private readonly float _maxSpeed = SettingsSingleton.GetSettings().BallMaxSpeed;
-        private readonly float _speedMultiplier = SettingsSingleton.GetSettings().BallSpeedMultiplier;
+        private float _speed = BallSettingsDto.GetBallSettings().BallSpeed;
+        private readonly float _maxSpeed = BallSettingsDto.GetBallSettings().BallMaxSpeed;
+        private readonly float _speedMultiplier = BallSettingsDto.GetBallSettings().BallSpeedMultiplier;
         private Vector2 _velocity;
         
         //private IDestrPlatformService destroyedPlatform;

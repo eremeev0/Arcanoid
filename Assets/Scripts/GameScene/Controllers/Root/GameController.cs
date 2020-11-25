@@ -27,20 +27,24 @@ namespace Assets.Scripts.GameScene.Controllers.Root
             _ballService = Ball.GetComponent<BallService>();
             _settingsStorage = new DataManager();
             _settingsStorage.Load();
-            
+            _action = new ActionContainer();
             _eventManager = EventSender.GetComponent<EventManager>();
+            print(Player);
             _action.FreezeObject(Player);
             _action.FreezeObject(Ball);
             _eventManager.Call(GlobalStates.GamePaused);
          
             SettingsSingleton.GetSettings().IsGameStopped = true;
             
+            //_ballService.destroyedPlatform = new DestrPlatformService();
             _ballService.destroyedPlatform.OnPlatformDestroyed(UpdatePlatformsList);
             _ballService.destroyedPlatform.OnAllPlatformDestroyed(LevelCompleted);
 
             _level = new LevelN();
             _level = _action.GenerateLevel(_level);
+            print(_level.PlatformsPosition);
             _loader = BoundlessLoader.GetLoader();
+            _action.SpawnObjects(_loader.GetGameObject("platform", "Platform"), _level.PlatformsPosition, PlatformsContainer);
             //SpawnPlatforms(level.Platform, level.PlatformsPosition, PlatformsContainer);
         }
 

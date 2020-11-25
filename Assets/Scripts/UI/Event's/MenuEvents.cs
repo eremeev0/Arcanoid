@@ -4,6 +4,7 @@
     {
         StartClicked,
         SettingsClicked,
-        ExitClicked
+        ExitClicked,
+        SavesClicked
     }
 }

@@ -21,8 +21,5 @@ namespace Assets.Scripts.MultiOriented.Contracts
         public bool IsLevelComplete { get; set; } = false;
         public bool IsLevelFailed { get; set; } = false;
         public bool IsScoreUpdate { get; set; } = true;
-        public float BallSpeed { get; set; } = 1f;
-        public float BallMaxSpeed { get; set; } = 14f;
-        public float BallSpeedMultiplier { get; set; } = .1f;
     }
 }
