@@ -7,7 +7,6 @@ namespace Assets.Scripts.MultiOriented
     {
         private string[] _guids { get; set; }
         void Check(string guid) { }
-
         void GetGuid(Action<string> action) { }
         string GetGuidByObjectName(string name) { return String.Empty;}
         void Initialization() { }

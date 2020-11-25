@@ -12,7 +12,7 @@ namespace Assets.Scripts.GameScene.Performances.Services
         private Vector2 _velocity;
         
         //private IDestrPlatformService destroyedPlatform;
-        public IDestrPlatformService destroyedPlatform { get; set; }
+        public DestrPlatformService destroyedPlatform { get; set; }
 
         private bool _isSpeedUpdate;
         private bool _isVelocityUpdate;
@@ -21,12 +21,12 @@ namespace Assets.Scripts.GameScene.Performances.Services
         {
             _isSpeedUpdate = false;
             _isVelocityUpdate = false;
-            destroyedPlatform = new DestrPlatformService();
+            destroyedPlatform = DestrPlatformService.GetPlatformService();
         }
         private void Update() {
             if (destroyedPlatform == null)
             {
-                destroyedPlatform = new DestrPlatformService();
+                destroyedPlatform = DestrPlatformService.GetPlatformService();
             }
         }
 

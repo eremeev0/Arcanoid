@@ -1,45 +1,52 @@
-﻿using Assets.Scripts.GameScene.Performances.Interfaces;
+﻿using System;
+using Assets.Scripts.GameScene.Performances.Interfaces;
+using Assets.Scripts.MultiOriented;
 using UnityEngine;
 using UnityEngine.Events;
+using Object = UnityEngine.Object;
 
 namespace Assets.Scripts.GameScene.Performances.Services
 {
-    public class DestrPlatformService: IDestrPlatformService
+    public class DestrPlatformService
     {
-        private bool _isAllDestroyed;
-        private UnityAction<Vector3> _getPlatfromPosition;
-        private UnityAction _isAllPlatfromsDestroyed;
-        public DestrPlatformService()
+        private static DestrPlatformService _platformService;
+
+        private UnityAction<Vector3> _getPlatformPosition;
+        private UnityAction _isAllPlatformsDestroyed;
+        private ObjectsManagement _management;
+
+        private DestrPlatformService()
         {
-            //_list = ContainerDto.PlatformsList;
-            _isAllDestroyed = false;
+            _management = ObjectsManagement.GetManagement();
+        }
+
+        public static DestrPlatformService GetPlatformService()
+        {
+            return _platformService ?? (_platformService = new DestrPlatformService());
         }
 
         public void OnAllPlatformDestroyed(UnityAction action)
         {
-            _isAllPlatfromsDestroyed = action;
+            _isAllPlatformsDestroyed = action;
         }
 
         public void Destroy(GameObject obj)
         {
             if (obj.transform.parent.childCount == 1)
             {
-                _isAllPlatfromsDestroyed.Invoke();
+                _isAllPlatformsDestroyed.Invoke();
                 //_isAllDestroyed = true;
             }
             // use guid
-            _getPlatfromPosition.Invoke(obj.transform.position);
+            // class.Remove(id)
+            _management.Remove(new Guid());
+            _getPlatformPosition.Invoke(obj.transform.position);
             Object.Destroy(obj);
-        }
-
-        public bool IsAllDestroyed()
-        {
-            return _isAllDestroyed;
         }
 
         public void OnPlatformDestroyed(UnityAction<Vector3> action)
         {
-            _getPlatfromPosition = action;
+            _getPlatformPosition = action;
         }
     }
 }
