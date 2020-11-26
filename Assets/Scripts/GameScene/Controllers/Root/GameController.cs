@@ -1,6 +1,5 @@
 ﻿using System;
 using Assets.Scripts.GameScene.Performances.Services;
-using Assets.Scripts.GameScene.Storage;
 using Assets.Scripts.MultiOriented;
 using Assets.Scripts.MultiOriented.Contracts;
 using Assets.Scripts.MultiOriented.Models;
@@ -17,7 +16,6 @@ namespace Assets.Scripts.GameScene.Controllers.Root
         public GameObject PlatformsContainer;
         public GameObject EventSender;
 
-        private DataManager _settingsStorage;
         private EventManager _eventManager;
         private LevelN _level;
         private DestrPlatformService _platformService;
@@ -41,12 +39,11 @@ namespace Assets.Scripts.GameScene.Controllers.Root
             _loader = BoundlessLoader.GetLoader();
             //Event manager
             _eventManager = EventSender.GetComponent<EventManager>();
-            //DataStorage
-            _settingsStorage = new DataManager();
             //Actions
             _action = new ActionContainer();
             //Level
-            _level = _levelLoader.Level;
+            _level = _action.GenerateLevel(_level);
+            //_level = _levelLoader.Level;
             //_level = _action.GenerateLevel(_level);
             print(_level.PlatformsPosition);
         }
@@ -56,7 +53,7 @@ namespace Assets.Scripts.GameScene.Controllers.Root
         void PostInitialization()
         {
             //Load user settings
-            _settingsStorage.Load();
+            _eventManager.Call(SettingsStates.Loaded);
             //Pause game
             _action.FreezeObject(Player);
             _action.FreezeObject(Ball);

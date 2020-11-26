@@ -13,6 +13,7 @@ namespace Assets.Scripts.MultiOriented.Contracts
         }
 
         public float PlayerSpeed { get; set; } = DefaultSettingsDto.PlayerSpeed;
+        public int SoundsVolume { get; set; } = DefaultSettingsDto.SoundsVolume;
         public Color PlayerColor { get; set; } = DefaultSettingsDto.PlayerColor;
         public Vector2 GameResolution { get; set; } = DefaultSettingsDto.GameResolution;
         public int PlayerScore { get; set; } = DefaultSettingsDto.PlayerScore;

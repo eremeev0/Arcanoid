@@ -87,10 +87,10 @@ namespace Assets.Scripts.UI.Controllers.Root
             switch (@event)
             {
                 case SettingsEvents.SaveClicked:
-                    _eventProvider.Call(GlobalStates.SAVE_SETTINGS);
+                    _eventProvider.Call(SettingsStates.Saved);
                     break;
                 case SettingsEvents.ResetClicked:
-                    _eventProvider.Call(GlobalStates.RESET_SETTINGS);
+                    _eventProvider.Call(SettingsStates.Reset);
                     break;
                 case SettingsEvents.BackToMenuClicked:
                     SettingsPanel.SetActive(false);

@@ -8,32 +8,27 @@ namespace Assets.Scripts.MultiOriented.StatesManagament.Provider
     public class EventManager: MonoBehaviour
     {
         private GlobalActionContainer _globalAction;
-
+        private SettingsActionsContainer _settingsActions;
         void Start()
         {
             _globalAction = new GlobalActionContainer();
+            _settingsActions = new SettingsActionsContainer();
         }
         
         /// <summary>
         /// Call function by selected Global event
         /// </summary>
-        /// <param name="states">Global state</param>
-        public void Call(GlobalStates states)
+        /// <param name="state">Global state</param>
+        public void Call(GlobalStates state)
         {
             Start();
-            switch (states)
+            switch (state)
             {
                 case GlobalStates.GameStarted:
                     _globalAction.StartGame();
                     break;
                 case GlobalStates.GameClosed:
                     _globalAction.CloseGame();
-                    break;
-                case GlobalStates.SAVE_SETTINGS:
-                    _globalAction.SaveSettings();
-                    break;
-                case GlobalStates.RESET_SETTINGS:
-                    _globalAction.ResetSettings();
                     break;
                 case GlobalStates.GameRestarted:
                     _globalAction.StartGame();
@@ -45,7 +40,25 @@ namespace Assets.Scripts.MultiOriented.StatesManagament.Provider
                     _globalAction.PauseGame();
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(states), states, null);
+                    throw new ArgumentOutOfRangeException(nameof(state), state, null);
+            }
+        }
+
+        public void Call(SettingsStates state)
+        {
+            switch (state)
+            {
+                case SettingsStates.Loaded:
+                    _settingsActions.LoadSettings();
+                    break;
+                case SettingsStates.Saved:
+                    _settingsActions.SaveSettings();
+                    break;
+                case SettingsStates.Reset:
+                    _settingsActions.ResetSettings();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(state), state, null);
             }
         }
     }
