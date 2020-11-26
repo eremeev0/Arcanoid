@@ -9,8 +9,13 @@ namespace Assets.Scripts.GameScene
         public LevelN Level { get; set; }
         public string SaveName { get; set; }
         private readonly ActionContainer _actions;
+        private static LevelLoader _loader;
 
-        public LevelLoader()
+        public static LevelLoader GetLoader()
+        {
+            return _loader ?? (_loader = new LevelLoader());
+        }
+        private LevelLoader()
         {
             _actions = new ActionContainer();
             SaveName = string.Empty;
@@ -29,7 +34,7 @@ namespace Assets.Scripts.GameScene
                     Debug.LogWarning("Level load func work, but file not found");
                     break;
                 case LevelStates.InitializeLevel:
-                    Level = _actions.LevelInit();
+                    Level = _actions.LevelInit(Level);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(state), state, null);

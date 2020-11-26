@@ -1,6 +1,7 @@
-﻿using Assets.Scripts.GameScene.Performances.Interfaces;
+﻿using System;
 using Assets.Scripts.GameScene.Performances.Services;
 using Assets.Scripts.GameScene.Storage;
+using Assets.Scripts.MultiOriented;
 using Assets.Scripts.MultiOriented.Contracts;
 using Assets.Scripts.MultiOriented.Models;
 using Assets.Scripts.MultiOriented.StatesManagament.Provider;
@@ -19,63 +20,68 @@ namespace Assets.Scripts.GameScene.Controllers.Root
         private DataManager _settingsStorage;
         private EventManager _eventManager;
         private LevelN _level;
-        private IBallService _ballService;
+        private DestrPlatformService _platformService;
         private ActionContainer _action;
         private BoundlessLoader _loader;
+        private LevelLoader _levelLoader;
         private void Start()
-        {  
-            _ballService = Ball.GetComponent<BallService>();
-            _settingsStorage = new DataManager();
-            _settingsStorage.Load();
-            _action = new ActionContainer();
+        {
+            Player.AddComponent<GuidComponent>();
+            Initialization();
+            PostInitialization();
+        }
+
+        //////////////////////////////////////////////////////////////
+        //////////////////Initialization objects/////////////////////
+        void Initialization()
+        {
+            //Singletons
+            _levelLoader = LevelLoader.GetLoader();
+            _platformService = DestrPlatformService.GetPlatformService();
+            _loader = BoundlessLoader.GetLoader();
+            //Event manager
             _eventManager = EventSender.GetComponent<EventManager>();
-            print(Player);
+            //DataStorage
+            _settingsStorage = new DataManager();
+            //Actions
+            _action = new ActionContainer();
+            //Level
+            _level = _levelLoader.Level;
+            //_level = _action.GenerateLevel(_level);
+            print(_level.PlatformsPosition);
+        }
+
+        //////////////////////////////////////////////////////////////
+        ////////////Post Initialization(set initial data)////////////
+        void PostInitialization()
+        {
+            //Load user settings
+            _settingsStorage.Load();
+            //Pause game
             _action.FreezeObject(Player);
             _action.FreezeObject(Ball);
             _eventManager.Call(GlobalStates.GamePaused);
-         
             SettingsSingleton.GetSettings().IsGameStopped = true;
-            
-            //_ballService.destroyedPlatform = new DestrPlatformService();
-            //_ballService.destroyedPlatform.OnPlatformDestroyed(UpdatePlatformsList);
-            //_ballService.destroyedPlatform.OnAllPlatformDestroyed(LevelCompleted);
-
-            _level = new LevelN();
-            _level = _action.GenerateLevel(_level);
-            print(_level.PlatformsPosition);
-            _loader = BoundlessLoader.GetLoader();
+            //Set callback methods
+            _platformService.OnPlatformDestroyed(UpdatePlatformsList);
+            _platformService.OnAllPlatformDestroyed(LevelCompleted);
+            //Spawn some game object(s)
             _action.SpawnObjects(_loader.GetGameObject("platform", "Platform"), _level.PlatformsPosition, PlatformsContainer);
-            //SpawnPlatforms(level.Platform, level.PlatformsPosition, PlatformsContainer);
         }
-
-        void StartPlay()
-        {
-            // _action.PlayGame();
-        }
-
+        //////////////////////////////////////////////////////////////
+        ///////////////////////Callback methods//////////////////////
         void LevelCompleted()
         {
             _level = _action.GenerateLevel(_level);
             _action.SpawnObjects(_loader.GetGameObject("platform", "Platform"), _level.PlatformsPosition, PlatformsContainer);
         }
 
-        // Level run
-        void LevelInitial()
+        void UpdatePlatformsList(Guid objectGuid)
         {
-            if (_level == null)
-            {
-               _level = _action.LevelInit();
-            }
-            else
-            {
-               _level = _action.LoadLevel("default");
-            }
+            //_action.UpdatePlatformsList(_level, );
         }
-
-        void UpdatePlatformsList(Vector3 removedPlatformPosition)
-        {
-            _action.UpdatePlatformsList(_level, removedPlatformPosition);
-        }
+        //////////////////////////////////////////////////////////////
+        /////////////////////////Game events/////////////////////////
         private void Update()
         {
             if (!SettingsSingleton.GetSettings().IsGameStopped)

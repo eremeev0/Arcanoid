@@ -583,7 +583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c887cb8e6e5eba4390072654df4748c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsFreeze: 0
+  IsFreeze: 1
 --- !u!4 &1671107119 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8736254645633861638, guid: e8ddf458995aada49a8bdc2f50f05f0b, type: 3}

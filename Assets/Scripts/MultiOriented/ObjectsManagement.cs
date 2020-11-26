@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Assets.Scripts.MultiOriented
 {
@@ -19,19 +20,21 @@ namespace Assets.Scripts.MultiOriented
 
         private readonly List<ObjectPrimitive> _primitives = new List<ObjectPrimitive>();
 
-        public GameObject Get(Guid guid)
+        public GameObject GetObjectById(Guid guid)
         {
             return _primitives.FirstOrDefault(p => p.Id == guid).Object;
         }
 
-        public void Remove(Guid guid)
+        public void RemoveObjectById(Guid guid)
         {
-            _primitives.Remove(_primitives.FirstOrDefault(p => p.Id == guid));
+            var primitive = _primitives.FirstOrDefault(p => p.Id == guid);
+            Object.Destroy(primitive.Object);
+            //_primitives.Remove(primitive);
         }
 
-        public void AddObjectToList(GameObject obj)
+        public void AddObjectPrimitiveToList(ObjectPrimitive primitive)
         {
-            _primitives.Add(new ObjectPrimitive(obj, Guid.NewGuid()));
+            _primitives.Add(primitive);
         }
     }
 }

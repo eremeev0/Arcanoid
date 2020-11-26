@@ -11,13 +11,13 @@ namespace Assets.Scripts.GameScene.Performances.Services
     {
         private static DestrPlatformService _platformService;
 
-        private UnityAction<Vector3> _getPlatformPosition;
+        private UnityAction<Guid> _getPlatformPosition;
         private UnityAction _isAllPlatformsDestroyed;
-        private ObjectsManagement _management;
+        private readonly ObjectsManagement _objectsManagement;
 
         private DestrPlatformService()
         {
-            _management = ObjectsManagement.GetManagement();
+            _objectsManagement = ObjectsManagement.GetManagement();
         }
 
         public static DestrPlatformService GetPlatformService()
@@ -39,12 +39,12 @@ namespace Assets.Scripts.GameScene.Performances.Services
             }
             // use guid
             // class.Remove(id)
-            _management.Remove(new Guid());
-            _getPlatformPosition.Invoke(obj.transform.position);
-            Object.Destroy(obj);
+            var guid = obj.GetComponent<GuidComponent>().guid;
+            _objectsManagement.RemoveObjectById(guid);
+            _getPlatformPosition.Invoke(guid);
         }
 
-        public void OnPlatformDestroyed(UnityAction<Vector3> action)
+        public void OnPlatformDestroyed(UnityAction<Guid> action)
         {
             _getPlatformPosition = action;
         }

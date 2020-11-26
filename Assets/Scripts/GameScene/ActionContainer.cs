@@ -1,8 +1,10 @@
-﻿using Assets.Scripts.GameScene.Controllers.Sub;
+﻿using System;
+using Assets.Scripts.GameScene.Controllers.Sub;
 using Assets.Scripts.MultiOriented;
 using Assets.Scripts.MultiOriented.Models;
 using Assets.Scripts.MultiOriented.StatesManagament.ActionsContainer;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Assets.Scripts.GameScene
 {
@@ -23,8 +25,9 @@ namespace Assets.Scripts.GameScene
                 var clone = Object.Instantiate(copyContainer, clonePosition, Quaternion.identity);
                 clone.name = "Platform";
                 clone.transform.parent = copyContainer.transform;
+                clone.AddComponent<GuidComponent>().guid = Guid.NewGuid();
                 
-                _management.AddObjectToList(clone);
+                _management.AddObjectPrimitiveToList(new ObjectPrimitive(clone, clone.GetComponent<GuidComponent>().guid));
             }
         }
 
@@ -64,9 +67,9 @@ namespace Assets.Scripts.GameScene
             return _levelActions.GenerateLevel(level);
         }
 
-        public LevelN LevelInit()
+        public LevelN LevelInit(LevelN level)
         {
-            return _levelActions.GenerateLevel(new LevelN());
+            return _levelActions.GenerateLevel(level);
         }
 
         public void UpdatePlatformsList(LevelN level, Vector3 platformPosition)

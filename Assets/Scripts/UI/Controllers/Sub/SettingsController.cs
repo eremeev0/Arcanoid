@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.MultiOriented.Contracts;
+﻿using System.Globalization;
+using Assets.Scripts.MultiOriented.Contracts;
 using Assets.Scripts.MultiOriented.StatesManagament.States;
 using Assets.Scripts.UI.Contracts;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace Assets.Scripts.UI.Controllers.Sub
         public Button SaveButton, ResetButton, MenuButton;
         public Dropdown ColorDropdown, ResolutionDropdown;
         public Slider PlayerSpeedSlider;
+        public Slider MusicVolumeSlider;
+        public Text VolumeValueLabel;
         public Text SpeedValueLabel;
         private UnityAction<SettingsEvents> _action;
         void Start()
@@ -22,7 +25,8 @@ namespace Assets.Scripts.UI.Controllers.Sub
 
             /*ColorDropdown.onValueChanged.AddListener();
             ResolutionDropdown.onValueChanged.AddListener();*/
-            PlayerSpeedSlider.onValueChanged.AddListener(DisplaySpeedValue);
+            PlayerSpeedSlider.onValueChanged.AddListener(UpdateSpeedValue);
+            MusicVolumeSlider.onValueChanged.AddListener(UpdateVolumeValue);
             ColorDropdown = UIDataInit.InitDropdown(ColorDropdown, UIStates.INIT_COLOR_LIST);
             ResolutionDropdown = UIDataInit.InitDropdown(ResolutionDropdown, UIStates.INIT_RESOLUTION_LIST);
         }
@@ -39,10 +43,10 @@ namespace Assets.Scripts.UI.Controllers.Sub
             SettingsSingleton.GetSettings().GameResolution = IdConverter.ToVector2(ResolutionDropdown.value);
             _action.Invoke(SettingsEvents.SaveClicked);
         }
-        void ResetSettings(){_action.Invoke(SettingsEvents.ResetClicked);}
-        void ShowMenu(){_action.Invoke(SettingsEvents.BackToMenuClicked);}
-        void DisplaySpeedValue(float value){SpeedValueLabel.text = value.ToString();}
-
+        void ResetSettings() { _action.Invoke(SettingsEvents.ResetClicked);}
+        void ShowMenu() { _action.Invoke(SettingsEvents.BackToMenuClicked);}
+        void UpdateSpeedValue(float value) { SpeedValueLabel.text = value.ToString(CultureInfo.CurrentCulture);}
+        void UpdateVolumeValue(float value) { VolumeValueLabel.text = value.ToString(CultureInfo.CurrentCulture);}
         public void AddListener(UnityAction<SettingsEvents> action)
         {
             _action = action;

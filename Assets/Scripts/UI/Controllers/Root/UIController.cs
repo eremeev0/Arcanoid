@@ -19,6 +19,7 @@ namespace Assets.Scripts.UI.Controllers.Root
         private FailedController _failed;
         private ScoreController _score;
         private SavesController _saves;
+        private AudioSource _audioSource;
 
         public GameObject MenuPanel;
         public GameObject FailedPanel;
@@ -35,7 +36,8 @@ namespace Assets.Scripts.UI.Controllers.Root
             _failed = GetComponentInChildren<FailedController>();
             _score = GetComponentInChildren<ScoreController>();
             _saves = GetComponentInChildren<SavesController>();
-            
+            _audioSource = GetComponent<AudioSource>();
+
             _menu.AddListener(Menu);
             _settings.AddListener(Settings);
             _failed.AddListener(Failed);
@@ -47,7 +49,7 @@ namespace Assets.Scripts.UI.Controllers.Root
             SettingsPanel.SetActive(false);
             SavesPanel.SetActive(false);
 
-            _level = new LevelLoader();
+            _level = LevelLoader.GetLoader();
             _eventProvider = gameObject.AddComponent<EventManager>();
         }
 
@@ -58,6 +60,7 @@ namespace Assets.Scripts.UI.Controllers.Root
             switch (@event)
             {
                 case MenuEvents.StartClicked:
+                    _audioSource.Stop();
                     MenuPanel.SetActive(false);
                     ScorePanel.SetActive(true);
                     _eventProvider.Call(GlobalStates.GameStarted);
