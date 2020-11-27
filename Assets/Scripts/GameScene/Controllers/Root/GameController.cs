@@ -24,7 +24,6 @@ namespace Assets.Scripts.GameScene.Controllers.Root
         private LevelLoader _levelLoader;
         private void Start()
         {
-            Player.AddComponent<GuidComponent>();
             Initialization();
             PostInitialization();
         }
@@ -42,9 +41,9 @@ namespace Assets.Scripts.GameScene.Controllers.Root
             //Actions
             _action = new ActionContainer();
             //Level
-            _level = _action.GenerateLevel(_level);
             //_level = _levelLoader.Level;
-            //_level = _action.GenerateLevel(_level);
+            _level = new LevelN();
+            _level = _action.GenerateLevel(_level);
             print(_level.PlatformsPosition);
         }
 
@@ -69,6 +68,7 @@ namespace Assets.Scripts.GameScene.Controllers.Root
         ///////////////////////Callback methods//////////////////////
         void LevelCompleted()
         {
+            // AssetBoundle cashing
             _level = _action.GenerateLevel(_level);
             _action.SpawnObjects(_loader.GetGameObject("platform", "Platform"), _level.PlatformsPosition, PlatformsContainer);
         }

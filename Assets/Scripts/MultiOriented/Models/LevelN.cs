@@ -26,6 +26,7 @@ namespace Assets.Scripts.MultiOriented.Models
         /// <summary>
         /// 
         /// </summary>
+        // save object
         public Vector3[] PlatformsPosition { get; set; }
     }
 }

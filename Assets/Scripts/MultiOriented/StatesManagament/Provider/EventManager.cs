@@ -46,6 +46,7 @@ namespace Assets.Scripts.MultiOriented.StatesManagament.Provider
 
         public void Call(SettingsStates state)
         {
+            Start();
             switch (state)
             {
                 case SettingsStates.Loaded:

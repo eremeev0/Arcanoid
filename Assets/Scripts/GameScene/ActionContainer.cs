@@ -25,9 +25,9 @@ namespace Assets.Scripts.GameScene
                 var clone = Object.Instantiate(copyContainer, clonePosition, Quaternion.identity);
                 clone.name = "Platform";
                 clone.transform.parent = copyContainer.transform;
-                clone.AddComponent<GuidComponent>().guid = Guid.NewGuid();
+                //clone.AddComponent<GuidComponent>().guid = Guid.NewGuid();
                 
-                _management.AddObjectPrimitiveToList(new ObjectPrimitive(clone, clone.GetComponent<GuidComponent>().guid));
+               // _management.AddObjectPrimitiveToList(new ObjectPrimitive(clone, clone.GetComponent<GuidComponent>().guid));
             }
         }
 

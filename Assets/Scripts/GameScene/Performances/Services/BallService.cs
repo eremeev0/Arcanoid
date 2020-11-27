@@ -10,7 +10,8 @@ namespace Assets.Scripts.GameScene.Performances.Services
         private readonly float _maxSpeed = BallSettingsDto.GetBallSettings().BallMaxSpeed;
         private readonly float _speedMultiplier = BallSettingsDto.GetBallSettings().BallSpeedMultiplier;
         private Vector2 _velocity;
-        
+        private AudioSource _hitSound;
+
         //private IDestrPlatformService destroyedPlatform;
         public DestrPlatformService destroyedPlatform { get; set; }
 
@@ -22,6 +23,7 @@ namespace Assets.Scripts.GameScene.Performances.Services
             _isSpeedUpdate = false;
             _isVelocityUpdate = false;
             destroyedPlatform = DestrPlatformService.GetPlatformService();
+            _hitSound = GetComponent<AudioSource>();
         }
         private void Update() {
             if (destroyedPlatform == null)
@@ -83,6 +85,7 @@ namespace Assets.Scripts.GameScene.Performances.Services
             if (col.gameObject.name == "GameOver")
             {
                 print("GameOver");
+                //_hitSound.clip
                 // hide ball and display failed window
                 gameObject.SetActive(false);
                 SettingsSingleton.GetSettings().IsLevelFailed = true;
@@ -94,6 +97,7 @@ namespace Assets.Scripts.GameScene.Performances.Services
         {
             SpeedUp();
             _isVelocityUpdate = true;
+            _hitSound.Play();
             switch (col.gameObject.name)
             {
                 case "Player":
