@@ -1,28 +1,30 @@
 ﻿using System;
-using Assets.Scripts.GameScene.Performances.Interfaces;
 using Assets.Scripts.MultiOriented;
 using UnityEngine;
 using UnityEngine.Events;
-using Object = UnityEngine.Object;
 
 namespace Assets.Scripts.GameScene.Performances.Services
 {
-    public class DestrPlatformService
+    public class PlatformService
     {
-        private static DestrPlatformService _platformService;
+        public Guid PlatformGuid { get; private set;}
+        public Vector3 PlatformPosition { get; private set; }
+        public Color PlatformColor { get; private set; }
+        public int HitsToDeath { get; private set; }
 
+        private static PlatformService _platformService;
         private UnityAction<Guid> _getPlatformPosition;
         private UnityAction _isAllPlatformsDestroyed;
         private readonly ObjectsManagement _objectsManagement;
 
-        private DestrPlatformService()
+        private PlatformService()
         {
             _objectsManagement = ObjectsManagement.GetManagement();
         }
 
-        public static DestrPlatformService GetPlatformService()
+        public static PlatformService GetPlatformService()
         {
-            return _platformService ?? (_platformService = new DestrPlatformService());
+            return _platformService ?? (_platformService = new PlatformService());
         }
 
         public void OnAllPlatformDestroyed(UnityAction action)

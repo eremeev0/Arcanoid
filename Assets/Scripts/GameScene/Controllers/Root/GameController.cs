@@ -18,7 +18,7 @@ namespace Assets.Scripts.GameScene.Controllers.Root
 
         private EventManager _eventManager;
         private LevelN _level;
-        private DestrPlatformService _platformService;
+        private PlatformService _platformService;
         private ActionContainer _action;
         private BoundlessLoader _loader;
         private LevelLoader _levelLoader;
@@ -34,7 +34,7 @@ namespace Assets.Scripts.GameScene.Controllers.Root
         {
             //Singletons
             _levelLoader = LevelLoader.GetLoader();
-            _platformService = DestrPlatformService.GetPlatformService();
+            _platformService = PlatformService.GetPlatformService();
             _loader = BoundlessLoader.GetLoader();
             //Event manager
             _eventManager = EventSender.GetComponent<EventManager>();
