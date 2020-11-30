@@ -10,6 +10,7 @@ namespace Assets.Scripts.GameScene.Performances.Interfaces
         float GetSpeed();
         Vector2 GetVelocity();
         bool IsSpeedUpdate();
+        bool IsFreezable();
         bool IsVelocityUpdate();
     }
 }

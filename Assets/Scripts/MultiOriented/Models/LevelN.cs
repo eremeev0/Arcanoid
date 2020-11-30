@@ -36,9 +36,9 @@ namespace Assets.Scripts.MultiOriented.Models
         public Vector3[] PlatformsPosition { get; set; }
 
         /// <summary>
-        /// The domain of game object "Platform". Contain all logic and data about destroyed platforms.
+        /// List of the domain of game object "Platform". Contain all logic and data about destroyed platforms.
         /// </summary>
-        public PlatformService Platform { get; set; }
+        public PlatformService[] Platforms { get; set; }
         /// <summary>
         /// The domain of game object "Player". Contain all logic and data about player character.
         /// </summary>

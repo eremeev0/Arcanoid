@@ -30,13 +30,15 @@ namespace Assets.Scripts.GameScene.Performances.Services
         private bool _freezeDown = false;
         private bool _freezeLeft = false;
         private bool _freezeRight = false;
-        /////////////////////////////////////////////////////////////
+        private readonly bool _isFreezable = true;
+        //////////////////////////////////////////////////////////////
         /////////////////////////Getters////////////////////////////
-        public bool IsFreezeUp(){return _freezeUp;}
-        public bool IsFreezeDown(){return _freezeDown;}
-        public bool IsFreezeLeft(){return _freezeLeft;}
-        public bool IsFreezeRight(){return _freezeRight;}
-        public bool IsSpeedUpdate(){return _isSpeedUpdate;}
+        public bool IsFreezable() { return _isFreezable;}
+        public bool IsFreezeUp() { return _freezeUp;}
+        public bool IsFreezeDown() { return _freezeDown;}
+        public bool IsFreezeLeft() { return _freezeLeft;}
+        public bool IsFreezeRight() { return _freezeRight;}
+        public bool IsSpeedUpdate() { return _isSpeedUpdate;}
         public float GetSpeed()
         {
             _isSpeedUpdate = false;

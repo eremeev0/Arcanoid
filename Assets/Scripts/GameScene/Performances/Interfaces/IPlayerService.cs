@@ -7,6 +7,7 @@ namespace Assets.Scripts.GameScene.Performances.Interfaces
     /// </summary>
     public interface IPlayerService
     {
+        bool IsFreezable();
         float GetSpeed();
         bool IsSpeedUpdate();
         bool IsFreezeUp();

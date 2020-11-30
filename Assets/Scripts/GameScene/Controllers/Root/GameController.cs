@@ -44,7 +44,7 @@ namespace Assets.Scripts.GameScene.Controllers.Root
             //_level = _levelLoader.Level;
             _level = new LevelN();
             _level = _action.GenerateLevel(_level);
-            print(_level.PlatformsPosition);
+            print(_level.Platforms);
         }
 
         //////////////////////////////////////////////////////////////
@@ -62,7 +62,7 @@ namespace Assets.Scripts.GameScene.Controllers.Root
             _platformService.OnPlatformDestroyed(UpdatePlatformsList);
             _platformService.OnAllPlatformDestroyed(LevelCompleted);
             //Spawn some game object(s)
-            _action.SpawnObjects(_loader.GetGameObject("platform", "Platform"), _level.PlatformsPosition, PlatformsContainer);
+            //_action.SpawnObjects(_loader.GetGameObject("platform", "Platform"), _level.Platforms, PlatformsContainer);
         }
         //////////////////////////////////////////////////////////////
         ///////////////////////Callback methods//////////////////////
@@ -70,7 +70,7 @@ namespace Assets.Scripts.GameScene.Controllers.Root
         {
             // AssetBoundle cashing
             _level = _action.GenerateLevel(_level);
-            _action.SpawnObjects(_loader.GetGameObject("platform", "Platform"), _level.PlatformsPosition, PlatformsContainer);
+            //_action.SpawnObjects(_loader.GetGameObject("platform", "Platform"), _level.Platforms, PlatformsContainer);
         }
 
         void UpdatePlatformsList(Guid objectGuid)

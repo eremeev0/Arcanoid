@@ -17,11 +17,12 @@ namespace Assets.Scripts.GameScene.Performances.Services
 
         private bool _isSpeedUpdate;
         private bool _isVelocityUpdate;
-
+        private bool _isFreezable;
         private void Start()
         {
             _isSpeedUpdate = false;
             _isVelocityUpdate = false;
+            _isFreezable = true;
             destroyedPlatform = PlatformService.GetPlatformService();
             _hitSound = GetComponent<AudioSource>();
         }
@@ -62,6 +63,10 @@ namespace Assets.Scripts.GameScene.Performances.Services
         }
 
         public bool IsSpeedUpdate(){return _isSpeedUpdate;}
+        public bool IsFreezable()
+        {
+            return _isFreezable;
+        }
 
         public bool IsVelocityUpdate(){return _isVelocityUpdate;}
 
