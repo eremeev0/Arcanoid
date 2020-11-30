@@ -5,21 +5,24 @@ using UnityEngine.Events;
 
 namespace Assets.Scripts.GameScene.Performances.Services
 {
-    public class PlatformService
+    [Serializable]
+    public class PlatformService: MonoBehaviour
     {
-        public Guid PlatformGuid { get; private set;}
-        public Vector3 PlatformPosition { get; private set; }
-        public Color PlatformColor { get; private set; }
-        public int HitsToDeath { get; private set; }
+        public Guid PlatformGuid;// { get; private set;}
+        public Vector3 PlatformPosition;// { get; private set; }
+        public Color PlatformColor;// { get; private set; }
+        public int HitsToDeath;// { get; private set; }
 
         private static PlatformService _platformService;
         private UnityAction<Guid> _getPlatformPosition;
         private UnityAction _isAllPlatformsDestroyed;
         private readonly ObjectsManagement _objectsManagement;
+        private ParticleManager _particles;
 
         private PlatformService()
         {
             _objectsManagement = ObjectsManagement.GetManagement();
+            _particles = gameObject.AddComponent<ParticleManager>();
         }
 
         public static PlatformService GetPlatformService()
@@ -34,6 +37,7 @@ namespace Assets.Scripts.GameScene.Performances.Services
 
         public void Destroy(GameObject obj)
         {
+            _particles.Play();
             if (obj.transform.parent.childCount == 1)
             {
                 _isAllPlatformsDestroyed.Invoke();

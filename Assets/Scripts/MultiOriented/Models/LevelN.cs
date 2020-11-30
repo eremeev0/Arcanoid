@@ -21,12 +21,12 @@ namespace Assets.Scripts.MultiOriented.Models
         /// <summary>
         /// player start position on level
         /// </summary>
-        [Obsolete("Property PlayerPosition deprecated. Use property Player instead (PlayerService).", true)]
+        //[Obsolete("Property PlayerPosition deprecated. Use property Player instead (PlayerService).", true)]
         public Vector3 PlayerPosition { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [Obsolete("Property BallPosition deprecated. Use property Ball instead (BallService).", true)]
+        //[Obsolete("Property BallPosition deprecated. Use property Ball instead (BallService).", true)]
         public Vector3 BallPosition { get; set; }
         /// <summary>
         /// 

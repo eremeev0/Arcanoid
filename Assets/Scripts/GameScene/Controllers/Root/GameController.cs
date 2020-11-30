@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Assets.Scripts.GameScene.Performances.Services;
 using Assets.Scripts.MultiOriented;
 using Assets.Scripts.MultiOriented.Contracts;
@@ -22,10 +23,13 @@ namespace Assets.Scripts.GameScene.Controllers.Root
         private ActionContainer _action;
         private BoundlessLoader _loader;
         private LevelLoader _levelLoader;
+
         private void Start()
         {
             Initialization();
             PostInitialization();
+            string json = JsonUtility.ToJson(_platformService);
+            print(json);
         }
 
         //////////////////////////////////////////////////////////////

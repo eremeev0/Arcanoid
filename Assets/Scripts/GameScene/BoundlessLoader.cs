@@ -20,5 +20,10 @@ namespace Assets.Scripts.GameScene
             Debug.LogError("Failed to load AssetBoundle");
             return null;
         }
+
+        public void Dispose()
+        {
+            _localAssetBundle.Unload(true);
+        }
     }
 }

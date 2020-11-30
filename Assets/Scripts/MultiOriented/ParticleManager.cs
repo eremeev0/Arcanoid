@@ -5,6 +5,12 @@ namespace Assets.Scripts.MultiOriented
     public class ParticleManager: MonoBehaviour
     {
         private ParticleSystem _particle;
+
+        void Start()
+        {
+            _particle = GetComponent<ParticleSystem>();
+        }
+
         public void SetParticle(ParticleSystem particle)
         {
             _particle = particle;
@@ -14,10 +20,20 @@ namespace Assets.Scripts.MultiOriented
         {
             if (_particle == null)
             {
-                Debug.LogError("ParticleManager.Play(): particle system is null");
+                Debug.LogError("particle system is null");
                 return;
             }
             _particle.Play();
+        }
+
+        public void Stop()
+        {
+            if (_particle == null)
+            {
+                Debug.LogError("particle system is null");
+                return;
+            }
+            _particle.Stop();
         }
     }
 }

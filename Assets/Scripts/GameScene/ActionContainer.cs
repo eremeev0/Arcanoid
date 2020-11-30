@@ -1,10 +1,8 @@
-﻿using System;
-using Assets.Scripts.GameScene.Controllers.Sub;
+﻿using Assets.Scripts.GameScene.Controllers.Sub;
 using Assets.Scripts.MultiOriented;
 using Assets.Scripts.MultiOriented.Models;
 using Assets.Scripts.MultiOriented.StatesManagament.ActionsContainer;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Assets.Scripts.GameScene
 {
@@ -18,16 +16,11 @@ namespace Assets.Scripts.GameScene
             _management = ObjectsManagement.GetManagement();
         }
 
-        public void SpawnObjects(GameObject obj, Vector3[] positions, GameObject copyContainer)
+        public void SetParent(LevelN level, GameObject parent)
         {
-            foreach (var clonePosition in positions)
+            foreach (var platform in level.Platforms)
             {
-                var clone = Object.Instantiate(copyContainer, clonePosition, Quaternion.identity);
-                clone.name = "Platform";
-                clone.transform.parent = copyContainer.transform;
-                //clone.AddComponent<GuidComponent>().guid = Guid.NewGuid();
-                
-               // _management.AddObjectPrimitiveToList(new ObjectPrimitive(clone, clone.GetComponent<GuidComponent>().guid));
+                platform.transform.parent = parent.transform;
             }
         }
 

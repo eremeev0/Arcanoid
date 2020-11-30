@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.GameScene.Performances.Interfaces;
+using Assets.Scripts.MultiOriented;
 using Assets.Scripts.MultiOriented.Contracts;
 using UnityEngine;
 
@@ -9,8 +10,9 @@ namespace Assets.Scripts.GameScene.Performances.Services
         private float _speed = BallSettingsDto.GetBallSettings().BallSpeed;
         private readonly float _maxSpeed = BallSettingsDto.GetBallSettings().BallMaxSpeed;
         private readonly float _speedMultiplier = BallSettingsDto.GetBallSettings().BallSpeedMultiplier;
+        private AudioManager _audioManager;
         private Vector2 _velocity;
-        private AudioSource _hitSound;
+        //private AudioSource _hitSound;
 
         //private IDestrPlatformService destroyedPlatform;
         public PlatformService destroyedPlatform { get; set; }
@@ -24,7 +26,8 @@ namespace Assets.Scripts.GameScene.Performances.Services
             _isVelocityUpdate = false;
             _isFreezable = true;
             destroyedPlatform = PlatformService.GetPlatformService();
-            _hitSound = GetComponent<AudioSource>();
+            //  _hitSound = GetComponent<AudioSource>();
+            _audioManager = gameObject.AddComponent<AudioManager>();
         }
         private void Update() {
             if (destroyedPlatform == null)
@@ -90,6 +93,8 @@ namespace Assets.Scripts.GameScene.Performances.Services
             if (col.gameObject.name == "GameOver")
             {
                 print("GameOver");
+                _audioManager.SetClipSource((AudioClip)Resources.Load(Application.dataPath + "Audio\\game_over.mp3", typeof(AudioClip)));
+                _audioManager.Play();
                 //_hitSound.clip
                 // hide ball and display failed window
                 gameObject.SetActive(false);
@@ -102,7 +107,8 @@ namespace Assets.Scripts.GameScene.Performances.Services
         {
             SpeedUp();
             _isVelocityUpdate = true;
-            _hitSound.Play();
+            _audioManager.Play();
+            //_hitSound.Play();
             switch (col.gameObject.name)
             {
                 case "Player":

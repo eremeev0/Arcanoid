@@ -29,7 +29,7 @@ namespace Assets.Scripts.MultiOriented
         {
             var primitive = _primitives.FirstOrDefault(p => p.Id == guid);
             Object.Destroy(primitive.Object);
-            //_primitives.Remove(primitive);
+            _primitives.Remove(primitive);
         }
 
         public void AddObjectPrimitiveToList(ObjectPrimitive primitive)

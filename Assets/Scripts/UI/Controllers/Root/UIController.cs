@@ -1,5 +1,6 @@
 ﻿using System;
 using Assets.Scripts.GameScene;
+using Assets.Scripts.MultiOriented;
 using Assets.Scripts.MultiOriented.Contracts;
 using Assets.Scripts.MultiOriented.StatesManagament.Provider;
 using Assets.Scripts.MultiOriented.StatesManagament.States;
@@ -19,7 +20,7 @@ namespace Assets.Scripts.UI.Controllers.Root
         private FailedController _failed;
         private ScoreController _score;
         private SavesController _saves;
-        private AudioSource _audioSource;
+        private AudioManager _audioManager;
 
         public GameObject MenuPanel;
         public GameObject FailedPanel;
@@ -36,7 +37,6 @@ namespace Assets.Scripts.UI.Controllers.Root
             _failed = GetComponentInChildren<FailedController>();
             _score = GetComponentInChildren<ScoreController>();
             _saves = GetComponentInChildren<SavesController>();
-            _audioSource = GetComponent<AudioSource>();
 
             _menu.AddListener(Menu);
             _settings.AddListener(Settings);
@@ -51,6 +51,8 @@ namespace Assets.Scripts.UI.Controllers.Root
 
             _level = LevelLoader.GetLoader();
             _eventProvider = gameObject.AddComponent<EventManager>();
+            _audioManager = gameObject.AddComponent<AudioManager>();
+            _audioManager.Play();
         }
 
         /////////////////////////////////////////////////////////////
@@ -60,7 +62,8 @@ namespace Assets.Scripts.UI.Controllers.Root
             switch (@event)
             {
                 case MenuEvents.StartClicked:
-                    _audioSource.Stop();
+                    _audioManager.Stop();
+                    //_audioManager.
                     MenuPanel.SetActive(false);
                     ScorePanel.SetActive(true);
                     _eventProvider.Call(GlobalStates.GameStarted);

@@ -33,7 +33,7 @@ namespace Assets.Scripts.GameScene
         /// <param name="levelNumber">number of the current level</param>
         /// <param name="originalPosition">the position of the real object relative to the playing field</param>
         /// <returns>UnityEngine Vector2 array</returns>
-        public Vector3[] GetPlatformsRelativePosition(int levelNumber,Vector2 originalPosition)
+        public Vector3[] GetPlatformsRelativePosition(int levelNumber, Vector2 originalPosition)
         {
             List<Vector3> clonedObjectsPosition = new List<Vector3>();
             Vector2 offsetVector;
