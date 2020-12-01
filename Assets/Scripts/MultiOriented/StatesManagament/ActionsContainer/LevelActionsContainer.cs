@@ -57,6 +57,7 @@ namespace Assets.Scripts.MultiOriented.StatesManagament.ActionsContainer
             var relPositions = _levelHelper.GetPlatformsRelativePosition(level.Number, source.transform.localPosition);
             var objects = SpawnObjects(source, relPositions);
             var color = _levelHelper.GetPlatformsColor(level.Number);
+
             foreach (var obj in objects)
             {
                 obj.GetComponent<SpriteRenderer>().color = color;

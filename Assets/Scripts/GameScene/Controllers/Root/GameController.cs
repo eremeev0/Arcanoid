@@ -19,7 +19,7 @@ namespace Assets.Scripts.GameScene.Controllers.Root
 
         private EventManager _eventManager;
         private LevelN _level;
-        private PlatformService _platformService;
+        private readonly PlatformService _platformService;
         private ActionContainer _action;
         private BoundlessLoader _loader;
         private LevelLoader _levelLoader;
@@ -28,8 +28,6 @@ namespace Assets.Scripts.GameScene.Controllers.Root
         {
             Initialization();
             PostInitialization();
-            string json = JsonUtility.ToJson(_platformService);
-            print(json);
         }
 
         //////////////////////////////////////////////////////////////
@@ -38,7 +36,7 @@ namespace Assets.Scripts.GameScene.Controllers.Root
         {
             //Singletons
             _levelLoader = LevelLoader.GetLoader();
-            _platformService = PlatformService.GetPlatformService();
+            //_platformService = 
             _loader = BoundlessLoader.GetLoader();
             //Event manager
             _eventManager = EventSender.GetComponent<EventManager>();

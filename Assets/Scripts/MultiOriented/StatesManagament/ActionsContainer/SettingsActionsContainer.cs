@@ -42,8 +42,8 @@ namespace Assets.Scripts.MultiOriented.StatesManagament.ActionsContainer
 
 
             SettingsSingleton.GetSettings().PlayerSpeed = Convert.ToSingle(settings[0].Remove(0, salt[0].Length));
-            SettingsSingleton.GetSettings().SoundsVolume = Convert.ToInt32(settings[1].Remove(0, salt[1].Length));
-            SettingsSingleton.GetSettings().PlayerScore = Convert.ToInt32(settings[2].Remove(0, salt[2].Length));
+            SettingsSingleton.GetSettings().PlayerScore = Convert.ToInt32(settings[1].Remove(0, salt[1].Length));
+            SettingsSingleton.GetSettings().SoundsVolume = Convert.ToInt32(settings[2].Remove(0, salt[2].Length));
             SettingsSingleton.GetSettings().PlayerColor = JsonUtility.FromJson<Color>(settings[3].Remove(0, salt[3].Length));
             SettingsSingleton.GetSettings().GameResolution = JsonUtility.FromJson<Vector2>(settings[4].Remove(0, salt[4].Length));
         }

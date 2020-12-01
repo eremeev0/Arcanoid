@@ -24,11 +24,18 @@ namespace Assets.Scripts.MultiOriented
         {
             return _primitives.FirstOrDefault(p => p.Id == guid).Object;
         }
-
+        /// <summary>
+        /// <see cref="GetObjectById"/> alternative method
+        /// </summary>
+        /// <param name="guid">global unique id</param>
+        /// <returns><see cref="ObjectPrimitive"/> - stores an object and its parameters</returns>
+        public ObjectPrimitive GetObjectPrimitiveById(Guid guid)
+        {
+            return _primitives.FirstOrDefault(p => p.Id == guid);
+        }
         public void RemoveObjectById(Guid guid)
         {
             var primitive = _primitives.FirstOrDefault(p => p.Id == guid);
-            Object.Destroy(primitive.Object);
             _primitives.Remove(primitive);
         }
 

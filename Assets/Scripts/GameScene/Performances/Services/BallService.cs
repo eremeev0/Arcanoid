@@ -25,14 +25,14 @@ namespace Assets.Scripts.GameScene.Performances.Services
             _isSpeedUpdate = false;
             _isVelocityUpdate = false;
             _isFreezable = true;
-            destroyedPlatform = PlatformService.GetPlatformService();
+            //destroyedPlatform = PlatformService.GetPlatformService();
             //  _hitSound = GetComponent<AudioSource>();
             _audioManager = gameObject.AddComponent<AudioManager>();
         }
         private void Update() {
             if (destroyedPlatform == null)
             {
-                destroyedPlatform = PlatformService.GetPlatformService();
+               // destroyedPlatform = PlatformService.GetPlatformService();
             }
         }
 

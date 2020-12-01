@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Create custom method without parameters</Title>
+      <Shortcut>ccm</Shortcut>
+      <Description>Custom method without params</Description>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>Modifier</ID>
+          <ToolTip>explicit modifier</ToolTip>
+          <Default>public</Default>
+        </Literal>
+        <Literal>
+          <ID>Type</ID>
+          <ToolTip>method type</ToolTip>
+          <Default>void</Default>
+        </Literal>
+        <Literal>
+          <ID>Name</ID>
+          <ToolTip>method name</ToolTip>
+          <Default>Name</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp">
+        <![CDATA[
+        $Modifier$ $Type$ $Name$(){
+          
+        }
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

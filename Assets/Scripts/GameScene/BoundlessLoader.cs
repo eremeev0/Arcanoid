@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEngine;
 
 namespace Assets.Scripts.GameScene
@@ -15,15 +16,18 @@ namespace Assets.Scripts.GameScene
             _localAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.dataPath, "Boundles\\platform"));
             if (_localAssetBundle != null)
             {
-                return _localAssetBundle.LoadAsset<GameObject>(assetName);
+                GameObject a = _localAssetBundle.LoadAsset<GameObject>(assetName);
+                return a;
+
             }
             Debug.LogError("Failed to load AssetBoundle");
             return null;
         }
 
+
         public void Dispose()
         {
-            _localAssetBundle.Unload(true);
+            _localAssetBundle.Unload(false);
         }
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 namespace Assets.Scripts.GameScene.Performances.Services
 {
-    [Serializable]
     public class PlatformService: MonoBehaviour
     {
         public Guid PlatformGuid;// { get; private set;}
@@ -13,21 +12,22 @@ namespace Assets.Scripts.GameScene.Performances.Services
         public Color PlatformColor;// { get; private set; }
         public int HitsToDeath;// { get; private set; }
 
-        private static PlatformService _platformService;
+        //private static PlatformService _platformService;
         private UnityAction<Guid> _getPlatformPosition;
         private UnityAction _isAllPlatformsDestroyed;
-        private readonly ObjectsManagement _objectsManagement;
+        private ObjectsManagement _objectsManagement;
         private ParticleManager _particles;
 
-        private PlatformService()
+        //Unity Start Message
+        void Start()
         {
             _objectsManagement = ObjectsManagement.GetManagement();
             _particles = gameObject.AddComponent<ParticleManager>();
         }
-
-        public static PlatformService GetPlatformService()
+        //Unity Update Message
+        void Update()
         {
-            return _platformService ?? (_platformService = new PlatformService());
+
         }
 
         public void OnAllPlatformDestroyed(UnityAction action)

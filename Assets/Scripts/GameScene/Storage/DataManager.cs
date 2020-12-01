@@ -11,7 +11,7 @@ namespace Assets.Scripts.GameScene.Storage
     public class DataManager
     {
         private readonly FileStorageManager _manager = new FileStorageManager();
-        private readonly EventManager _eventManager = null;
+        //private readonly EventManager _eventManager = null;
 
         /// <summary>
         /// Load user configuration from persistent data path to game settings

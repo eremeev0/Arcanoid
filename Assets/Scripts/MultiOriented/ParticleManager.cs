@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.MultiOriented
 {
@@ -26,6 +28,17 @@ namespace Assets.Scripts.MultiOriented
             _particle.Play();
         }
 
+        public void Play(float delay)
+        {
+            if (delay < 0) throw new ArgumentOutOfRangeException(nameof(delay));
+            throw new NotImplementedException();
+        }
+
+        public void SetParticleStartColor(Color color)
+        {
+            var particleMain = _particle.main;
+            particleMain.startColor = new ParticleSystem.MinMaxGradient(color);
+        }
         public void Stop()
         {
             if (_particle == null)
