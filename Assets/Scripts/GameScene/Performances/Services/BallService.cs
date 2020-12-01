@@ -102,7 +102,7 @@ namespace Assets.Scripts.GameScene.Performances.Services
                 //ContainerDto.Manager.SendEvent(GameEvents.GAME_PAUSED);
             }
         }
-
+        
         private void OnCollisionEnter2D(Collision2D col)
         {
             SpeedUp();

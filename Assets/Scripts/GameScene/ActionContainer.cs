@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.GameScene.Controllers.Sub;
+﻿using System;
+using Assets.Scripts.GameScene.Controllers.Sub;
 using Assets.Scripts.MultiOriented;
 using Assets.Scripts.MultiOriented.Models;
 using Assets.Scripts.MultiOriented.StatesManagament.ActionsContainer;
@@ -65,9 +66,9 @@ namespace Assets.Scripts.GameScene
             return _levelActions.GenerateLevel(level);
         }
 
-        public void UpdatePlatformsList(LevelN level, Vector3 platformPosition)
+        public void RemovePlatformFromLevel(LevelN level, Guid guid)
         {
-            _levelActions.RemovePositionFromList(level, platformPosition);
+            _levelActions.RemovePlatform(level, guid);
         }
 
         public LevelN LoadLevel(string saveName)

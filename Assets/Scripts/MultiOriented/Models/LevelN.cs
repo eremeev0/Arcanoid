@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Scripts.GameScene;
 using Assets.Scripts.GameScene.Performances.Services;
 using UnityEngine;
 
@@ -13,11 +14,7 @@ namespace Assets.Scripts.MultiOriented.Models
         /// level number in level's hierarchy (like a level 1, level 2 etc.)
         /// </summary>
         public int Number { get; set; } = 0;
-        /// <summary>
-        /// color of the destroyed platform's
-        /// </summary>
-        [Obsolete("Property PlatformsColor deprecated. Use property Platform instead (PlatformService).", true)]
-        public Color PlatformsColor { get; set; }
+
         /// <summary>
         /// player start position on level
         /// </summary>
@@ -29,16 +26,9 @@ namespace Assets.Scripts.MultiOriented.Models
         //[Obsolete("Property BallPosition deprecated. Use property Ball instead (BallService).", true)]
         public Vector3 BallPosition { get; set; }
         /// <summary>
-        /// 
+        /// List of the game object "Platform".
         /// </summary>
-        // save object
-        [Obsolete("Property PlatformsPosition deprecated. Use property Platform instead (PlatformService).", true)]
-        public Vector3[] PlatformsPosition { get; set; }
-
-        /// <summary>
-        /// List of the domain of game object "Platform". Contain all logic and data about destroyed platforms.
-        /// </summary>
-        public PlatformService[] Platforms { get; set; }
+        public ConcretePlatform[] Platforms { get; set; }
         /// <summary>
         /// The domain of game object "Player". Contain all logic and data about player character.
         /// </summary>

@@ -19,7 +19,7 @@ namespace Assets.Scripts.GameScene.Controllers.Root
 
         private EventManager _eventManager;
         private LevelN _level;
-        private readonly PlatformService _platformService;
+        private PlatformService _platformService;
         private ActionContainer _action;
         private BoundlessLoader _loader;
         private LevelLoader _levelLoader;
@@ -36,8 +36,9 @@ namespace Assets.Scripts.GameScene.Controllers.Root
         {
             //Singletons
             _levelLoader = LevelLoader.GetLoader();
-            //_platformService = 
             _loader = BoundlessLoader.GetLoader();
+            //PlatformService (Manager)
+            _platformService = PlatformsContainer.GetComponent<PlatformService>(); 
             //Event manager
             _eventManager = EventSender.GetComponent<EventManager>();
             //Actions
@@ -61,10 +62,10 @@ namespace Assets.Scripts.GameScene.Controllers.Root
             _eventManager.Call(GlobalStates.GamePaused);
             SettingsSingleton.GetSettings().IsGameStopped = true;
             //Set callback methods
-            _platformService.OnPlatformDestroyed(UpdatePlatformsList);
+            _platformService.OnPlatformDestroyed(RemovePlatformFromLevel);
             _platformService.OnAllPlatformDestroyed(LevelCompleted);
-            //Spawn some game object(s)
-            //_action.SpawnObjects(_loader.GetGameObject("platform", "Platform"), _level.Platforms, PlatformsContainer);
+            //Set parent for spawned platforms
+            _action.SetParent(_level, PlatformsContainer);
         }
         //////////////////////////////////////////////////////////////
         ///////////////////////Callback methods//////////////////////
@@ -72,12 +73,11 @@ namespace Assets.Scripts.GameScene.Controllers.Root
         {
             // AssetBoundle cashing
             _level = _action.GenerateLevel(_level);
-            //_action.SpawnObjects(_loader.GetGameObject("platform", "Platform"), _level.Platforms, PlatformsContainer);
         }
 
-        void UpdatePlatformsList(Guid objectGuid)
+        void RemovePlatformFromLevel(Guid guid)
         {
-            //_action.UpdatePlatformsList(_level, );
+            _action.RemovePlatformFromLevel(_level, guid);
         }
         //////////////////////////////////////////////////////////////
         /////////////////////////Game events/////////////////////////

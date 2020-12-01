@@ -7,25 +7,26 @@ namespace Assets.Scripts.GameScene.Performances.Services
 {
     public class PlatformService: MonoBehaviour
     {
-        public Guid PlatformGuid;// { get; private set;}
+        /*public Guid PlatformGuid;// { get; private set;}
         public Vector3 PlatformPosition;// { get; private set; }
         public Color PlatformColor;// { get; private set; }
         public int HitsToDeath;// { get; private set; }
-
+        */
         //private static PlatformService _platformService;
+       
         private UnityAction<Guid> _getPlatformPosition;
         private UnityAction _isAllPlatformsDestroyed;
         private ObjectsManagement _objectsManagement;
         private ParticleManager _particles;
 
         //Unity Start Message
-        void Start()
+        private void Start()
         {
             _objectsManagement = ObjectsManagement.GetManagement();
             _particles = gameObject.AddComponent<ParticleManager>();
         }
         //Unity Update Message
-        void Update()
+        private void Update()
         {
 
         }
@@ -37,17 +38,15 @@ namespace Assets.Scripts.GameScene.Performances.Services
 
         public void Destroy(GameObject obj)
         {
+            var platform = obj.GetComponent<ConcretePlatform>();
             _particles.Play();
-            if (obj.transform.parent.childCount == 1)
+            if (transform.childCount == 1)
             {
                 _isAllPlatformsDestroyed.Invoke();
-                //_isAllDestroyed = true;
             }
-            // use guid
-            // class.Remove(id)
-            var guid = obj.GetComponent<GuidComponent>().guid;
-            _objectsManagement.RemoveObjectById(guid);
-            _getPlatformPosition.Invoke(guid);
+
+            _objectsManagement.RemoveObjectById(platform.GetGuid()); //need to remove this class?
+            _getPlatformPosition.Invoke(platform.GetGuid());
         }
 
         public void OnPlatformDestroyed(UnityAction<Guid> action)
