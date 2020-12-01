@@ -51,7 +51,7 @@ namespace Assets.Scripts.GameScene.Controllers.Root
         }
 
         //////////////////////////////////////////////////////////////
-        ////////////Post Initialization(set initial data)////////////
+        //////////Post Initialization(set data for objects)//////////
         void PostInitialization()
         {
             //Load user settings

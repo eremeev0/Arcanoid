@@ -32,15 +32,7 @@ namespace Assets.Scripts.GameScene
             position = transform.position;
         }
 
-
         public Guid GetGuid() { return guid;}
         public int GetHealth() { return health;}
-        
-        //Unity Update Message
-        private void Update()
-        {
-
-        }
-
     }
 }

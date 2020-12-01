@@ -31,11 +31,6 @@ namespace Assets.Scripts.UI.Controllers.Sub
             ResolutionDropdown = UIDataInit.InitDropdown(ResolutionDropdown, UIStates.INIT_RESOLUTION_LIST);
         }
 
-        private void Update()
-        {
-
-        }
-
         void SaveSettings()
         {
             SettingsSingleton.GetSettings().PlayerSpeed = PlayerSpeedSlider.value;

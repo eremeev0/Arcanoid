@@ -23,11 +23,6 @@ namespace Assets.Scripts.UI.Controllers.Sub
             MenuButton.onClick.AddListener(ShowMenu);
         }
 
-        private void Update()
-        {
-
-        }
-
         void RestartGame(){_action.Invoke(FailedEvent.RestartClicked);}
         void ShowMenu(){_action.Invoke(FailedEvent.BackToMenuClicked);}
         public void AddListener(UnityAction<FailedEvent> action)

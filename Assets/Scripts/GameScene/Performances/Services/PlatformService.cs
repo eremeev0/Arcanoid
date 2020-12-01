@@ -25,11 +25,6 @@ namespace Assets.Scripts.GameScene.Performances.Services
             _objectsManagement = ObjectsManagement.GetManagement();
             _particles = gameObject.AddComponent<ParticleManager>();
         }
-        //Unity Update Message
-        private void Update()
-        {
-
-        }
 
         public void OnAllPlatformDestroyed(UnityAction action)
         {

@@ -12,7 +12,7 @@ namespace Assets.Scripts.UI.Controllers.Sub
         public Button LoadButton;
 
         private UnityAction<MenuEvents> _action;
-        //private
+
         private void Start()
         {
 
@@ -22,10 +22,6 @@ namespace Assets.Scripts.UI.Controllers.Sub
             LoadButton.onClick.AddListener(ShowSaves);
         }
 
-        private void Update()
-        {
-            
-        }
         public void AddListener(UnityAction<MenuEvents> action)
         {
             _action = action;

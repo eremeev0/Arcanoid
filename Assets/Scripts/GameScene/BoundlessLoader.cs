@@ -13,7 +13,7 @@ namespace Assets.Scripts.GameScene
         public string BoundlessFolder { get; set; } = "Boundles";
         public GameObject GetGameObject(string boundleName, string assetName)
         {
-            _localAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.dataPath, "Boundles\\platform"));
+            _localAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.dataPath, $"Boundles\\{boundleName}"));
             if (_localAssetBundle != null)
             {
                 GameObject a = _localAssetBundle.LoadAsset<GameObject>(assetName);

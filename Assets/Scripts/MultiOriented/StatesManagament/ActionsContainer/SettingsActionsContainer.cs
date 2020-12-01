@@ -7,7 +7,7 @@ namespace Assets.Scripts.MultiOriented.StatesManagament.ActionsContainer
 {
     public class SettingsActionsContainer
     {
-        private DataManager _dataManager;
+        private readonly DataManager _dataManager;
 
         public SettingsActionsContainer()
         {

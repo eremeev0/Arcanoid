@@ -7,12 +7,9 @@ namespace Assets.Scripts.MultiOriented.StatesManagament.ActionsContainer
 {
     public class GlobalActionContainer
     {
-
-        private readonly DataManager _settings;
         private readonly LevelLoader _levelLoader;
         public GlobalActionContainer()
         {
-            _settings = new DataManager();
             _levelLoader = LevelLoader.GetLoader();
         }
 
