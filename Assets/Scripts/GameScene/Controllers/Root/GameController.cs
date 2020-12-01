@@ -26,6 +26,7 @@ namespace Assets.Scripts.GameScene.Controllers.Root
 
         private void Start()
         {
+            print(Application.streamingAssetsPath);
             Initialization();
             PostInitialization();
         }
@@ -39,6 +40,8 @@ namespace Assets.Scripts.GameScene.Controllers.Root
             _loader = BoundlessLoader.GetLoader();
             //PlatformService (Manager)
             _platformService = PlatformsContainer.GetComponent<PlatformService>(); 
+            //Ball init
+            Ball.GetComponent<BallService>().MainPlatformService = _platformService;
             //Event manager
             _eventManager = EventSender.GetComponent<EventManager>();
             //Actions

@@ -17,13 +17,11 @@ namespace Assets.Scripts.GameScene.Performances.Services
         private UnityAction<Guid> _getPlatformPosition;
         private UnityAction _isAllPlatformsDestroyed;
         private ObjectsManagement _objectsManagement;
-        private ParticleManager _particles;
 
         //Unity Start Message
         private void Start()
         {
             _objectsManagement = ObjectsManagement.GetManagement();
-            _particles = gameObject.AddComponent<ParticleManager>();
         }
 
         public void OnAllPlatformDestroyed(UnityAction action)
@@ -34,7 +32,7 @@ namespace Assets.Scripts.GameScene.Performances.Services
         public void Destroy(GameObject obj)
         {
             var platform = obj.GetComponent<ConcretePlatform>();
-            _particles.Play();
+            platform.BeforeDestroy();
             if (transform.childCount == 1)
             {
                 _isAllPlatformsDestroyed.Invoke();

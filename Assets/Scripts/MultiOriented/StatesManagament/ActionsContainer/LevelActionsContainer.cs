@@ -70,6 +70,7 @@ namespace Assets.Scripts.MultiOriented.StatesManagament.ActionsContainer
             
             var color = _levelHelper.GetPlatformsColor(level.Number);
             
+
             level.Platforms = objects.Select(obj => obj.GetComponent<ConcretePlatform>()).ToArray();
             
             foreach (var platform in level.Platforms)
@@ -79,7 +80,7 @@ namespace Assets.Scripts.MultiOriented.StatesManagament.ActionsContainer
                 ObjectsManagement.GetManagement().AddObjectPrimitiveToList(new ObjectPrimitive(platform.gameObject, platform.guid));
             }
             
-            BoundlessLoader.GetLoader().Dispose();
+            //BoundlessLoader.GetLoader().Dispose();
             return level;
         }
         public GameObject[] SpawnObjects(GameObject obj, Vector3[] positions)

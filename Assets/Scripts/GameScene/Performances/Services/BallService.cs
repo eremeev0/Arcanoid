@@ -15,7 +15,7 @@ namespace Assets.Scripts.GameScene.Performances.Services
         //private AudioSource _hitSound;
 
         //private IDestrPlatformService destroyedPlatform;
-        public PlatformService destroyedPlatform { get; set; }
+        public PlatformService MainPlatformService { get; set; }
 
         private bool _isSpeedUpdate;
         private bool _isVelocityUpdate;
@@ -30,7 +30,7 @@ namespace Assets.Scripts.GameScene.Performances.Services
             _audioManager = gameObject.AddComponent<AudioManager>();
         }
         private void Update() {
-            if (destroyedPlatform == null)
+            if (MainPlatformService == null)
             {
                // destroyedPlatform = PlatformService.GetPlatformService();
             }
@@ -128,7 +128,7 @@ namespace Assets.Scripts.GameScene.Performances.Services
                 case "Platform":
                     _velocity.y = -_velocity.y;
                     IncrementScore();
-                    destroyedPlatform.Destroy(col.gameObject);
+                    MainPlatformService.Destroy(col.gameObject);
                     break;
             }
         }

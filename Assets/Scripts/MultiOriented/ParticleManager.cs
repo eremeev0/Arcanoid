@@ -10,7 +10,7 @@ namespace Assets.Scripts.MultiOriented
 
         void Start()
         {
-            _particle = GetComponent<ParticleSystem>();
+            _particle = GetComponentInChildren<ParticleSystem>();
         }
 
         public void SetParticle(ParticleSystem particle)
@@ -27,7 +27,8 @@ namespace Assets.Scripts.MultiOriented
             }
             _particle.Play();
         }
-
+        // change to 
+        
         public void Play(float delay)
         {
             if (delay < 0) throw new ArgumentOutOfRangeException(nameof(delay));

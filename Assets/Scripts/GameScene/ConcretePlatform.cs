@@ -1,6 +1,6 @@
 ﻿using System;
+using Assets.Scripts.MultiOriented;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 namespace Assets.Scripts.GameScene
 {
@@ -12,6 +12,13 @@ namespace Assets.Scripts.GameScene
         public Color color;
         public int health = 1;
         public int points = 1;
+
+        private ParticleManager _particles;
+        
+        public void BeforeDestroy()
+        {
+            _particles.Play();
+        }
 
         public void Initialization(Guid guid, Color color)
         {
@@ -28,6 +35,7 @@ namespace Assets.Scripts.GameScene
         //Unity Start Message
         private void Start()
         {
+            _particles = gameObject.AddComponent<ParticleManager>();
             GetComponent<SpriteRenderer>().color = color;
             position = transform.position;
         }

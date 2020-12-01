@@ -2,6 +2,7 @@
 using Assets.Scripts.GameScene.Storage;
 using Assets.Scripts.MultiOriented.Contracts;
 using UnityEditor;
+using UnityEngine;
 
 namespace Assets.Scripts.MultiOriented.StatesManagament.ActionsContainer
 {
@@ -18,7 +19,7 @@ namespace Assets.Scripts.MultiOriented.StatesManagament.ActionsContainer
             SettingsSingleton.GetSettings().IsGameStopped = false;
             if (_levelLoader.Level == null)
             {
-                _levelLoader.Run(LevelStates.InitializeLevel);
+                //_levelLoader.Run(LevelStates.InitializeLevel);
             }
         }
 

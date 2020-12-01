@@ -34,7 +34,7 @@ namespace Assets.Scripts.GameScene
                     Debug.LogWarning("Level load func work, but file not found");
                     break;
                 case LevelStates.InitializeLevel:
-                    Level = _actions.LevelInit(Level);
+                    //Level = _actions.LevelInit(new LevelN());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(state), state, null);

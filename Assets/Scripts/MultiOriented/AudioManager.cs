@@ -1,17 +1,32 @@
-﻿using UnityEngine;
+﻿using System;
+using Assets.Scripts.MultiOriented.Models;
+using UnityEngine;
 
 namespace Assets.Scripts.MultiOriented
 {
     public class AudioManager: MonoBehaviour
     {
         private AudioSource _audioSource;
-        private void Start()
+        private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
             if (_audioSource == null)
             {
                 Debug.LogError("Component Audio Source not found!");
                 return;
+            }
+        }
+
+        public void Build()
+        {
+            try
+            {
+                _audioSource = GetComponent<AudioSource>() ?? throw new NullReferenceException("Component Audio Source not found!");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(ExceptionModel.GetExceptionInfo(e));
+                throw;
             }
         }
 
