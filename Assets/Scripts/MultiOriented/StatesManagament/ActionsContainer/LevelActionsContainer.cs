@@ -14,12 +14,12 @@ namespace Assets.Scripts.MultiOriented.StatesManagament.ActionsContainer
     {
         private readonly LevelManager _levelManager;
         private readonly LevelHelper _levelHelper;
-        private static readonly GameObject source = BoundlessLoader.GetLoader().GetGameObject("platform", "Platform");
-
+        private readonly GameObject source;
         public LevelActionsContainer()
         {
             _levelManager = new LevelManager();
             _levelHelper = new LevelHelper();
+            source = BoundlessLoader.GetLoader().GetGameObject("platform", "Platform");
         }
 
         public LevelN LoadLevel(string saveName)
@@ -80,7 +80,7 @@ namespace Assets.Scripts.MultiOriented.StatesManagament.ActionsContainer
                 ObjectsManagement.GetManagement().AddObjectPrimitiveToList(new ObjectPrimitive(platform.gameObject, platform.guid));
             }
             
-            //BoundlessLoader.GetLoader().Dispose();
+            BoundlessLoader.GetLoader().Dispose();
             return level;
         }
         public GameObject[] SpawnObjects(GameObject obj, Vector3[] positions)
@@ -93,7 +93,7 @@ namespace Assets.Scripts.MultiOriented.StatesManagament.ActionsContainer
                 clone.name = "Platform";
                 clones.Add(clone);
             }
-
+            
             return clones.ToArray();
         }
     }

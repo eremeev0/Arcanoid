@@ -16,7 +16,7 @@ namespace Assets.Scripts.GameScene
             _localAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.dataPath, $"Boundles\\{boundleName}"));
             if (_localAssetBundle != null)
             {
-                GameObject a = _localAssetBundle.LoadAsset<GameObject>(assetName);
+                GameObject a = UnityEngine.Object.Instantiate(_localAssetBundle.LoadAsset<GameObject>(assetName));
                 return a;
 
             }

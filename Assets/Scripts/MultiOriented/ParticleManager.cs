@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Threading.Tasks;
+using Assets.Scripts.MultiOriented.Models;
 using UnityEngine;
 
 namespace Assets.Scripts.MultiOriented
@@ -27,13 +29,33 @@ namespace Assets.Scripts.MultiOriented
             }
             _particle.Play();
         }
-        // change to 
+        // change to courutine
         
-        public void Play(float delay)
-        {
-            if (delay < 0) throw new ArgumentOutOfRangeException(nameof(delay));
-            throw new NotImplementedException();
+        /// <summary>
+        /// Play particle after delay
+        /// </summary>
+        /// <param name="delay">milliseconds</param>
+        /// <returns><see cref="IEnumerator"/></returns>
+        public IEnumerator Play(float delay){
+            if (delay < 0) 
+            {
+                Debug.LogError($"{nameof(delay)} out of range!");
+                yield return null;
+            }
+            if (_particle == null) 
+            {
+                Debug.LogError($"{nameof(_particle)} is null!");
+                yield return null;
+            }
+            yield return new WaitForSeconds(delay/1000);
+            _particle.Play();
         }
+
+        // public void Play(float delay)
+        // {
+        //     if (delay < 0) throw new ArgumentOutOfRangeException(nameof(delay));
+        //     throw new NotImplementedException();
+        // }
 
         public void SetParticleStartColor(Color color)
         {

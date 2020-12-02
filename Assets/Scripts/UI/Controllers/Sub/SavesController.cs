@@ -20,6 +20,7 @@ namespace Assets.Scripts.UI.Controllers.Sub
             LoadButton.onClick.AddListener(Load);
             BackToMenuButton.onClick.AddListener(BackToMenu);
             DeleteButton.onClick.AddListener(Delete);
+            Build();
         }
 
         private void Load() { _isButtonClicked.Invoke(SavesEvents.Load);}
@@ -32,14 +33,35 @@ namespace Assets.Scripts.UI.Controllers.Sub
         {
             var saves = new List<Button>();
             var savesPath = Application.dataPath + "/Saves";
+            if (!Directory.Exists(savesPath)){
+                Directory.CreateDirectory(savesPath);
+                return;
+            }
             var files =  Directory.GetFiles(savesPath);
+            if (files.Length == 0)
+            {
+                BuildButton("Debug", Rect.content.transform);
+                return;
+            }
             foreach (var file in files)
             {
-                //SaveBuilder.SetData = File.ReadAllLines(file);
-                //SaveBuilder.Build();
-                //...
-                //saves.Add(new Button{name = file});
+                BuildButton(file, Rect.content.transform);
             }
+        }
+
+        void BuildButton(string name, Transform parent){
+            
+            GameObject button = new GameObject(name);
+            button.AddComponent<RectTransform>();
+            
+            Button component = button.AddComponent<Button>();
+            component.onClick.AddListener(() => {component.SendMessage(component.name);});
+            
+            GameObject capture = new GameObject();
+            capture.AddComponent<Text>().text = name;
+            capture.transform.parent = button.transform;
+
+            button.transform.parent = parent;
         }
     }
 }
